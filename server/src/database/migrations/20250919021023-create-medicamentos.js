@@ -46,6 +46,10 @@ module.exports = {
             defaultValue: 0,
             allowNull: false,
          },
+         img: {
+            type: Sequelize.DataTypes.STRING,
+            allowNull: false
+         },
          created_at: {
             type: Sequelize.DataTypes.DATE,
             allowNull: false,
