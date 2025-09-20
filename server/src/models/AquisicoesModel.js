@@ -23,6 +23,12 @@ module.exports = (sequelize, DataTypes) => {
    });
 
    Aquisicoes.associate = (models) => {
+      Aquisicoes.hasOne(models.Relatorios_medicamentos, {
+         constraint: true,
+         foreignKey: "fk_id_aquisicao",
+         as: "relatorio_aquisicao"
+      })
+
       Aquisicoes.hasMany(models.Itens_aquisicoes, {
          constraint: true,
          foreignKey: "fk_id_aquisicao",
