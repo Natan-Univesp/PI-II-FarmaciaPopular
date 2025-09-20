@@ -10,7 +10,7 @@ module.exports = {
             autoIncrement: true,
             allowNull: false,
          },
-         fk_id_medicamentos: {
+         fk_id_medicamento: {
             type: Sequelize.DataTypes.INTEGER(11),
             references: {
                model: "Medicamentos",
