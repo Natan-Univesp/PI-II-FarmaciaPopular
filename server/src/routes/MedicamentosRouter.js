@@ -33,7 +33,11 @@ router
 router
    .route("/:id")
    .get(medicamentosController.getMedicamentoById)
-   .patch(medicamentosController.updateMedicamento)
+   .patch(
+      uploadAndMoveFile.single("image"), 
+      medicamentosController.updateMedicamento, 
+      middlewareMulter
+   )
 
 
 module.exports = router;

@@ -118,7 +118,8 @@ async function createMedicamento(req, res) {
          !nome_medicamento ||
          !indicacao_uso ||
          !categoria ||
-         !quantidade_minima ||
+         (quantidade_minima === undefined || 
+          quantidade_minima === null) ||
          !file
       ) {
          throw new FieldUndefinedError("Nenhum campo identificado", {
@@ -168,12 +169,13 @@ async function updateMedicamento(req, res) {
 
       if (
          !id ||
-         !fk_id_laboratorio ||
-         !nome_medicamento ||
-         !indicacao_uso ||
-         !categoria ||
-         !tipo_unidade ||
-         !quantidade_minima
+         (!fk_id_laboratorio &&
+         !nome_medicamento &&
+         !indicacao_uso &&
+         !categoria &&
+         !tipo_unidade &&
+         (quantidade_minima === undefined || 
+          quantidade_minima === null))
       ) {
          throw new FieldUndefinedError("Um ou mais campos não identificados", {
             fields: {
