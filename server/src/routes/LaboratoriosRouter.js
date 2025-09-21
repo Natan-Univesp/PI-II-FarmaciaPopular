@@ -16,3 +16,5 @@ router
    .route("/:id")
    .get(laboratoriosController.getLaboratorioById)
    .post(laboratoriosController.updateLaboratorio)
+
+module.exports = router;
