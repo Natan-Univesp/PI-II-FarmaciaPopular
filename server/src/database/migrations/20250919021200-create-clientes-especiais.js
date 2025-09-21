@@ -10,16 +10,6 @@ module.exports = {
             autoIncrement: true,
             allowNull: false,
          },
-         fk_id_medicamento: {
-            type: Sequelize.DataTypes.INTEGER(11),
-            references: {
-               model: "Medicamentos",
-               key: "id",
-            },
-            onUpdate: "CASCADE",
-            onDelete: "CASCADE",
-            allowNull: false,
-         },
          nome_cliente: {
             type: Sequelize.DataTypes.STRING(100),
             allowNull: false,
@@ -32,6 +22,6 @@ module.exports = {
    },
 
    down: (queryInterface, Sequelize) => {
-      return queryInterface.dropDatabase("");
+      return queryInterface.dropTable("Clientes_especiais");
    },
 };

@@ -19,10 +19,10 @@ module.exports = (sequelize, DataTypes) => {
    );
 
    ClientesEspeciais.associate = (models) => {
-      ClientesEspeciais.belongsTo(models.Medicamentos, {
+      ClientesEspeciais.hasMany(models.Medicamentos_clientes_especiais, {
          constraint: true,
-         foreignKey: "fk_id_medicamento",
-         as: "medicamento",
+         foreignKey: "fk_id_cliente_especial",
+         as: "cliente_medicamento",
       });
    };
 
