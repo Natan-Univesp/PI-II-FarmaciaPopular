@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-   const RelatoriosMedicamento = sequelize.define(
+   const RelatoriosMedicamentos = sequelize.define(
       "Relatorios_medicamentos",
       {
          situacao: {
@@ -15,13 +15,13 @@ module.exports = (sequelize, DataTypes) => {
       }
    );
 
-   RelatoriosMedicamento.associate = (models) => {
-      RelatoriosMedicamento.belongsTo(models.Aquisicoes, {
+   RelatoriosMedicamentos.associate = (models) => {
+      RelatoriosMedicamentos.belongsTo(models.Aquisicoes, {
          constraint: true,
          foreignKey: "fk_id_aquisicao",
          as: "aquisicao"         
       })
    }
 
-   return RelatoriosMedicamento;
+   return RelatoriosMedicamentos;
 };
