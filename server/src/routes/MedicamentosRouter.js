@@ -1,4 +1,4 @@
-const Router = require("express");
+const { Router } = require("express");
 const uploadAndMoveFile = require("../utils/MulterUtil.js");
 const middlewareMulter = require("../middlewares/multerMiddleware.js");
 const medicamentosController = require("../controllers/MedicamentosController.js");

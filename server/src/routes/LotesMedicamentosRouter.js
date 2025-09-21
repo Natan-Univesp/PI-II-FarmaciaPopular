@@ -1,4 +1,4 @@
-const Router = require("express");
+const { Router } = require("express");
 const lotesMedicamentos = require("../controllers/LotesMedicamentosController.js");
 
 const router = Router();
