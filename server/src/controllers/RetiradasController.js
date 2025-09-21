@@ -1,3 +1,4 @@
+const CannotCreateError = require("../classes/CannotCreateError.js");
 const FieldUndefinedError = require("../classes/FieldUndefinedError.js");
 const NotFoundError = require("../classes/NotFoundError.js");
 const errorResponse = require("../helper/ErrorResponseHelper.js");
