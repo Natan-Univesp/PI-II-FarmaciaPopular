@@ -50,6 +50,6 @@ module.exports = {
    },
 
    down: (queryInterface, Sequelize) => {
-      return queryInterface.dropDatabase("Aquisicoes");
+      return queryInterface.dropTable("Aquisicoes");
    },
 };

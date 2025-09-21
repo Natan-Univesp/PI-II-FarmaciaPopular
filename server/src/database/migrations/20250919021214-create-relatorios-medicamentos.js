@@ -3,7 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
    up: (queryInterface, Sequelize) => {
-      return queryInterface.createTable("relatorios_medicamentos", {
+      return queryInterface.createTable("Relatorios_medicamentos", {
          id: {
             type: Sequelize.DataTypes.INTEGER(11),
             primaryKey: true,
@@ -32,6 +32,6 @@ module.exports = {
    },
 
    down: (queryInterface, Sequelize) => {
-      return queryInterface.dropDatabase("");
+      return queryInterface.dropTable("Relatorios_medicamentos");
    },
 };

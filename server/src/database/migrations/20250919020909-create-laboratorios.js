@@ -34,6 +34,6 @@ module.exports = {
    },
 
    down: (queryInterface, Sequelize) => {
-      return queryInterface.dropDatabase("Laboratorios");
+      return queryInterface.dropTable("Laboratorios");
    },
 };

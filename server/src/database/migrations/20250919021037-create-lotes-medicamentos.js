@@ -40,6 +40,6 @@ module.exports = {
    },
 
    down: (queryInterface, Sequelize) => {
-      return queryInterface.dropDatabase("Lotes_medicamentos");
+      return queryInterface.dropTable("Lotes_medicamentos");
    },
 };
