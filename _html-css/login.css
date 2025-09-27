@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -28,7 +30,7 @@ body {
 .container h1 {
     text-align: center;
     margin-bottom: 30px;
-    font-size: 30px;
+    font-size: 40px;
     color: #4162A6;
 }
 
@@ -42,8 +44,9 @@ body {
 .input-box input {
     width: 100%;
     height: 100%;
-    padding: 20px 45px 20px 20px;
-    font-size: 18px;
+    padding: 0px 45px 0px 20px;
+    font-size: 17px;
+    font-family: "Poppins", sans-serif;
     border: 2px solid #4162A6;
     background: #F6F6F6;
     outline: none;
@@ -62,7 +65,8 @@ body {
     background: #4162A6;
     color: #F6F6F6;
     font-size: 20px;
-    font-weight: 600;
+    font-weight: 500;
+    letter-spacing: 2px;
     border-radius: 40px;
     cursor: pointer;
     box-shadow: 0 0 10px #C2D4FA;
