@@ -1,0 +1,85 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    background-color: #F6F6F6;
+}
+
+.container {
+    width: 420px;
+    padding: 30px 40px;
+    background-color: #F6F6F6;
+    border: 2px solid #4162A6;
+    border-radius: 10px;
+    color: #4162A6;
+    box-shadow: 0 0 10px #C2D4FA;
+}
+
+.container h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 30px;
+    color: #4162A6;
+}
+
+.input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+}
+
+.input-box input {
+    width: 100%;
+    height: 100%;
+    padding: 20px 45px 20px 20px;
+    font-size: 18px;
+    border: 2px solid #4162A6;
+    background: #F6F6F6;
+    outline: none;
+    border-radius: 40px;
+
+}
+
+.input-box input::placeholder {
+    color: #4162A6;
+}
+
+.login {
+    width: 100%;
+    height: 50px;
+    border: none;
+    background: #4162A6;
+    color: #F6F6F6;
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 40px;
+    cursor: pointer;
+    box-shadow: 0 0 10px #C2D4FA;
+    transition: .3s;
+}
+
+.login:hover {
+    background: #33559C;
+}
+
+
+.error-message {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    color: #F22738;
+    font-size: 14px;
+    margin-top: 5px;
+}
