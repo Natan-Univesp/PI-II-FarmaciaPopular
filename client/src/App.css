@@ -1,0 +1,32 @@
+.generalContainer {
+   position: relative;
+   display: grid;
+   grid-template: var(--fixHeightTopBar) 1fr / var(--fixWidthNav) 1fr;
+   grid-template-areas: 
+   "topbar topbar topbar"
+   "navbar main main";
+}
+
+div.inactiveNavbar {
+   animation: 0s linear .19s forwards changeGridTemplate ;
+}
+
+main {
+   grid-area: main;
+   width: 100%;
+   padding: 20px;
+}
+
+@keyframes changeGridTemplate {
+   from {
+      grid-template-areas: 
+      "topbar topbar topbar"
+      "navbar main main";
+   } 
+
+   to {
+      grid-template-areas: 
+      "topbar topbar topbar"
+      "main main main";
+   }
+}
