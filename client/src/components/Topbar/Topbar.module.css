@@ -1,0 +1,83 @@
+header.topBarContainer {
+   grid-area: topbar;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 15px 25px;
+   background-color: var(--colorRed);
+   color: white;
+}
+
+header.topBarContainer .topBar__leftSide {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+}
+
+.topBar__leftSide h1 {
+   font-size: 30px;
+}
+
+.topBar__leftSide .topBar__logo {
+   width: 60px;
+   height: 60px;
+}
+
+.topBar__logo img {
+   width: 100%;
+}
+
+.topBar__leftSide button.topBar__buttonMenu {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   padding: 5px;
+   border: none;
+   background-color: white;
+   font-size: 30px;
+   border-radius: var(--fixBorderRadius);
+   cursor: pointer;
+   transition: .2s ease;
+}
+
+.topBar__leftSide button.topBar__buttonMenu:hover {
+   background-color: var(--colorBlue);
+   color: white;
+}
+
+.topBar__rightSide {
+   display: flex;
+   align-items: center;
+   gap: 15px;
+}
+
+
+.topBar__rightSide .topBar__userInfo p {
+   margin-top: 3px;
+   font-size: 23px;
+}
+
+.topBar__rightSide button.topBar__buttonLogout {
+   display: flex;
+   align-items: center;
+   gap: 3px;
+   padding: 5px 8px;
+   background-color: transparent;
+   color: white;
+   font-family: var(--fontSec);
+   font-size: 15px;
+   font-weight: 600;
+   border: 1px solid transparent;
+   border-radius: var(--fixBorderRadius);
+   cursor: pointer;
+   transition: .2s ease;
+}
+
+.topBar__rightSide button.topBar__buttonLogout:hover {
+   background-color: var(--colorBlue);
+   color: white;
+}
+
+button.topBar__buttonLogout .logoutIcon {
+   font-size: 25px;
+}
