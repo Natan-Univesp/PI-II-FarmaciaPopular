@@ -50,7 +50,7 @@ nav.navContainer ul li {
    width: 100%;
 }
 
-nav.navContainer ul li:is(:has(.active), .activeDropDown) {
+nav.navContainer ul li:is(:has(.active), :hover, .activeDropDown) {
    background-color: var(--colorItemNav);
 }
 
@@ -61,6 +61,10 @@ nav.navContainer ul li a {
    gap: 10px;
    align-items: center;
    font-weight: 600;
+}
+
+nav.navContainer ul li:hover a {
+   color: var(--colorBlue);
 }
 
 nav.navContainer ul li:has(.active) a {
@@ -147,6 +151,10 @@ Responsividade
 }
 
 @media only screen and (max-width: 991px) {
+   nav.navContainer {
+      position: absolute;
+      top: 90px;
+   }
 
 }
 

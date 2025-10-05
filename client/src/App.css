@@ -17,6 +17,20 @@ main {
    padding: 20px;
 }
 
+
+@media only screen and (max-width: 991px) {
+   .generalContainer {
+      grid-template-areas: 
+      "topbar topbar topbar"
+      "main main main";
+   }
+
+   div.inactiveNavbar {
+      animation: none;
+   }
+
+}
+
 @keyframes changeGridTemplate {
    from {
       grid-template-areas: 
