@@ -49,78 +49,72 @@ async function getAllMedicamentosForSelectService() {
 
 async function getAllMedicamentosByFilterService(QueryParams = {}) {
    const { orderBy, ...filters } = QueryParams;
-   const MedicamentosFilters = ["nome", "indicacao_uso", "categoria", "tipo_unidade", "situacao"];
-   const Filterselect = {};
 
-    Object.keys(filters).forEach(key => {
-      if (MedicamentosFilters.includes(key)) {
-         if (key === 'nome' || key === 'indicacao_uso') {
-            Filterselect[key] = { [Op.like]: `%${filters[key]}%` };
-         } else {
-            Filterselect[key] = { [Op.eq]: filters[key] };
+   const MedicamentosFilters = ["id", "nome", "indicacao_uso", "categoria", "tipo_unidade", "situacao"];
+   const FilterSelect = {};
+
+   if (filters && Object.keys(filters).length > 0) {
+      Object.keys(filters).forEach(key => {
+         if (MedicamentosFilters.includes(key)) {
+
+            //Filtra com base na ID 
+            if (key == 'id') {
+               FilterSelect[key] = { [Op.eq]: Number(filters[key]) };
+            }
+            //Filtra com base no NOME DO MEDICAMENTO
+            else if (key === 'nome') {
+               FilterSelect[key] = { [Op.like]: `%${filters[key]}%` };
+            }
+            //Filtra com base na INDICAÇÃO DE USO
+            else if (key === 'indicacao_uso') {
+               FilterSelect[key] = { [Op.like]: `%${filters[key]}%` };
+            }
+            //Filtra com base na CATEGORIA
+            else if (key === 'categoria') {
+               FilterSelect[key] = { [Op.eq]: (filters[key]) };
+            }
+            //Filtra com base no nome do USUÁRIO
+            else if (key === 'tipo_unidade') {
+               FilterSelect[key] = { [Op.like]: `%${filters[key]}%` };
+            }
+            //Filtra com base na SITUAÇÃO
+            else if (key === 'situacao') {
+               FilterSelect[key] = { [Op.eq]: (filters[key]) };
+            }
          }
-      }
-   });
-
-   const Orderselect = [];
+      });
+   }
+   const OrderSelect = [];
    if (orderBy) {
-      const [field, direction] = orderBy.split(",")
-      if (field && (direction == "ASC" || direction === "DESC")) {
-         Orderselect.push([field, direction]);
+      const [field, direction] = orderBy.split(",");
+      if (field && (direction === "ASC" || direction === "DESC" || direction === "asc" || direction === "desc")) {
+         const formattedDirection = direction.toUpperCase();
+         OrderSelect.push([field, formattedDirection]);
       }
    } else {
-      Orderselect.push(["nome", "ASC"]);
-   };
-
-   const queryOptions = {
-      where: Filterselect,
-      order: Orderselect,
-      attributes: [
-         "id",
-         "fk_id_laboratorio",
-         "nome",
-         "indicacao_uso",
-         "categoria",
-         "tipo_unidade",
-         "situacao",
-         [
-            sequelize.fn("DATE_FORMAT", sequelize.col("Medicamentos.created_at"), "%d-%m-%Y %H:%i:%s"),
-            "data_criacao",
-         ],
-         [
-            sequelize.fn("DATE_FORMAT", sequelize.col("Medicamentos.updated_at"), "%d-%m-%Y %H:%i:%s"),
-            "data_alteracao",
-         ],
-      ],
-      include: {
-         model: Laboratorios,
-         as: "laboratorio",
-         attributes: ["nome_laboratorio"],
-      },
-      order: [],
-   };
-
-   const allMedicamentos = await getAllMedicamentosByFilter(queryOptions);
-   return allMedicamentos;
+      OrderSelect.push(["id", "ASC"]);
+   }
+   const relatorios_medicamentos = await getAllMedicamentosByFilter(FilterSelect, OrderSelect);
+   return relatorios_medicamentos;
 }
 
-async function createMedicamentoService(id, fk_id_laboratorio, nome, indicacao_uso, categoria, tipo_unidade, quantidade_minima, img) {
+async function createMedicamentoService(id, fk_id_laboratorio, nome, indicacao_uso, categoria, tipo_unidade, quantidade_minima, quantidade_total, img, situacao) {
 
    const idExists = await getMedicamentoById(id);
    if(idExists) {
       throw new ExistsDataError("Existe um medicamento com este ID.","ID_EXISTS", {id})
    }
 
-   const Newmedicamento = await createMedicamento (id, fk_id_laboratorio, nome, indicacao_uso, categoria, tipo_unidade, quantidade_minima, img);
+   const Newmedicamento = await createMedicamento (id, fk_id_laboratorio, nome, indicacao_uso, categoria, tipo_unidade, quantidade_minima, quantidade_total, img, situacao);
    return Newmedicamento;
 }
 
-async function updateMedicamentoService(id, fk_id_laboratorio, nome, indicacao_uso, categoria, tipo_unidade, quantidade_minima, img) {
+async function updateMedicamentoService(id, fk_id_laboratorio, nome, indicacao_uso, categoria, tipo_unidade, quantidade_minima, img, situacao, quantidade_total) {
    const medicamento = await getMedicamentoById(id);
    if(!medicamento) {
       throw new NotFoundError("O medicamento não existe")
    }
-   const updatedMedicamento = await updateMedicamento(id, fk_id_laboratorio, nome, indicacao_uso, categoria, tipo_unidade, quantidade_minima, img);
+   const updatedMedicamento = await updateMedicamento(id, fk_id_laboratorio, nome, indicacao_uso, categoria, tipo_unidade, quantidade_minima, img, situacao, quantidade_total);
    return updatedMedicamento;
 }
 
@@ -152,4 +146,4 @@ module.exports = {
    createMedicamentoService,
    updateMedicamentoService,
    changeSituacaoMedicamentoService,
-};    
+};   

@@ -118,7 +118,9 @@ async function createMedicamento(req, res) {
          indicacao_uso,
          categoria,
          quantidade_minima,
+         quantidade_total = 0,
          tipo_unidade,
+         situacao = "ATIVO"
       } = req.body;
 
       const file = req.file;
@@ -150,7 +152,9 @@ async function createMedicamento(req, res) {
          categoria,
          tipo_unidade,
          Number(quantidade_minima),
-         file.filename
+         Number(quantidade_total),
+         file.filename,
+         situacao
    );
 
       if (!createdMedicamento) {
@@ -184,6 +188,8 @@ async function updateMedicamento(req, res) {
          categoria,
          tipo_unidade,
          quantidade_minima,
+         quantidade_total,
+         situacao
       } = req.body;
 
       const file = req?.file;
@@ -210,15 +216,19 @@ async function updateMedicamento(req, res) {
       const imgFilename = file ? file.filename : undefined;
       const fk_id_laboratorio_num = fk_id_laboratorio ? Number(fk_id_laboratorio) : undefined;
       const quantidade_minima_num = quantidade_minima ? Number(quantidade_minima) : undefined;
+      const quantidade_total_num = quantidade_total ? Number(quantidade_total) : undefined;
 
-      const [rowAffected] = await updateMedicamentoService(id, 
+
+      const rowAffected = await updateMedicamentoService(id, 
          fk_id_laboratorio_num, 
          nome_medicamento, 
          indicacao_uso, 
          categoria, 
          tipo_unidade, 
-         quantidade_minima_num, 
-         imgFilename);
+         quantidade_minima_num,
+         quantidade_total_num,
+         imgFilename,
+         situacao);
 
       if (rowAffected > 0) {
          return res.status(200).json({
