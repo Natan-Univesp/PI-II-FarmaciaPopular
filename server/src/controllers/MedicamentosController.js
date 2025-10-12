@@ -65,7 +65,7 @@ async function getAllMedicamentosByFilter(req, res) {
          });
       }
 
-      const filteredMedicamentos = await getAllMedicamentosByFilterService(req.query);
+      const filteredMedicamentos = await getAllMedicamentosByFilterService(orderBy, filterOptions);
       return res.status(200).json(filteredMedicamentos);
    } catch (error) {
       errorResponse(error, res);
@@ -111,6 +111,12 @@ async function getAllMedicamentosForSelect(req, res) {
 
 async function createMedicamento(req, res) {
    try {
+      if(!req.body) {
+         throw new FieldUndefinedError("Nenhum campo identificado", {
+            fields: req.body
+         })
+      }
+
       const {
          id,
          fk_id_laboratorio,
@@ -118,9 +124,7 @@ async function createMedicamento(req, res) {
          indicacao_uso,
          categoria,
          quantidade_minima,
-         quantidade_total = 0,
          tipo_unidade,
-         situacao = "ATIVO"
       } = req.body;
 
       const file = req.file;
@@ -131,12 +135,12 @@ async function createMedicamento(req, res) {
          !nome_medicamento ||
          !indicacao_uso ||
          !categoria ||
-         !tipo_unidade ||
          (quantidade_minima === undefined || 
           quantidade_minima === null) ||
+         !tipo_unidade ||
          !file
       ) {
-         throw new FieldUndefinedError("Nenhum campo identificado", {
+         throw new FieldUndefinedError("Um ou mais campos não identificados", {
             dados_passados: {
                ...req.body,
                ...req.file,
@@ -152,9 +156,7 @@ async function createMedicamento(req, res) {
          categoria,
          tipo_unidade,
          Number(quantidade_minima),
-         Number(quantidade_total),
          file.filename,
-         situacao
    );
 
       if (!createdMedicamento) {

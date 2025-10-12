@@ -47,8 +47,7 @@ async function getAllMedicamentosForSelectService() {
    return formattedMedicamentos;
 }
 
-async function getAllMedicamentosByFilterService(QueryParams = {}) {
-   const { orderBy, ...filters } = QueryParams;
+async function getAllMedicamentosByFilterService(orderBy, filters) {
 
    const MedicamentosFilters = ["id", "nome", "indicacao_uso", "categoria", "tipo_unidade", "situacao"];
    const FilterSelect = {};
@@ -84,10 +83,11 @@ async function getAllMedicamentosByFilterService(QueryParams = {}) {
          }
       });
    }
+
    const OrderSelect = [];
    if (orderBy) {
       const [field, direction] = orderBy.split(",");
-      if (field && (direction === "ASC" || direction === "DESC" || direction === "asc" || direction === "desc")) {
+      if (field && (direction.toUpperCase() === "ASC" || direction.toUpperCase() === "DESC")) {
          const formattedDirection = direction.toUpperCase();
          OrderSelect.push([field, formattedDirection]);
       }
@@ -98,14 +98,14 @@ async function getAllMedicamentosByFilterService(QueryParams = {}) {
    return relatorios_medicamentos;
 }
 
-async function createMedicamentoService(id, fk_id_laboratorio, nome, indicacao_uso, categoria, tipo_unidade, quantidade_minima, quantidade_total, img, situacao) {
+async function createMedicamentoService(id, fk_id_laboratorio, nome, indicacao_uso, categoria, tipo_unidade, quantidade_minima, img) {
 
    const idExists = await getMedicamentoById(id);
    if(idExists) {
       throw new ExistsDataError("Existe um medicamento com este ID.","ID_EXISTS", {id})
    }
 
-   const Newmedicamento = await createMedicamento (id, fk_id_laboratorio, nome, indicacao_uso, categoria, tipo_unidade, quantidade_minima, quantidade_total, img, situacao);
+   const Newmedicamento = await createMedicamento (id, fk_id_laboratorio, nome, indicacao_uso, categoria, tipo_unidade, quantidade_minima, 0, img, "ATIVO");
    return Newmedicamento;
 }
 
