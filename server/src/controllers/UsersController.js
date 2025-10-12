@@ -101,12 +101,12 @@ async function createUser(req, res) {
          });
       }
 
-      const { nivel_acesso } = existsUser;
+      const { nivel_acesso: nivel_acesso_currUser } = existsUser;
 
-      if (nivel_acesso > 1) {
+      if (nivel_acesso_currUser > 1) {
          throw new AccessLevelError("É necessário ser um Administrador para executar a ação", {
             fields: {
-               nivel_acesso,
+               nivel_acesso_currUser,
             },
          });
       }
@@ -116,9 +116,9 @@ async function createUser(req, res) {
                      Cadastro efetivo
       =============================================
       */
-      const { usuario, senha } = req.body;
+      const { usuario, senha, nivel_acesso } = req.body;
 
-      if (!usuario || !senha) {
+      if (!usuario || !senha || !nivel_acesso) {
          throw new FieldUndefinedError("Um ou mais campos não identificados", {
             fields: {
                usuario,
@@ -127,7 +127,7 @@ async function createUser(req, res) {
          });
       }
 
-      const createdUser = await createUserService({ usuario, senha });
+      const createdUser = await createUserService({ usuario, senha, nivel_acesso });
 
       return res.status(201).json({
          status: "success",
