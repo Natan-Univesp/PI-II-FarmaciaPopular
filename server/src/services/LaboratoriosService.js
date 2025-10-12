@@ -55,7 +55,7 @@ async function updateLaboratorioService(id, nome_laboratorio, cnpj, endereco) {
 
     const laboratorio = await getLaboratorioById(id);
     if(!laboratorio){
-        throw new ExistsDataError("O laboratório não existe")
+        throw new NotFoundError("O laboratório não existe");
     }
 
     if (cnpj && cnpj !== laboratorio.cnpj) {

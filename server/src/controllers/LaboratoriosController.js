@@ -61,6 +61,12 @@ async function getAllLaboratoriosForSelect(req, res) {
 
 async function createLaboratorio(req, res) {
    try {
+      if(!req.body) {
+         throw new FieldUndefinedError("Nenhum campo identificado", {
+            fields: req.body
+         })
+      }
+
       const {
          nome_laboratorio,
          cnpj, 
@@ -68,7 +74,7 @@ async function createLaboratorio(req, res) {
       } = req.body;
 
       if(!nome_laboratorio || !cnpj || !endereco) {
-         throw new FieldUndefinedError("Nenhum campo identificado", {
+         throw new FieldUndefinedError("Um ou mais campos não identificados", {
             dados_passados: {
                nome_laboratorio,
                cnpj,
@@ -100,6 +106,16 @@ async function createLaboratorio(req, res) {
 async function updateLaboratorio(req, res) {
    try {
       const id = Number(req.params.id);
+
+      if(!id || !req.body) {
+         throw new FieldUndefinedError("Campo ID ou novos valores não encontrados", {
+            fields: {
+               id,
+               ...req.body
+            }
+         })
+      }
+
       const {
          nome_laboratorio,
          cnpj, 
@@ -107,7 +123,7 @@ async function updateLaboratorio(req, res) {
       } = req.body;
 
       if(!id || (!nome_laboratorio && !cnpj && !endereco)) {
-         throw new FieldUndefinedError("Nenhum campo identificado", {
+         throw new FieldUndefinedError("Um ou mais campos não identificados", {
             fields: {
                id,
                nome_laboratorio,

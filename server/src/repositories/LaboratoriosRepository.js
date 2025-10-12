@@ -27,7 +27,22 @@ async function getAllLaboratorios() {
 
 //Filtra os laboratórios pela ID
 async function getLaboratorioById(id) {
-    const laboratorio = await Laboratorios.findByPk(id, {})
+    const laboratorio = await Laboratorios.findByPk(id, {
+        attributes: [
+            "id",
+            "nome_laboratorio",
+            "cnpj",
+            "endereco",
+            [
+                sequelize.fn("DATE_FORMAT", sequelize.col("Laboratorios.created_at"), "%d-%m-%Y %H:%i:%s"),
+                "data_criacao",
+            ],
+            [
+                sequelize.fn("DATE_FORMAT", sequelize.col("Laboratorios.updated_at"), "%d-%m-%Y %H:%i:%s"),
+                "data_alteracao",
+            ]
+        ],
+    })
     return laboratorio
 }
 
