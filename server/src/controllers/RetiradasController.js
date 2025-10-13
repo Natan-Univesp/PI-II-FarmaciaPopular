@@ -81,12 +81,7 @@ async function createRetirada(req, res) {
          });
       }
 
-      const retiradaData = {
-         fk_id_user: fk_id_user,
-         data_retirada: new Date()
-      }
-
-      const createdRetirada = await createdRetiradaService(medicamentos_retirados, retiradaData);
+      const createdRetirada = await createdRetiradaService(medicamentos_retirados, fk_id_user);
 
       if (!createdRetirada) {
          throw new CannotCreateError("Erro ao cadastrar Retirada", {
@@ -96,7 +91,7 @@ async function createRetirada(req, res) {
       }
 
       return res.status(201).json({
-         success: true,
+         status: "success",
          message: "Retirada criada com sucesso",
          data: createdRetirada
       });

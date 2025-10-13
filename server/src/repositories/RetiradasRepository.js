@@ -3,20 +3,20 @@ const { Itens_retiradas, Retiradas, Medicamentos, sequelize } = require("../mode
 
 
 // Cria uma nova retirada
-async function createRetirada(itensRetirada, retiradaData) {
+async function createRetirada(itensRetirada, idUser) {
     const t = await sequelize.transaction();
+    console.log(idUser);
 
     try {
         // Cria a retirada
         const createRetirada = await Retiradas.create({
-            fk_id_user: retiradaData.fk_id_user,
-            data_retirada: retiradaData.data_retirada
+            fk_id_user: idUser,
         }, { transaction: t });
 
         // Cria o item a ser retirado em Itens Retiradas 
         const createItem = itensRetirada.map(item => {
             return {
-                fk_id_medicamento: item.medicamentoID,
+                fk_id_medicamento: item.fk_id_medicamento,
                 fk_id_retirada: createRetirada.id,
                 quantidade_solicitada: item.quantidade_solicitada
             }
@@ -25,7 +25,7 @@ async function createRetirada(itensRetirada, retiradaData) {
 
         // Atualiza o estoque conforme a quantidade solicitada
         for (const item of itensRetirada) {
-            const medicamento = await Medicamentos.findByPk(item.medicamentoID, {
+            const medicamento = await Medicamentos.findByPk(item.fk_id_medicamento, {
                 transaction: t,
                 lock: t.LOCK.UPDATE
             });
