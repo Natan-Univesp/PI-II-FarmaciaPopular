@@ -25,6 +25,9 @@ async function getAllAquisicoes() {
             {
                 association: "user",
                 attributes: ["usuario"]
+            },
+            {
+                association: "itens_aquisicoes"
             }
         ],
         order: [
@@ -174,7 +177,6 @@ async function createAquisicao(aquisicaoData, loteMedicamentos) {
             fk_id_laboratorio: aquisicaoData.fk_id_laboratorio,
             fornecedor: aquisicaoData.fornecedor,
             status: formattedStatus,
-            data_entrega: aquisicaoData.data_entrega
         }, { transaction: t });
 
         const itensParaCriar = loteMedicamentos.map(item => {
