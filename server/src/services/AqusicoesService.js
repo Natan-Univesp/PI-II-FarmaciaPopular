@@ -44,7 +44,7 @@ async function getAquisicaoByIdService(id) {
 }
 
 async function createAquisicaoService(aquisicaoData, lote_medicamentos) {
-    const novaAquisicao = await createAquisicao(aquisicaoData, lote_medicamentos)
+    const novaAquisicao = await createAquisicao({...aquisicaoData, status: "SOLICITADO"}, lote_medicamentos)
     return novaAquisicao;
 }
 
