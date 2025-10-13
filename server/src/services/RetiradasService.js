@@ -6,27 +6,27 @@ const {
 } = require("../repositories/RetiradasRepository.js");
 const { Op } = require("sequelize");
 const { Itens_retiradas, Retiradas, Medicamentos, sequelize } = require("../models/index.js");
-const ExistsDataError = require("../classes/ExistsDataError.js");
+const CannotCreateError = require("../classes/CannotCreateError.js");
 
 
-async function createdRetiradaService(medicamentos_retirados, retiradaData) {
+async function createdRetiradaService(medicamentos_retirados, idUser) {
     for (const retirados of medicamentos_retirados) {
-            const medicamentos = await Medicamentos.findByPk(retirados.medicamentoID);
+            const medicamentos = await Medicamentos.findByPk(retirados.fk_id_medicamento);
 
         if(!medicamentos){
-            throw new ExistsDataError("O medicamento informado não existe")
+            throw new CannotCreateError("O medicamento informado não existe")
         }
 
         if (medicamentos.situacao !== "ATIVO") {
-            throw new ExistsDataError ("O medicamento informado encontra-se desativado")
+            throw new CannotCreateError ("O medicamento informado encontra-se desativado")
         }
 
         if (retirados.quantidade_solicitada > medicamentos.quantidade_total) {
-            throw new ExistsDataError ("Não há estoque suficiente do medicamento solicitado")
+            throw new CannotCreateError ("Não há estoque suficiente do medicamento solicitado")
         }
         
     }
-    const novaRetirada = await createRetirada(medicamentos_retirados, retiradaData)
+    const novaRetirada = await createRetirada(medicamentos_retirados, idUser)
     return novaRetirada;
 }  
 
