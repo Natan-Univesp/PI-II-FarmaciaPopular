@@ -106,17 +106,22 @@ async function getAquisicaoById(req, res) {
 
 async function createAquisicao(req, res) {
    try {
+      const fk_id_user = req.userInfo.id;
+
+      if(!req.body) {
+         throw new FieldUndefinedError("Nenhum campo identificado", {
+            fields: req.body
+         })
+      }
+
       const {
-         fk_id_user,
          fk_id_laboratorio,
          fornecedor,
-         status,
-         data_entrega,
          lote_medicamentos
       } = req.body;
 
-      if (!fk_id_user || !fk_id_laboratorio || !fornecedor || !lote_medicamentos || !Array.isArray(lote_medicamentos) || lote_medicamentos.length === 0) {
-         throw new FieldUndefinedError("Nenhum campo identificado", {
+      if (!fk_id_user || !fk_id_laboratorio || !fornecedor || !lote_medicamentos) {
+         throw new FieldUndefinedError("Um ou mais campos não identificados", {
             dados_passados: {
                fk_id_user,
                fk_id_laboratorio,
@@ -126,7 +131,7 @@ async function createAquisicao(req, res) {
          })
       }
 
-      const createdAquisicao = await createAquisicaoService({fk_id_user, fk_id_laboratorio, fornecedor, status, data_entrega }, 
+      const createdAquisicao = await createAquisicaoService({fk_id_user, fk_id_laboratorio, fornecedor}, 
          lote_medicamentos
       )
 
@@ -157,16 +162,17 @@ async function createAquisicao(req, res) {
 async function changeStatusAquisicao(req, res) {
    try {
       const id = Number(req.params.id);
-      const { status } = req.body;
 
-      if (!id || !status) {
+      if(!id || !req.body) {
          throw new FieldUndefinedError("Um ou mais campos não identificados", {
             fields: {
                id,
-               status
-            },
-         });
+               status: req.body
+            }
+         })
       }
+
+      const { status } = req.body;
 
       const [rowAffected] = await changeStatusAquisicaoService (id,status)
 

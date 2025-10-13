@@ -60,10 +60,17 @@ async function getClienteEspecialById(req, res) {
 
 async function createClienteEspecial(req, res) {
    try {
+
+      if(!req.body) {
+         throw new FieldUndefinedError("Nenhum campo identificado", {
+            fields: req.body
+         })
+      }
+
       const { nome_cliente, telefone, medicamentos } = req.body;
 
       if (!nome_cliente || !telefone || !medicamentos) {
-         throw new FieldUndefinedError("Nenhum campo identificado", {
+         throw new FieldUndefinedError("Um ou mais campos não identificados", {
             fields: {
                nome_cliente,
                telefone,
