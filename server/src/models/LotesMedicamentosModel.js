@@ -1,3 +1,5 @@
+const moment = require("moment");
+
 module.exports = (sequelize, DataTypes) => {
    const LotesMedicamentos = sequelize.define("Lotes_medicamentos", {
       quantidade: {
@@ -7,6 +9,17 @@ module.exports = (sequelize, DataTypes) => {
       data_validade: {
          type: DataTypes.DATEONLY,
          allowNull: false,
+         set(value) {
+            // Converte o DD-MM-YYYY para YYYY-MM-DD
+            if (value && typeof value === 'string') {
+                const dataMoment = moment(value, 'DD-MM-YYYY');
+                if (dataMoment.isValid()) {
+                    this.setDataValue('data_validade', dataMoment.format('YYYY-MM-DD'));
+                } else {
+                    throw new Error('Formato de data inválido. Use DD-MM-YYYY');
+                }
+            }
+         }
       },
    }, {
       freezeTableName: true,
