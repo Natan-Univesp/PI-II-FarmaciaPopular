@@ -13,7 +13,16 @@
    --colorPrimBright: #C2D4FA;
    --colorRed: #F22738;
    --colorYellow: #F2B90C;
+   --colorItemNav: white;
+   --colorInactive : rgb(196,196,196);
 
-   /* Barra de navegação */
+   /* Valores fixos */
+   --fixHeightTopBar: 90px;
    --fixWidthNav: 240px;
+   --fixBorderRadius: 4px;
+
+   /* para textos */
+   --fontTitleSize: 40px;
+
+   --shadowBox: 2px 2px 10px 7px #e5e5e526;
 }

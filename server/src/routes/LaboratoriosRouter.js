@@ -15,6 +15,6 @@ router
 router
    .route("/:id")
    .get(laboratoriosController.getLaboratorioById)
-   .post(laboratoriosController.updateLaboratorio)
+   .patch(laboratoriosController.updateLaboratorio)
 
 module.exports = router;

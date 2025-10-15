@@ -3,10 +3,21 @@ const FieldUndefinedError = require("../classes/FieldUndefinedError.js");
 const NotFoundError = require("../classes/NotFoundError.js");
 const deleteFile = require("../helper/deleteFileHelper.js");
 const errorResponse = require("../helper/ErrorResponseHelper.js");
+const {
+   getAllMedicamentosService,
+   getAllMedicamentosByLaboratorioIdService,
+   getMedicamentoByIdService,
+   getAllInactiveMedicamentosService,
+   getAllMedicamentosForSelectService,
+   getAllMedicamentosByFilterService,
+   createMedicamentoService,
+   updateMedicamentoService,
+   changeSituacaoMedicamentoService,
+} = require("../services/MedicamentosService.js")
 
 async function getAllMedicamentos(req, res) {
    try {
-      const allMedicamentos = "service aqui";
+      const allMedicamentos = await getAllMedicamentosService();
       return res.status(200).json(allMedicamentos);
    } catch (error) {
       errorResponse(error, res);
@@ -15,7 +26,7 @@ async function getAllMedicamentos(req, res) {
 
 async function getAllInactiveMedicamentos(req, res) {
    try {
-      const allInactiveMedicamentos = "service aqui";
+      const allInactiveMedicamentos = await getAllInactiveMedicamentosService ();
       return res.status(200).json(allInactiveMedicamentos);
    } catch (error) {
       errorResponse(error, res);
@@ -34,7 +45,7 @@ async function getAllMedicamentosByLaboratorioId(req, res) {
          });
       }
 
-      const allMedicamentos = "service aqui";
+      const allMedicamentos = await getAllMedicamentosByLaboratorioIdService(idLab);
       return res.status(200).json(allMedicamentos);
    } catch (error) {
       errorResponse(error, res);
@@ -54,8 +65,7 @@ async function getAllMedicamentosByFilter(req, res) {
          });
       }
 
-      const filteredMedicamentos = "service aqui";
-
+      const filteredMedicamentos = await getAllMedicamentosByFilterService(orderBy, filterOptions);
       return res.status(200).json(filteredMedicamentos);
    } catch (error) {
       errorResponse(error, res);
@@ -74,7 +84,7 @@ async function getMedicamentoById(req, res) {
          });
       }
 
-      const medicamento = "service aqui";
+      const medicamento = await getMedicamentoByIdService(id);
 
       if (!medicamento) {
          throw new NotFoundError("Medicamento não encontrado", {
@@ -92,7 +102,7 @@ async function getMedicamentoById(req, res) {
 
 async function getAllMedicamentosForSelect(req, res) {
    try {
-      const allMedicamentos = "service aqui";
+      const allMedicamentos = await getAllMedicamentosForSelectService();
       return res.status(200).json(allMedicamentos);
    } catch (error) {
       errorResponse(error, res);
@@ -101,6 +111,12 @@ async function getAllMedicamentosForSelect(req, res) {
 
 async function createMedicamento(req, res) {
    try {
+      if(!req.body) {
+         throw new FieldUndefinedError("Nenhum campo identificado", {
+            fields: req.body
+         })
+      }
+
       const {
          id,
          fk_id_laboratorio,
@@ -108,6 +124,7 @@ async function createMedicamento(req, res) {
          indicacao_uso,
          categoria,
          quantidade_minima,
+         tipo_unidade,
       } = req.body;
 
       const file = req.file;
@@ -120,9 +137,10 @@ async function createMedicamento(req, res) {
          !categoria ||
          (quantidade_minima === undefined || 
           quantidade_minima === null) ||
+         !tipo_unidade ||
          !file
       ) {
-         throw new FieldUndefinedError("Nenhum campo identificado", {
+         throw new FieldUndefinedError("Um ou mais campos não identificados", {
             dados_passados: {
                ...req.body,
                ...req.file,
@@ -130,7 +148,16 @@ async function createMedicamento(req, res) {
          });
       }
 
-      const createdMedicamento = "service aqui";
+      const createdMedicamento = await createMedicamentoService(
+         Number(id),
+         Number(fk_id_laboratorio),
+         nome_medicamento,
+         indicacao_uso,
+         categoria,
+         tipo_unidade,
+         Number(quantidade_minima),
+         file.filename,
+   );
 
       if (!createdMedicamento) {
          throw new CannotCreateError("Erro ao cadastrar Medicamento", {
@@ -163,6 +190,8 @@ async function updateMedicamento(req, res) {
          categoria,
          tipo_unidade,
          quantidade_minima,
+         quantidade_total,
+         situacao
       } = req.body;
 
       const file = req?.file;
@@ -186,7 +215,22 @@ async function updateMedicamento(req, res) {
          });
       }
 
-      const [rowAffected] = "service aqui";
+      const imgFilename = file ? file.filename : undefined;
+      const fk_id_laboratorio_num = fk_id_laboratorio ? Number(fk_id_laboratorio) : undefined;
+      const quantidade_minima_num = quantidade_minima ? Number(quantidade_minima) : undefined;
+      const quantidade_total_num = quantidade_total ? Number(quantidade_total) : undefined;
+
+
+      const rowAffected = await updateMedicamentoService(id, 
+         fk_id_laboratorio_num, 
+         nome_medicamento, 
+         indicacao_uso, 
+         categoria, 
+         tipo_unidade, 
+         quantidade_minima_num,
+         quantidade_total_num,
+         imgFilename,
+         situacao);
 
       if (rowAffected > 0) {
          return res.status(200).json({
@@ -215,9 +259,7 @@ async function changeSituacaoMedicamento(req, res) {
             },
          });
       }
-
-      const [rowAffected] = "service aqui";
-
+      const rowAffected = await changeSituacaoMedicamentoService(id, situacao);
       if (rowAffected > 0) {
          return res.status(200).json({
             status: "success",

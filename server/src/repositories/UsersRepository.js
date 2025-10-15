@@ -57,7 +57,7 @@ async function findUserLoggedById(idUser) {
 }
 
 async function findUserByName(userName) {
-   const user = await Users.FindOne({
+   const user = await Users.findOne({
       where: {
          usuario: userName
       }

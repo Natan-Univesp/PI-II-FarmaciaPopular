@@ -1,0 +1,167 @@
+/* 
+===================================================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Estilização Geral
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+===================================================================
+*/
+
+nav.navContainer {
+   grid-area: navbar;
+   width: var(--fixWidthNav);
+   height: calc(100vh - var(--fixHeightTopBar));
+   background-color: var(--colorBlue);
+   color: white;
+   letter-spacing: 1px;
+   box-shadow: 0px 4px 12px 9px rgba(191, 191, 191, 0.21);
+   transition: .25s ease;
+}
+
+/* 
+===================================================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Estilização De ativar e desativar Navbar
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+===================================================================
+*/
+nav.inactive {
+   position: absolute;
+   transform: translateX(-100%);
+   opacity: 0;
+}
+
+/* 
+===================================================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Estilização dos Links
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+===================================================================
+*/
+
+nav.navContainer ul :is(li, li > p) {
+   font-size: 18px;
+   padding: 10px 20px;
+   margin: 15px 0;
+   transition: 0.2s ease;
+   z-index: 1;
+}
+
+nav.navContainer ul li {
+   width: 100%;
+}
+
+nav.navContainer ul li:is(:has(.active), :hover, .activeDropDown) {
+   background-color: var(--colorItemNav);
+}
+
+
+nav.navContainer ul li a {
+   color: white;
+   display: flex;
+   gap: 10px;
+   align-items: center;
+   font-weight: 600;
+}
+
+nav.navContainer ul li:hover a {
+   color: var(--colorBlue);
+}
+
+nav.navContainer ul li:has(.active) a {
+   color: var(--colorBlue);
+}
+
+nav.navContainer ul li a .iconList {
+   font-size: 1.5em;
+}
+
+/* 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            Estilização das Sublistas
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+nav.navContainer .iconDropList {
+   font-size: 1.15em;
+   transition: 0.2s ease;
+}
+
+nav.navContainer ul li ul {
+   display: none;
+}
+
+
+
+/* 
+--------------------------------------------------
+Lista ativa
+--------------------------------------------------
+*/
+
+nav.navContainer ul li.activeDropDown ul {
+   display: block;
+}
+
+nav.navContainer ul :is(li.activeDropDown) .iconDropList {
+   transform: rotate(180deg);
+}
+
+nav.navContainer ul li.activeDropDown li {
+   border-radius: var(--fixBorderRadius) 0 0 var(--fixBorderRadius);
+}
+
+nav.navContainer ul li.activeDropDown a {
+   color: var(--colorBlue);
+}
+
+nav.navContainer ul li.activeDropDown li:is(:hover, :has(.active)) {
+   background-color: var(--colorBlueContrast);
+
+}
+
+nav.navContainer ul li.activeDropDown li:is(:hover, :has(.active)) a {
+   color: white;
+}
+
+nav.navContainer ul li ul {
+   padding-right: 0;
+   margin-right: -20px;
+   font-size: calc(18px / 1.5);
+}
+
+/* 
+===================================================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Responsividade
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+===================================================================
+*/
+
+@media only screen and (min-width: 1400px) {
+   /* nav.navContainer ul li:has(ul):hover ul{
+        display: block;
+    }
+
+    nav.navContainer ul li:has(ul):hover .iconDropList {
+        transform: rotate(180deg);
+    } */
+}
+
+@media only screen and (max-width: 1399px) {
+
+}
+
+@media only screen and (max-width: 991px) {
+   nav.navContainer {
+      position: absolute;
+      top: 90px;
+   }
+
+}
+
+@media only screen and (max-width: 880px) {
+
+}
+
+@media only screen and (max-width: 575px) {
+
+}

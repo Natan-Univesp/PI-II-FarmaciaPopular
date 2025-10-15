@@ -20,7 +20,7 @@ function authMiddleware(req, res, next) {
    }
 
    try {
-      const decoded = jwt.verify(token, process.env.SECRET_TOKEN);
+      const decoded = jwt.verify(token, process.env.JWT_TOKEN);
       
       if(!decoded.id) {
          return res.status(401).json({

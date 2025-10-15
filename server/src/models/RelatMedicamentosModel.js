@@ -2,6 +2,12 @@ module.exports = (sequelize, DataTypes) => {
    const RelatoriosMedicamentos = sequelize.define(
       "Relatorios_medicamentos",
       {
+      id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
+            allowNull: false,
+         },
          situacao: {
             type: DataTypes.ENUM("SOLICITADO", "ENVIADO", "RECEBIDO"),
             allowNull: false,

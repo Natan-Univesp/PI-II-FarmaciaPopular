@@ -33,22 +33,22 @@ async function getUserLoggedByIdService(idUser) {
 }
 
 async function createUserService(userInfo) {
-   const { user, password, nivel_acesso } = userInfo;
-   const formattedUser = removeAllAcentsForString(user);
+   const { usuario, senha, nivel_acesso } = userInfo;
+   const formattedUser = removeAllAcentsForString(usuario);
    const existsUser = await findUserByName(formattedUser);
-   const trimPassword = String(password).trim();
+   const trimPassword = String(senha).trim();
 
    if(existsUser) {
       throw new ExistsDataError("Usuário já existe", "USER_EXISTS", {
          user_informado: formattedUser,
-         user_existente: existsUser.user 
+         user_existente: existsUser.usuario 
       })
    }
 
    const hashedPassword = await hash(trimPassword, 10);
    const createdUser = await createNewUser({
-      user: String(formattedUser).trim(),
-      password: hashedPassword,
+      usuario: String(formattedUser).trim(),
+      senha: hashedPassword,
       nivel_acesso,
       status: "ATIVO",
    });

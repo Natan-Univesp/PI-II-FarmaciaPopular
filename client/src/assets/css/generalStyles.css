@@ -1,0 +1,14 @@
+h1.mainTitle {
+   font-size: var(--fontTitleSize);
+   text-align: center;
+   margin: var(--fontMargin);
+}
+
+h2.subTitle {
+   width: fit-content;
+   margin: var(--marginContent);
+   margin-top: 1.3em;
+   padding: 5px 30px;
+   background-color: var(--colorSec);
+   color: white;
+}

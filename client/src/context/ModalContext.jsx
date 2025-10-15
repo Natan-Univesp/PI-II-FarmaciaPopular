@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import { createPortal } from "react-dom";
 import PropTypes from "prop-types";
-import ModalContainer from "../components/Modals/ModalContainer/ModalContainer";
+import { ModalContainer } from "../components/Modals/ModalContainer/ModalContainer";
 
 const ModalContext = createContext(null);
 

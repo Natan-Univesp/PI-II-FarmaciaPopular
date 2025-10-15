@@ -1,4 +1,5 @@
 @import url(./assets/css/var.css);
+@import url(./assets/css/generalStyles.css);
 @import url(./assets/css/animation.css);
 
 * {
@@ -9,7 +10,7 @@
 
 body {
   font-family: var(--fontPrim);
-  background-color: var(--colorPrim);
+  background-color: var(--colorBackground);
 }
 
 body:has(.activeModal) { overflow-y: hidden; }

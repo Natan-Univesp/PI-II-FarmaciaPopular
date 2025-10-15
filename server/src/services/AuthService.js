@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 function generateToken(id) {
-   return jwt.sign({id: id}, process.env.SECRET_TOKEN, {expiresIn: 86400});
+   return jwt.sign({id: id}, process.env.JWT_TOKEN, {expiresIn: 86400});
 }
 
 
@@ -20,7 +20,7 @@ async function loginService(userName, password) {
 
    const { id, usuario, nivel_acesso } = existsUser;
 
-   const isValidPassword = await bcrypt.compare(password, existsUser.password);
+   const isValidPassword = await bcrypt.compare(password, existsUser.senha);
 
    if(!isValidPassword) {
       throw new NotFoundError("Senha incorreta", {
