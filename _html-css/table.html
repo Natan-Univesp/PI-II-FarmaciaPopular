@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabelas</title>
+    <link rel="stylesheet" href="table.css">
+</head>
+
+<body>
+
+    <div class="container-amarelo">
+
+        <div class="bloco-tabela">
+            <table class="tabela-dados">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>USUÁRIO</th>
+                        <th>NÍVEL DE ACESSO</th>
+                        <th>ATIVO</th>
+                        <th>DATA DE CRIAÇÃO</th>
+                        <th class="acoes-header">AÇÕES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Usuario1</td>
+                        <td>comum</td>
+                        <td class="celula-status">
+                            <input type="checkbox" id="user1-status" class="status-toggle">
+                            <label for="user1-status" class="toggle-switch"></label>
+                        </td>
+                        <td>20-06-2025</td>
+                        <td class="acoes">
+                            <span class="icone-acao icone-editar">✏️</span>
+                            <span class="icone-acao icone-excluir">❌</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Usuario2</td>
+                        <td>Administrador</td>
+                        <td class="celula-status">
+                            <input type="checkbox" id="user2-status" class="status-toggle" checked>
+                            <label for="user2-status" class="toggle-switch"></label>
+                        </td>
+                        <td>15-08-2024</td>
+                        <td class="acoes">
+                            <span class="icone-acao icone-editar">✏️</span>
+                            <span class="icone-acao icone-excluir">❌</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="bloco-tabela">
+            <table class="tabela-dados">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>NOME DO MEDICAMENTO</th>
+                        <th>LABORATÓRIO</th>
+                        <th>QUANTIDADE MÍNIMA</th>
+                        <th>QUANTIDADE DISPONÍVEL</th>
+                        <th>INDICAÇÃO</th>
+                        <th>DATA DE VALIDADE</th>
+                        <th>DATA DE RECEBIMENTO</th>
+                        <th class="acoes-header">AÇÕES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Cimegripe</td>
+                        <td>Cimed</td>
+                        <td>10</td>
+                        <td>80</td>
+                        <td>Dores de garganta,<br> febre etc.</td>
+                        <td>22-10-2033</td>
+                        <td>20-06-2025</td>
+                        <td class="actions">
+                            <button class="btn-edit">✏️</button>
+                            <button class="btn-delete">❌</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Aspirina</td>
+                        <td>Bayer</td>
+                        <td>5</td>
+                        <td>50</td>
+                        <td>Dor de cabeça, <br>inflamação.</td>
+                        <td>15-01-2030</td>
+                        <td>10-05-2024</td>
+                        <td class="actions">
+                            <button class="btn-edit">✏️</button>
+                            <button class="btn-delete">❌</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</body>
+
+</html>
