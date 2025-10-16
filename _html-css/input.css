@@ -15,9 +15,10 @@ body {
 }
 
 .input-label {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
     padding: 5px 10px;
+    letter-spacing: 1px;
     color: white;
     background-color: #4162A6;
     border-radius: 4px 4px 0 0;
