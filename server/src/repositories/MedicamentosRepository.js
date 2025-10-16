@@ -1,5 +1,6 @@
 const { Where } = require("sequelize/lib/utils");
 const { Medicamentos, Laboratorios, sequelize } = require("../models/index.js");
+const ExistsDataError = require("../classes/ExistsDataError.js");
 const NotFoundError = require("../classes/NotFoundError.js");
 
 
@@ -23,15 +24,15 @@ async function getAllMedicamentos() {
          [
             sequelize.fn("DATE_FORMAT", sequelize.col("Medicamentos.updated_at"), "%d-%m-%Y %H:%i:%s"),
             "data_alteracao",
-         ]
+         ],
+         [sequelize.col("laboratorio.nome_laboratorio"), "nome_laboratorio"],
       ],
       include: {
-         model: Laboratorios,
-         as: "laboratorio",
-         attributes: ["nome_laboratorio"]
+         association: "laboratorio",
+         attributes: [],
       },
-      order :[ //Ordena conforme a situação do medicamento (ATIVOS primeiro)
-         ['situacao','ASC']
+      order: [ //Ordena conforme a situação do medicamento (ATIVOS primeiro)
+         ['situacao', 'ASC']
       ]
    });
 
@@ -43,9 +44,13 @@ async function getAllMedicamentosByLaboratorioId(idLab) {
    const allMedicamentos = await Medicamentos.findAll({
       where: { fk_id_laboratorio: idLab },
       include: {
-         model: Laboratorios,
-         as: "laboratorio",
-         attributes: ["nome_laboratorio"]
+         association: "laboratorio",
+         attributes: [],
+      },
+      attributes: {
+         include: [
+            [sequelize.col("laboratorio.nome_laboratorio"), "nome_laboratorio"]
+         ]
       }
    });
 
@@ -56,9 +61,13 @@ async function getAllMedicamentosByLaboratorioId(idLab) {
 async function getMedicamentoById(id) {
    const medicamento = await Medicamentos.findByPk(id, {
       include: {
-         model: Laboratorios,
-         as: "laboratorio",
-         attributes: ["nome_laboratorio"]
+         association: "laboratorio",
+         attributes: [],
+      },
+      attributes: {
+         include: [
+            [sequelize.col("laboratorio.nome_laboratorio"), "nome_laboratorio"]
+         ]
       }
    });
    return medicamento;
@@ -91,9 +100,13 @@ async function getAllInactiveMedicamentos() {
          situacao: 'INATIVO'
       },
       include: {
-         model: Laboratorios,
-         as: "laboratorio",
-         attributes: ["nome_laboratorio"]
+         association: "laboratorio",
+         attributes: [],
+      },
+      attributes: {
+         include: [
+            [sequelize.col("laboratorio.nome_laboratorio"), "nome_laboratorio"]
+         ]
       }
    });
 
@@ -104,17 +117,10 @@ async function getAllInactiveMedicamentos() {
 async function getAllMedicamentosForSelect() {
    const medicamento = await Medicamentos.findAll({
       attributes: [
-         "id",
-         "fk_id_laboratorio",
-         "nome",
-      ],
-      include: {
-         model: Laboratorios,
-         as: "laboratorio",
-         attributes: ["nome_laboratorio"]
-      }
+         ["id", "value"],
+         ["nome", "label"]
+      ]
    });
-
    return medicamento;
 }
 
@@ -143,47 +149,100 @@ async function getAllMedicamentosByFilter(filterSelect = {}, orderSelect = []) {
       ],
       include: {
          association: "laboratorio",
-         attributes: ["nome_laboratorio"],
+         attributes: [],
+      },
+      attributes: {
+         include: [
+            [sequelize.col("laboratorio.nome_laboratorio"), "nome_laboratorio"]
+         ]
       },
    };
 
-   
-    const allRelatorios = await Medicamentos.findAll(queryOptions);
-    return allRelatorios
+
+   const allRelatorios = await Medicamentos.findAll(queryOptions);
+   return allRelatorios
 }
 
 // Função para a criação de um NOVO MEDICAMENTO
-async function createMedicamento(id, fk_id_laboratorio, nome, indicacao_uso, categoria, tipo_unidade, quantidade_minima, quantidade_total, img, situacao) {
-   const Newmedicamentos = await Medicamentos.create({id, fk_id_laboratorio, nome, indicacao_uso, categoria, tipo_unidade, quantidade_minima, quantidade_total, img, situacao, })
-   return Newmedicamentos
+async function createMedicamento(medicamentoData) {
+   const { id, fk_id_laboratorio, nome, indicacao_uso, categoria, tipo_unidade, quantidade_minima, quantidade_total, img, situacao } = medicamentoData;
+
+   // Verifica a existência da ID informada
+   const idExists = await getMedicamentoById(id);
+   if (idExists) {
+      throw new ExistsDataError("Existe um medicamento com este ID.", "ID_EXISTS", { id })
+   }
+
+   const Newmedicamentos = await Medicamentos.create({
+      id,
+      fk_id_laboratorio,
+      nome,
+      indicacao_uso,
+      categoria,
+      tipo_unidade,
+      quantidade_minima,
+      quantidade_total,
+      img,
+      situacao
+   });
+
+   return Newmedicamentos;
 }
 
 
 // Função para ATUALIZAR um MEDICAMENTO
-async function updateMedicamento(id, fk_id_laboratorio, nome, indicacao_uso, categoria, tipo_unidade, quantidade_minima, quantidade_total, img, situacao) {
+async function updateMedicamento(medicamentoData) {
+   const { id, fk_id_laboratorio, nome, indicacao_uso, categoria, tipo_unidade, quantidade_minima, quantidade_total, img, situacao } = medicamentoData;
+
+   // Verifica a existência da ID informada
+   const medicamento = await getMedicamentoById(id);
+   if (!medicamento) {
+      throw new NotFoundError("O medicamento não existe")
+   }
+
    const updateFields = {}
    if (fk_id_laboratorio !== undefined) updateFields.fk_id_laboratorio = fk_id_laboratorio;
    if (nome !== undefined && nome !== "") updateFields.nome = nome;
    if (indicacao_uso !== undefined && indicacao_uso !== "") updateFields.indicacao_uso = indicacao_uso;
    if (categoria !== undefined && categoria !== "") updateFields.categoria = categoria;
-   if (tipo_unidade !== undefined && tipo_unidade !=="") updateFields.tipo_unidade = tipo_unidade;
+   if (tipo_unidade !== undefined && tipo_unidade !== "") updateFields.tipo_unidade = tipo_unidade;
    if (quantidade_minima !== undefined) updateFields.quantidade_minima = quantidade_minima;
    if (quantidade_total !== undefined) updateFields.quantidade_total = quantidade_total;
    if (img !== undefined) updateFields.img = img;
    if (situacao !== undefined) updateFields.situacao = situacao;
-   const medicamento = await Medicamentos.update(updateFields, { 
+
+   const [rowsAffected] = await Medicamentos.update(updateFields, {
       where: { id: id }
    });
-   return medicamento;
+   return rowsAffected;
 }
 
 // Função para ATUALIZAR a situação dos MEDICAMENTOS
 async function changeSituacaoMedicamento(id, situacao) {
+
+   // Verifica a existência da ID informada
+   const medicamento = await getMedicamentoById(id);
+   if (!medicamento) {
+      throw new NotFoundError("O medicamento não existe")
+   }
+
+   // Verifica se o usuário passou a situação de forma correta
+   const formattedStatus = situacao.trim().toUpperCase();
+   if (formattedStatus != 'ATIVO' && formattedStatus != 'INATIVO') {
+      throw new ExistsDataError("Use: ATIVO ou INATIVO");
+   }
+
+   // Verifica se a situação informada não é a mesma da atual.
+   const situacaoAtual = medicamento.situacao ? medicamento.situacao.trim().toUpperCase() : 'ATIVO';
+   if (situacaoAtual == formattedStatus) {
+      throw new ExistsDataError(`O medicamento já está ${formattedStatus}`);
+   }
+
    const [rowsAffected] = await Medicamentos.update(
-        { situacao: situacao },
-        { where: { id: id } }
+      { situacao: situacao },
+      { where: { id: id } }
    );
-   return rowsAffected; 
+   return rowsAffected;
 }
 
 module.exports = {

@@ -1,5 +1,5 @@
 const { createRelatorio, 
-   getAllRetiradasByFilter,
+   getAllRelatoriosByFilter,
    getAllRelatorios,
    getRelatorioById,
 } = require("../repositories/RelatMedicamentosRepository.js");
@@ -59,10 +59,6 @@ async function getAllRelatoriosByFilterService(QueryParams = {}) {
             else if (key === 'usuario') {
                FilterSelect["$aquisicao.user.usuario$"] = { [Op.like]: `%${filters[key]}%` };
             }
-            //Filtra com base no nome do MEDICAMENTO
-            else if (key === 'medicamento') {
-               FilterSelect["$aquisicao.item_aquisicao.medicamento.nome$"] = { [Op.like]: `%${filters[key]}%` };
-            }
          }
       });
    }
@@ -76,7 +72,7 @@ async function getAllRelatoriosByFilterService(QueryParams = {}) {
    } else {
       OrderSelect.push(["id", "ASC"]);
    }
-   const relatorios_medicamentos = await getAllRetiradasByFilter(FilterSelect, OrderSelect);
+   const relatorios_medicamentos = await getAllRelatoriosByFilter(FilterSelect, OrderSelect);
    return relatorios_medicamentos;
 }
 

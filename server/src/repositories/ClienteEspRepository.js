@@ -1,5 +1,7 @@
+const NotFoundError = require ("../classes/NotFoundError.js")
 const ExistsDataError = require("../classes/ExistsDataError.js");
 const { Clientes_especiais, Medicamentos_clientes_especiais, Medicamentos, sequelize } = require("../models/index.js");
+const { Op } = require("sequelize");
 
 // Busca todos os clientes especiais
 async function getAllClientesEspeciais() {
@@ -60,7 +62,18 @@ async function createClienteEspecial(clienteData, idMedicamentos) {
     const t = await sequelize.transaction();
 
     try {
-        
+
+        const medicamentosInvalidos = await Medicamentos.findAll({
+            where: {
+                id: idMedicamentos,
+                categoria: { [Op.ne]: "CONVENIO" }
+            }
+        }, { transaction: t });
+
+        if (medicamentosInvalidos.length > 0) {
+            throw new ExistsDataError("Apenas medicamentos com a categoria 'CONVÊNIO' podem ser associados a clientes especiais.");
+        }
+
         // Cria o cliente 
         const newClient = await Clientes_especiais.create({
             nome_cliente: clienteData.nome_cliente,
@@ -68,10 +81,10 @@ async function createClienteEspecial(clienteData, idMedicamentos) {
         }, { transaction: t });
 
         // Cria o medicamento(s) associados a este cliente
-        const newMed = idMedicamentos.map(medicamentoId => {
+        const newMed = idMedicamentos.map(fk_id_medicamento => {
             return {
                 fk_id_cliente_especial: newClient.id,
-                fk_id_medicamento: medicamentoId
+                fk_id_medicamento: fk_id_medicamento
             }
         });
 
@@ -105,13 +118,32 @@ async function updateClienteEspecial(id, nome_cliente, telefone, idMedicamentos)
     const t = await sequelize.transaction();
 
     try {
-        
-      // Atualiza dados do cliente
+
+    const existsCliente = await Clientes_especiais.findByPk(id, {
+    attributes: ['id', 'nome_cliente', 'telefone']
+    });
+
+    if (!existsCliente) {
+        throw new NotFoundError("Cliente não encontrado");
+    }
+
+    const medicamentosInvalidos = await Medicamentos.findAll({
+        where: {
+            id: idMedicamentos,
+            categoria: { [Op.ne]: "CONVENIO" }
+        }
+    });
+
+    if (medicamentosInvalidos.length > 0) {
+        throw new ExistsDataError("Apenas medicamentos com a categoria 'CONVÊNIO' podem ser associados a clientes especiais.");
+    }
+
+        // Atualiza dados do cliente
         const updateFields = {};
         if (nome_cliente !== undefined && nome_cliente !== "") updateFields.nome_cliente = nome_cliente;
         if (telefone !== undefined && telefone !== "") updateFields.telefone = telefone;
-       
-  
+
+
         if (Object.keys(updateFields).length > 0) {
             await Clientes_especiais.update(updateFields, {
                 where: { id },
@@ -126,9 +158,9 @@ async function updateClienteEspecial(id, nome_cliente, telefone, idMedicamentos)
         });
 
         if (idMedicamentos && idMedicamentos.length > 0) {
-            const itensParaCriar = idMedicamentos.map(medicamentoId => ({
+            const itensParaCriar = idMedicamentos.map(fk_id_medicamento => ({
                 fk_id_cliente_especial: id,
-                fk_id_medicamento: medicamentoId
+                fk_id_medicamento: fk_id_medicamento
             }));
 
             await Medicamentos_clientes_especiais.bulkCreate(itensParaCriar, { transaction: t });
@@ -151,7 +183,7 @@ async function deleteClienteEspecial(id) {
     const t = await sequelize.transaction();
 
     try {
-         await Medicamentos_clientes_especiais.destroy({
+        await Medicamentos_clientes_especiais.destroy({
             where: { fk_id_cliente_especial: id },
             transaction: t
         })

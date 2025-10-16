@@ -1,6 +1,7 @@
 const { Association } = require("sequelize");
 const { Lotes_medicamentos, Medicamentos, sequelize } = require("../models/index.js");
 const { Op } = require("sequelize");
+const ExistsDataError = require("../classes/ExistsDataError.js");
 
 async function getAllLotesMedicamentos() {
     const allLotesMedicamentos = await Lotes_medicamentos.findAll({
@@ -19,32 +20,35 @@ async function getAllLotesMedicamentos() {
             [
                 sequelize.fn("DATE_FORMAT", sequelize.col("Lotes_medicamentos.updated_at"), "%d-%m-%Y %H:%i:%s"),
                 "data_alteracao",
-            ]
+            ],
+            [sequelize.col("medicamento.nome"), "nome_medicamento"],
         ],
-        include: [
-            {
-                association: "medicamento",
-                attributes: ["nome"]
-            }
-        ],
+        include: {
+            association: "medicamento",
+            attributes: [],
+        },
         order: [ //Ordena conforme a ID dos Lotes dos medicamentos (Ordem Crescente)
             ['id', 'ASC']
         ]
     });
-
     return allLotesMedicamentos;
 }
 
 //Filtra os lotes pela ID
 async function getLotesMedicamentoById(id) {
     const loteMedicamento = await Lotes_medicamentos.findByPk(id, {
+        attributes: {
+            include: [
+                [sequelize.col("medicamento.nome"), "nome_medicamento"]
+            ]
+        },
         include: [
             {
                 association: "medicamento",
-                attributes: ["nome"]
+                attributes: [],
             }
         ]
-    })
+    });
     return loteMedicamento
 }
 
@@ -52,10 +56,15 @@ async function getLotesMedicamentoById(id) {
 async function getAllLotesMedicamentosByIdMedicamento(idMedicamento) {
     const loteMedicamento = await Lotes_medicamentos.findAll({
         where: { fk_id_medicamento: idMedicamento },
+        attributes: {
+            include: [
+                [sequelize.col("medicamento.nome"), "nome_medicamento"]
+            ]
+        },
         include: [
             {
                 association: "medicamento",
-                attributes: ["nome"]
+                attributes: [],
             }
         ]
     });
@@ -84,10 +93,15 @@ async function getAllLotesMedicamentosByFilter(Filterselect = {}, Orderselect = 
                 "data_alteracao",
             ]
         ],
+        attributes: {
+            include: [
+                [sequelize.col("medicamento.nome"), "nome_medicamento"]
+            ]
+        },
         include: [
             {
                 association: "medicamento",
-                attributes: ["nome"]
+                attributes: [],
             }
         ]
     };
@@ -102,13 +116,19 @@ async function createLoteMedicamento(loteData) {
 }
 
 //Edita um lote já existente
-async function updateLoteMedicamento(id, fk_id_medicamento, quantidade, data_validade){
+async function updateLoteMedicamento(id, fk_id_medicamento, quantidade, data_validade) {
+
+    const existingLote = await getLotesMedicamentoById(id);
+    if (!existingLote) {
+        throw new ExistsDataError("Não existe nenhum lote com esta ID")
+    }
+
     const updateFields = {};
-    if(fk_id_medicamento !== undefined) updateFields.fk_id_medicamento = fk_id_medicamento;
-    if(quantidade !== undefined && quantidade !== "") updateFields.quantidade = quantidade;
-    if(data_validade !== undefined && data_validade !== "") updateFields.data_validade = data_validade;
+    if (fk_id_medicamento !== undefined) updateFields.fk_id_medicamento = fk_id_medicamento;
+    if (quantidade !== undefined && quantidade !== "") updateFields.quantidade = quantidade;
+    if (data_validade !== undefined && data_validade !== "") updateFields.data_validade = data_validade;
     const updatedData = await Lotes_medicamentos.update(updateFields, {
-        where: { id: id},
+        where: { id: id },
     });
     return updatedData
 }

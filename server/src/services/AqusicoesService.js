@@ -62,7 +62,10 @@ async function changeStatusAquisicaoService(id, status) {
     if (formattedSituacao == situacaoAtual) {
         throw new ExistsDataError(`Esta aquisição já está na situação de: ${formattedSituacao}`);
     }
-    const rowAffected = await changeStatusAquisicao(id, formattedSituacao);
+    
+    const dataEntrega = formattedSituacao === "ENTREGUE" ? new Date() : null;
+
+    const rowAffected = await changeStatusAquisicao(id, formattedSituacao, dataEntrega);
     return rowAffected
 }
 

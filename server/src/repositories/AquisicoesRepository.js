@@ -196,9 +196,10 @@ async function createAquisicao(aquisicaoData, loteMedicamentos) {
 }
 
 //Edita os status da Aquisição
-async function changeStatusAquisicao(id, status) {
+async function changeStatusAquisicao(id, status, data_entrega) {
     const updateFields = {}
     if (status === "SOLICITADO" || status === "ENVIADO" || status === "ENTREGUE") updateFields.status = status;
+    if (status === "ENTREGUE") {updateFields.data_entrega = data_entrega;}
     const updateAquisicao = await Aquisicoes.update(updateFields, {
         where: { id: id },
     });
