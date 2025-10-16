@@ -36,15 +36,7 @@ async function getAllInactiveMedicamentosService() {
 
 async function getAllMedicamentosForSelectService() {
    const medicamento = await getAllMedicamentosForSelect();
-   const formattedMedicamentos = medicamento.map((medicamento) => {
-      return {
-         medicamentoValue: medicamento.id,
-         medicamentoLabel: medicamento.nome,
-         laboratorioValue: medicamento.laboratorio.id,
-         laboratorioLabel: medicamento.laboratorio.nome_laboratorio,
-      };
-   });
-   return formattedMedicamentos;
+   return medicamento;
 }
 
 async function getAllMedicamentosByFilterService(orderBy, filters) {
@@ -98,41 +90,27 @@ async function getAllMedicamentosByFilterService(orderBy, filters) {
    return relatorios_medicamentos;
 }
 
-async function createMedicamentoService(id, fk_id_laboratorio, nome, indicacao_uso, categoria, tipo_unidade, quantidade_minima, img) {
+async function createMedicamentoService(medicamentoData) {
+   const { id, fk_id_laboratorio, nome, indicacao_uso, categoria, tipo_unidade, quantidade_minima, img } = medicamentoData;
 
-   const idExists = await getMedicamentoById(id);
-   if(idExists) {
-      throw new ExistsDataError("Existe um medicamento com este ID.","ID_EXISTS", {id})
+   const medicamento = {
+      ...medicamentoData,
+      quantidade_total: 0,
+      situacao: "ATIVO"
    }
 
-   const Newmedicamento = await createMedicamento (id, fk_id_laboratorio, nome, indicacao_uso, categoria, tipo_unidade, quantidade_minima, 0, img, "ATIVO");
+   const Newmedicamento = await createMedicamento (medicamento);
    return Newmedicamento;
 }
 
-async function updateMedicamentoService(id, fk_id_laboratorio, nome, indicacao_uso, categoria, tipo_unidade, quantidade_minima, img, situacao, quantidade_total) {
-   const medicamento = await getMedicamentoById(id);
-   if(!medicamento) {
-      throw new NotFoundError("O medicamento não existe")
-   }
-   const updatedMedicamento = await updateMedicamento(id, fk_id_laboratorio, nome, indicacao_uso, categoria, tipo_unidade, quantidade_minima, img, situacao, quantidade_total);
+async function updateMedicamentoService(medicamentoData) {
+   const { id, fk_id_laboratorio, nome, indicacao_uso, categoria, tipo_unidade, quantidade_minima, img } = medicamentoData;
+   const updatedMedicamento = await updateMedicamento(medicamentoData);
    return updatedMedicamento;
 }
 
 async function changeSituacaoMedicamentoService(id, situacao) {
-   const medicamento = await getMedicamentoById(id);
-   if(!medicamento) {
-      throw new NotFoundError("O medicamento não existe")
-   }
-
-   const formattedStatus = situacao.trim().toUpperCase();
-   if (formattedStatus != 'ATIVO' && formattedStatus != 'INATIVO') {
-      throw new ExistsDataError ("Use: ATIVO ou INATIVO");
-   }
-   const situacaoAtual = medicamento.situacao ? medicamento.situacao.trim().toUpperCase() : 'ATIVO';
-      if (situacaoAtual == formattedStatus) {
-         throw new ExistsDataError (`O medicamento já está ${formattedStatus}`);
-      }
-    const rowAffected = await changeSituacaoMedicamento(id, formattedStatus);
+    const rowAffected = await changeSituacaoMedicamento(id, situacao);
       return rowAffected;
 } 
 

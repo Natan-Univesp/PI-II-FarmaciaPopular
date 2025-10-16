@@ -5,38 +5,33 @@ async function createRelatorio(relatData) {
     return createRelat;
 }
 
-async function getAllRetiradasByFilter(filterSelect = {}, orderSelect = []) {
+async function getAllRelatoriosByFilter(filterSelect = {}, orderSelect = []) {
 
     const queryOptions = {
         where: Object.keys(filterSelect).length > 0 ? filterSelect : {},
         order: orderSelect.length > 0 ? orderSelect : [['id', 'ASC']],
-        attributes: ["id", "situacao",],
+        attributes: [
+            "id",
+            "situacao",
+            [sequelize.col("aquisicao.fornecedor"), "fornecedor"],
+            [sequelize.col("aquisicao.user.usuario"), "usuario"],
+            [sequelize.col("aquisicao.laboratorio.nome_laboratorio"), "laboratorio"],
+            [sequelize.fn("DATE_FORMAT", sequelize.col("aquisicao.data_solicitacao"), "%d-%m-%Y"), "data_solicitacao"],
+            [sequelize.fn("DATE_FORMAT", sequelize.col("aquisicao.data_entrega"), "%d-%m-%Y"), "data_entrega"]
+        ],
         include: [
             {
                 association: "aquisicao",
-                attributes: ["fornecedor", "data_solicitacao", "data_entrega",
-                    [
-                        sequelize.fn("DATE_FORMAT", sequelize.col("aquisicao.data_solicitacao"), "%d-%m-%Y"),
-                        "data_solicitacao",
-                    ],
-                    [
-                        sequelize.fn("DATE_FORMAT", sequelize.col("aquisicao.data_entrega"), "%d-%m-%Y"),
-                        "data_entrega",
-                    ]
-                ],
+                attributes: [],
                 include: [
                     {
                         association: "user",
-                        attributes: ["usuario"]
+                        attributes: []
                     },
                     {
-                        association: "item_aquisicao",
-                        attributes: ["quantidade_solicitada"],
-                        include: [{
-                            association: "medicamento",
-                            attributes: ["nome", "indicacao_uso", "categoria", "quantidade_total"]
-                        }]
-                    }
+                        association: "laboratorio",
+                        attributes: []
+                    },
                 ]
             }
         ],
@@ -47,33 +42,28 @@ async function getAllRetiradasByFilter(filterSelect = {}, orderSelect = []) {
 
 async function getAllRelatorios() {
     const allRelatorios = await Relatorios_medicamentos.findAll({
-        attributes: ["id", "situacao",],
+        attributes: [
+            "id",
+            "situacao",
+            [sequelize.col("aquisicao.fornecedor"), "fornecedor"],
+            [sequelize.col("aquisicao.user.usuario"), "usuario"],
+            [sequelize.col("aquisicao.laboratorio.nome_laboratorio"), "laboratorio"],
+            [sequelize.fn("DATE_FORMAT", sequelize.col("aquisicao.data_solicitacao"), "%d-%m-%Y"), "data_solicitacao"],
+            [sequelize.fn("DATE_FORMAT", sequelize.col("aquisicao.data_entrega"), "%d-%m-%Y"), "data_entrega"]
+        ],
         include: [
             {
                 association: "aquisicao",
-                attributes: ["fornecedor", "data_solicitacao", "data_entrega",
-                    [
-                        sequelize.fn("DATE_FORMAT", sequelize.col("aquisicao.data_solicitacao"), "%d-%m-%Y"),
-                        "data_solicitacao",
-                    ],
-                    [
-                        sequelize.fn("DATE_FORMAT", sequelize.col("aquisicao.data_entrega"), "%d-%m-%Y"),
-                        "data_entrega",
-                    ]
-                ],
+                attributes: [],
                 include: [
                     {
                         association: "user",
-                        attributes: ["usuario"]
+                        attributes: []
                     },
                     {
-                        association: "item_aquisicao",
-                        attributes: ["quantidade_solicitada"],
-                        include: [{
-                            association: "medicamento",
-                            attributes: ["nome", "indicacao_uso", "categoria", "quantidade_total"]
-                        }]
-                    }
+                        association: "laboratorio",
+                        attributes: []
+                    },
                 ]
             }
         ],
@@ -82,13 +72,13 @@ async function getAllRelatorios() {
 }
 
 async function getRelatorioById(id) {
-    const relatorios = await Relatorios_medicamentos.findByPk(id,{})
+    const relatorios = await Relatorios_medicamentos.findByPk(id, {})
     return relatorios;
 }
 
 module.exports = {
     getRelatorioById,
     createRelatorio,
-    getAllRetiradasByFilter,
+    getAllRelatoriosByFilter,
     getAllRelatorios,
 }

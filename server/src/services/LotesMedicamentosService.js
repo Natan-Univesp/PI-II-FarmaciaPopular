@@ -8,7 +8,7 @@ const {
 } = require("../repositories/LotesMedicamentosRepository.js");
 const { Op } = require("sequelize");
 const { LotesMedicamentos, sequelize } = require("../models/index.js");
-const ExistsDataError = require("../classes/ExistsDataError.js");
+
 
 
 async function getAllLotesMedicamentosService() {
@@ -35,6 +35,7 @@ async function getAllLotesMedicamentosByFilterService(QueryParams = {}) {
     if (filters && Object.keys(filters).length > 0) {
         Object.keys(filters).forEach(key => {
             if (LotesFilters.includes(key)) {
+                
                 // Filtra por quantidade exata
                 if (key === 'fk_id_medicamento' || key === 'quantidade') {
                     Filterselect[key] = { [Op.eq]: Number(filters[key]) };
@@ -97,10 +98,7 @@ async function createdLoteMedicamentoService(loteData) {
 }
 
 async function updateLoteMedicamentoService(id, fk_id_medicamento, quantidade, data_validade) {
-    const existingLote = await getLotesMedicamentoById(id);
-    if(!existingLote){
-        throw new ExistsDataError("Não existe nenhum lote com esta ID")
-    }
+
     const updatedLote = await updateLoteMedicamento(id,fk_id_medicamento,quantidade,data_validade)
     return updatedLote;
 }
