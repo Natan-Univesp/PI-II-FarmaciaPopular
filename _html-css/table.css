@@ -1,0 +1,180 @@
+body {
+    font-family: 'Bebas Neue', sans-serif;
+    background-color: #F6F6F6;
+    margin: 0;
+    padding: 30px 0;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.container-amarelo {
+    background-color: #F6F6F6;
+    border-top: 5px solid #F2B90C;
+    padding: 20px 30px 30px 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 1400px;
+}
+
+
+.bloco-tabela {
+    background-color: #F6F6F6;
+    border: 1px solid #C2D4FA;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.tabela-dados {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 0;
+    table-layout: fixed;
+}
+
+.tabela-dados thead th {
+    text-align: left;
+    padding: 10px 0 20px 0;
+    font-weight: bold;
+    color: #4162A6;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    border-bottom: none;
+}
+
+.tabela-dados tbody td {
+    padding: 12px 0;
+    color: #4162A6;
+    font-size: 0.9em;
+    border-bottom: 1px solid #C2D4FA;
+    vertical-align: top;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+
+.tabela-dados tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.acoes-header {
+    text-align: center !important;
+}
+
+.acoes,
+.actions {
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.status-toggle {
+    display: none;
+}
+
+.toggle-switch {
+    position: relative;
+    display: block;
+    width: 90px;
+    height: 25px;
+    cursor: pointer;
+    background-color: #F6F6F6;
+    border-radius: 4px;
+    transition: background-color 0.4s;
+    font-size: 0.75rem;
+    font-weight: bold;
+    line-height: 25px;
+    overflow: hidden;
+}
+
+.toggle-switch::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 47px;
+    width: 41px;
+    height: 21px;
+    background-color: #F6F6F6;
+    border-radius: 2px;
+    transition: left 0.4s;
+    z-index: 2;
+}
+
+.toggle-switch::before {
+    position: absolute;
+    z-index: 3;
+    transition: left 0.4s, color 0.4s, content 0.4s;
+
+    content: "INATIVO";
+    left: 8px;
+    color: #F22738;
+}
+
+.status-toggle:checked+.toggle-switch {
+    background-color: #4EBF4B;
+}
+
+.status-toggle:checked+.toggle-switch::after {
+    left: 2px;
+}
+
+.status-toggle:checked+.toggle-switch::before {
+    content: "ATIVO";
+    left: 48px;
+    color: #4162A6;
+}
+
+.icone-acao {
+    cursor: pointer;
+    margin: 0 3px;
+    padding: 5px 8px;
+    font-size: 1em;
+    border-radius: 4px;
+    display: inline-block;
+    color: #F6F6F6;
+    font-weight: normal;
+}
+
+.icone-editar {
+    background-color: #F2B90C;
+}
+
+.icone-excluir {
+    background-color: #F22738;
+}
+
+.btn-edit,
+.btn-delete {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px 8px;
+    margin: 0 3px;
+    font-size: 1em;
+    border-radius: 4px;
+    display: inline-block;
+    transition: opacity 0.2s;
+}
+
+.actions .btn-edit {
+    background-color: #F2B90C;
+}
+
+.actions .btn-delete {
+    background-color: #F22738;
+}
+
+.divisor-tabela {
+    border: 0;
+    border-top: 1px solid #F2B90C;
+    margin: 40px 0;
+}
+
+.legenda-amarela {
+    text-align: center;
+    color: #F2B90C;
+    font-weight: bold;
+    margin-top: 30px;
+    font-size: 1.2em;
+}
