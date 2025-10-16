@@ -155,9 +155,3 @@ module.exports = {
    createLaboratorio,
    updateLaboratorio
    }
-   /*
-  
-   
-
-  
-   */
