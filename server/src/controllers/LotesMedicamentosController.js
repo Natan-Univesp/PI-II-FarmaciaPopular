@@ -22,7 +22,7 @@ async function getAllLotesMedicamentos(req, res) {
 
 async function getAllLotesMedicamentosByIdMedicamento(req, res) {
    try {
-      const idMedicamento = Number(req.params.id);
+      const idMedicamento = Number(req.params.idMedicamento);
 
       if (!idMedicamento) {
          throw new FieldUndefinedError("Campo idMedicamento não identificado", {

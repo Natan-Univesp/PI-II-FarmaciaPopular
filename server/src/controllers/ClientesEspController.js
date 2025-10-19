@@ -20,7 +20,7 @@ async function getAllClientesEspeciais(req, res) {
 
 async function getAllClientesByMedicamento(req, res) {
    try {
-      const idMedicamento = Number(req.params.idMedicamentos);
+      const idMedicamento = Number(req.params.idMedicamento);
 
       if (!idMedicamento) {
          throw new FieldUndefinedError("Campo idMedicamento não identificado", {

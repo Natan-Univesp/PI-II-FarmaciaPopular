@@ -13,7 +13,7 @@ router
    .get(lotesMedicamentos.getAllLotesMedicamentosByFilter);
 
 router
-   .route("/medicamentos/:id")
+   .route("/medicamentos/:idMedicamento")
    .get(lotesMedicamentos.getAllLotesMedicamentosByIdMedicamento);
 
 router

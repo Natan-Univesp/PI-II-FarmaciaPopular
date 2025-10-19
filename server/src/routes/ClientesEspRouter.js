@@ -9,7 +9,7 @@ router
    .post(clientesEspController.createClienteEspecial)
 
 router
-   .route("/medicamentos/:idMedicamentos")
+   .route("/medicamentos/:idMedicamento")
    .get(clientesEspController.getAllClientesByMedicamento)
 
 router

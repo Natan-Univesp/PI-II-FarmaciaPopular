@@ -192,8 +192,6 @@ async function updateMedicamento(req, res) {
          categoria,
          tipo_unidade,
          quantidade_minima,
-         quantidade_total,
-         situacao
       } = req.body;
 
       const file = req?.file;
@@ -218,16 +216,13 @@ async function updateMedicamento(req, res) {
       }
 
          const medicamentoData = {
-         id,
          fk_id_laboratorio: fk_id_laboratorio ? Number(fk_id_laboratorio) : undefined,
-         nome: nome_medicamento,
+         nome_medicamento,
          indicacao_uso,
          categoria,
          tipo_unidade,
          quantidade_minima: quantidade_minima ? Number(quantidade_minima) : undefined,
-         quantidade_total: quantidade_total ? Number(quantidade_total) : undefined,
          img: file ? file.filename : undefined,
-         situacao
       };
 
       const rowAffected = await updateMedicamentoService(medicamentoData);

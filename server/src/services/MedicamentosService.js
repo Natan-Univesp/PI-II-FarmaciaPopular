@@ -104,7 +104,6 @@ async function createMedicamentoService(medicamentoData) {
 }
 
 async function updateMedicamentoService(medicamentoData) {
-   const { id, fk_id_laboratorio, nome, indicacao_uso, categoria, tipo_unidade, quantidade_minima, img } = medicamentoData;
    const updatedMedicamento = await updateMedicamento(medicamentoData);
    return updatedMedicamento;
 }
