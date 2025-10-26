@@ -17,7 +17,7 @@ export async function getAllAquisicoesService() {
    return res;
 }
 
-export async function getAllAquisicoesSolicitadasServie() {
+export async function getAllAquisicoesSolicitadasService() {
    const res = await axios.get(`${localServer}/aquisicoes/status/solicitado`, {
       headers: {
          Authorization: `Bearer ${Cookies.get("token")}`
@@ -26,7 +26,7 @@ export async function getAllAquisicoesSolicitadasServie() {
    return res;
 }
 
-export async function getAllAquisicoesEnviadasServie() {
+export async function getAllAquisicoesEnviadasService() {
    const res = await axios.get(`${localServer}/aquisicoes/status/enviado`, {
       headers: {
          Authorization: `Bearer ${Cookies.get("token")}`
