@@ -119,20 +119,27 @@
     gap: 15px;
 }
 
-.info__btnCollection button { 
-    font-size: 18px;
+.info__btnCollection button {
+    font-family: var(--fontSec);
+    font-size: 16px;
     padding: 10px 20px;
+    transition: .2s ease;
+}
+
+.info__btnCollection button:hover {
+    filter: brightness(0.85);
 }
 
 .btnCollection__btnConfirm {
-    background-color: var(--colorSec);
+    background-color: var(--colorBlue);
+    color: white;
     
 }
 
 .btnCollection__btnCancel {
     background-color: white;
-    color: var(--colorSec);
-    border: 1px solid var(--colorSec);
+    color: var(--colorBlue);
+    border: 1px solid var(--colorBlue);
 
 }
 

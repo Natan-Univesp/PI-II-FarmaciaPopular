@@ -33,6 +33,7 @@ header.topBarContainer .topBar__leftSide {
    align-items: center;
    padding: 5px;
    border: none;
+   color: black;
    background-color: white;
    font-size: 30px;
    border-radius: var(--fixBorderRadius);
