@@ -1,6 +1,6 @@
 .blocoTabela {
    background-color: #f6f6f6;
-   border: 1px solid #c2d4fa;
+   border: 1px solid var(--colorPrimBright);
    border-radius: var(--fixBorderRadius);
    padding: 15px 15px 8px;
    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);

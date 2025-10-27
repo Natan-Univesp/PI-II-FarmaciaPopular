@@ -25,4 +25,7 @@
    --fontTitleSize: 40px;
 
    --shadowBox: 2px 2px 10px 7px #e5e5e526;
+
+   /* espaçamento */
+   --marginContent: 0.65rem;
 }
