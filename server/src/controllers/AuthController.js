@@ -4,18 +4,18 @@ const { loginService } = require("../services/AuthService.js");
 
 async function login(req, res) {
    try {
-      const { userName, senha } = req.body;
+      const { usuario, senha } = req.body;
 
-      if(!userName || !senha) {
+      if(!usuario || !senha) {
          throw new FieldUndefinedError("Um ou mais campos não identificados", {
             fields: {
-               userName,
+               usuario,
                senha
             }
          })
       }
 
-      const loginInfo = await loginService(userName, senha);
+      const loginInfo = await loginService(usuario, senha);
 
       return res.status(200).json(loginInfo);
       
