@@ -22,7 +22,7 @@
     height: fit-content;
     background-color: white;
     padding: 10px 20px;
-    border-radius: var(--borderRadiusFix);
+    border-radius: var(--fixBorderRadius);
     overflow-x: hidden;
     overflow-y: auto;
 
@@ -40,22 +40,24 @@
 }
 
 .modalContent__header h1 {
-    font-size: 20px;
+    font-size: 24px;
+    font-weight: 500;
     text-align: left;
+    letter-spacing: 0.4px;
 }
 
 .modalContent__header .closeIcon {
     font-size: 2em;
     color: white;
-    background-color: var(--colorSec);
-    border-radius: 50px;
+    background-color: var(--colorPrim);
+    border-radius: var(--fixBorderRadius);
     cursor: pointer;
     transition: .2s ease;
 }
 
 .modalContent__header .closeIcon:hover {
-    background-color: var(--colorBright);
-    color: var(--colorSec);
+    background-color: var(--colorPrimBright);
+    color: var(--colorPrim);
 }
 
 @media only screen and (max-width: 575px) {
