@@ -7,7 +7,11 @@ const router = Router();
 router
    .route("/")
    .get(authMiddleware, usersController.getAllUsers)
-   .post(usersController.createUser);
+   .post(authMiddleware, usersController.createUser);
+
+router
+   .route("/first-register")
+   .post(usersController.firstCreateUser)
 
 router
    .route("/total-registered")

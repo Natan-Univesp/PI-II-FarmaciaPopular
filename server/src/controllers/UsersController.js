@@ -83,7 +83,7 @@ async function getTotalUsersRegistered(req, res) {
 
 async function createUser(req, res) {
    try {
-      const id = req?.userInfo?.id;
+      const { id } = req.userInfo;
 
       /*
       =============================================
@@ -111,6 +111,31 @@ async function createUser(req, res) {
    } catch (error) {
       errorResponse(error, res);
    }
+}
+
+async function firstCreateUser(req, res) {
+   try {
+      const { usuario, senha, nivel_acesso } = req.body;
+
+      if (!usuario || !senha || !nivel_acesso) {
+         throw new FieldUndefinedError("Um ou mais campos não identificados", {
+            fields: {
+               usuario,
+               senha: senha && "Senha encontrada",
+            },
+         });
+      }
+
+      const createdUser = await createUserService(id, { usuario, senha, nivel_acesso });
+
+      return res.status(201).json({
+         status: "success",
+         message: "Usuário cadastrado com sucesso!",
+         data: createdUser,
+      });
+   } catch (error) {
+      errorResponse(error, res);
+   }   
 }
 
 async function changeStatusUser(req, res) {
@@ -179,5 +204,6 @@ module.exports = {
    getUserLoggedById,
    getTotalUsersRegistered,
    createUser,
+   firstCreateUser,
    changeStatusUser,
 };

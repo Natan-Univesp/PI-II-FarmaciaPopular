@@ -30,6 +30,6 @@ export async function getNecessaryInfoUserService() {
 }
 
 export async function registerFirstUserService(body) {
-   const res = await axios.post(`${localServer}/users`, body);
+   const res = await axios.post(`${localServer}/users/firstLogin`, body);
    return res;
 }
