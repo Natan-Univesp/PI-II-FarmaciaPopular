@@ -52,6 +52,9 @@ export function TBodyAdminUser({ userData }) {
    return (
       <tr id={userData.id}>
          <td>
+            <p>{userData.id}</p>
+         </td>
+         <td>
             <p>{userData.usuario}</p>
          </td>
          <td>
@@ -62,15 +65,16 @@ export function TBodyAdminUser({ userData }) {
                    name={`userStatus${userData.id}`}
                    id={`userStatus${userData.id}`} 
                    className={"statusToggle"}
-                   onClick={handleConfirmChangeStatus}/>
+                   checked={userData?.status === "ATIVO"}
+                   onChange={handleConfirmChangeStatus}/>
             <label for={`userStatus${userData.id}`} 
                    className={"toggleSwitch"}></label>
          </td>
          <td>
-            <p>{userData.created_at}</p>
+            <p>{userData.data_criacao}</p>
          </td>
          <td>
-            <p>{userData.updated_at}</p>
+            <p>{userData.data_alteracao}</p>
          </td>
       </tr>
    );

@@ -3,6 +3,7 @@ import { TBodyAdminUser } from "../TableComponents/TBody/TBodyAdminUser.jsx";
 
 export function TableAdminUser({ userCollection = [] }) {
    const fieldCollection = [
+      "ID",
       "Usuário",
       "Nível de Acesso",
       "Status",
