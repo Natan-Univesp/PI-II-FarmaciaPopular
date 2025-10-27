@@ -16,6 +16,8 @@ import { RetiradaMedicamento } from './pages/RetiradaMedicamento/RetiradaMedicam
 import { Autenticacao } from './pages/Autenticacao/Autenticacao.jsx'
 import { UserProvider } from './context/UserContext.jsx'
 import { AlertProvider } from './context/AlertContext.jsx'
+import { MedicamentoMain } from './components/MainPagesScreen/Medicamento/MedicamentoMain.jsx'
+import { AdministradorMain } from './components/MainPagesScreen/Administrador/AdministradorMain.jsx'
 
 const router = createBrowserRouter([
   {
@@ -30,6 +32,12 @@ const router = createBrowserRouter([
       {
         path: "/medicamentos",
         element: <Medicamento/>,
+        children: [
+          {
+            index: true,
+            element: <MedicamentoMain/>
+          }
+        ]
       },
       {
         path: "/medicamentos/modelos",
@@ -57,7 +65,13 @@ const router = createBrowserRouter([
       },
       {
         path: "/admin",
-        element: <Administrador/>
+        element: <Administrador/>,
+        children: [
+          {
+            index: true,
+            element: <AdministradorMain/>
+          }
+        ]
       }
     ],
   },

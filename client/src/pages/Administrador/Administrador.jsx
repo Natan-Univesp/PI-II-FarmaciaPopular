@@ -1,9 +1,13 @@
+import { Outlet } from "react-router";
 import { MainLayout } from "../../components/Layout/MainLayout";
+import { AdminProvider } from "../../context/AdminContext";
 
 export function Administrador() {
    return(
-      <MainLayout title="Administrador">
-         <p>Conteudo</p>
-      </MainLayout>
+      <AdminProvider>
+         <MainLayout title="Administrador">
+            <Outlet/>
+         </MainLayout>
+      </AdminProvider>
    )
 }
