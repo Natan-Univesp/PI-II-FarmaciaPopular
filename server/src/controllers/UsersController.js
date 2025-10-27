@@ -5,6 +5,7 @@ const {
    createUserService,
    changeStatusUserService,
    getUserLoggedByIdService,
+   getTotalUsersRegisteredService,
 } = require("../services/UsersService.js");
 //Helpers
 const errorResponse = require("../helper/ErrorResponseHelper");
@@ -82,34 +83,18 @@ async function getUserLoggedById(req, res) {
    }
 }
 
+async function getTotalUsersRegistered(req, res) {
+   try {
+      const totalUsers = await getTotalUsersRegisteredService();
+      return res.status(200).json(totalUsers);
+   } catch (error) {
+      errorResponse(error, res);
+   }
+}
+
 async function createUser(req, res) {
    try {
-      /*
-      =============================================
-              Verificação de nível de acesso
-      =============================================
-      */
-      const { id } = req.userInfo;
-
-      const existsUser = await getUserByIdService(id);
-
-      if (!existsUser) {
-         throw new NotFoundError("Usuário não encontrado", {
-            fields: {
-               id,
-            },
-         });
-      }
-
-      const { nivel_acesso: nivel_acesso_currUser } = existsUser;
-
-      if (nivel_acesso_currUser > 1) {
-         throw new AccessLevelError("É necessário ser um Administrador para executar a ação", {
-            fields: {
-               nivel_acesso_currUser,
-            },
-         });
-      }
+      const id = req?.userInfo?.id;
 
       /*
       =============================================
@@ -127,7 +112,7 @@ async function createUser(req, res) {
          });
       }
 
-      const createdUser = await createUserService({ usuario, senha, nivel_acesso });
+      const createdUser = await createUserService(id, { usuario, senha, nivel_acesso });
 
       return res.status(201).json({
          status: "success",
@@ -203,6 +188,7 @@ module.exports = {
    getAllDefaultUsers,
    getUserById,
    getUserLoggedById,
+   getTotalUsersRegistered,
    createUser,
    changeStatusUser,
 };
