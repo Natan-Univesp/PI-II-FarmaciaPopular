@@ -1,0 +1,11 @@
+.selectContainer h4 {
+   font-size: 15px;
+   font-weight: bold;
+   margin-bottom: -5px;
+   padding: 5px 10px;
+   letter-spacing: 1px;
+   color: white;
+   background-color: var(--colorPrim);
+   border-radius: 4px 4px 0 0;
+   text-transform: uppercase;
+}
