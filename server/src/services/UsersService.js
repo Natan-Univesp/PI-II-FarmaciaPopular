@@ -20,8 +20,24 @@ async function getAllUsersService() {
    return users;
 }
 
-async function getAllDefaultUsersService() {
-   const defaultUsers = await findAllDefaultUsers();
+async function getAllDefaultUsersService(idLoggedUser) {
+   const loggedUser = await findUserById(idLoggedUser);
+
+   if(!loggedUser) {
+      throw new NotFoundError("Usuário não encontrado", {
+         id: idLoggedUser
+      })
+   }
+
+   const nivelAcessoLoggedUser = loggedUser.nivel_acesso;
+
+   if(nivelAcessoLoggedUser > 1) {
+      throw new AccessLevelError("Apenas Administradores ou acima podem visualizar novos usuários", {
+         nivel_acesso: nivelAcessoLoggedUser
+      })
+   }
+
+   const defaultUsers = await findAllDefaultUsers(idLoggedUser, nivelAcessoLoggedUser);
    return defaultUsers;
 }
 

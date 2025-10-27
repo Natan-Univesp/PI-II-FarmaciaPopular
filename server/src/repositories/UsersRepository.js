@@ -7,7 +7,7 @@ async function findAllUsers() {
 }
 
 // Busca por usuários com nível de acesso inferior ao de Administrador
-async function findAllDefaultUsers() {
+async function findAllDefaultUsers(idLoggedUser, nivel_acesso) {
    const users = await Users.findAll({
       attributes: [
          "id",
@@ -26,7 +26,10 @@ async function findAllDefaultUsers() {
       ],
       where: {
          nivel_acesso: {
-            [Op.gt]: 1
+            [Op.gte]: nivel_acesso
+         },
+         id: {
+            [Op.ne]: idLoggedUser
          }
       }
    });

@@ -26,20 +26,9 @@ async function getAllUsers(req, res) {
 
 async function getAllDefaultUsers(req, res) {
    try {
-      const { nivel_acesso } = req.userInfo;
+      const { id } = req.userInfo;
 
-      if (nivel_acesso > 1) {
-         throw new AccessLevelError(
-            "Apenas Administradores ou acima podem visualizar outros usuários",
-            {
-               fields: {
-                  nivel_acesso,
-               },
-            }
-         );
-      }
-
-      const allDefaultUsers = await getAllDefaultUsersService();
+      const allDefaultUsers = await getAllDefaultUsersService(id);
       return res.status(200).json(allDefaultUsers);
       
    } catch (error) {
