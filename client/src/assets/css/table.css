@@ -1,0 +1,176 @@
+.blocoTabela {
+   background-color: #f6f6f6;
+   border: 1px solid #c2d4fa;
+   border-radius: var(--fixBorderRadius);
+   padding: 15px 15px 8px;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.tabelaDados {
+   width: 100%;
+   border-collapse: collapse;
+}
+
+.tabelaDados :is(td, th) {
+   padding: 10px 15px;
+}
+
+.tabelaDados thead th {
+   text-align: left;
+   font-weight: bold;
+   color: var(--colorBlue);
+   font-size: 18px;
+   letter-spacing: 0.4px;
+   text-transform: uppercase;
+   border-bottom: none;
+}
+
+.tabelaDados tbody td {
+   color: black;
+   font-family: var(--fontSec);
+   font-size: 16px;
+   border-bottom: 1px solid var(--colorInactive);
+   vertical-align: middle;
+   word-wrap: break-word;
+   overflow: hidden;
+}
+
+td.customLimitWidthText {
+   width: 580px;
+   white-space: normal;
+}
+
+td.customLimitWidthText p {
+   display: -webkit-box;
+   line-clamp: 3;
+   -webkit-line-clamp: 3;
+   -webkit-box-orient: vertical;
+   overflow: hidden;
+}
+
+.tabelaDados tbody tr:last-child td {
+   border-bottom: none;
+}
+
+.tabelaDadosContent__acoesHeader {
+   text-align: center !important;
+}
+
+.tabelaDadosContent__actions {
+   display: flex;
+   justify-content: center;
+}
+
+.tabelaDadosContent__actions button {
+   padding: 10px;
+   margin: 0 5px;
+}
+
+.statusToggle {
+   display: none;
+}
+
+.toggleSwitch {
+   position: relative;
+   display: block;
+   width: 150px;
+   height: 35px;
+   cursor: pointer;
+   background-color: white;
+   border-radius: 4px;
+   transition: background-color 0.4s;
+   font-size: 15px;
+   font-weight: bold;
+   line-height: 25px;
+   overflow: hidden;
+}
+
+.toggleSwitch::after {
+   content: "";
+   position: absolute;
+   top: 50%;
+   transform: translateY(-50%);
+   left: 5px;
+   width: 75px;
+   height: 25px;
+   background-color: pink;
+   border-radius: 2px;
+   transition: 0.3s;
+   z-index: 2;
+}
+
+.toggleSwitch::before {
+   position: absolute;
+   z-index: 3;
+   transition: 0.3s;
+   content: "INATIVO";
+   top: 50%;
+   transform: translateY(-51%);
+   left: 10px;
+   color: var(--colorRed);
+}
+
+.statusToggle:checked + .toggleSwitch::after {
+   background-color: #c1edc0;
+   left: 70px;
+}
+
+.statusToggle:checked + .toggleSwitch::before {
+   content: "ATIVO";
+   left: 84px;
+   color: var(--colorGreen);
+}
+
+.iconeAcao {
+   cursor: pointer;
+   margin: 0 3px;
+   padding: 5px 8px;
+   font-size: 1em;
+   border-radius: 4px;
+   display: inline-block;
+   color: #f6f6f6;
+   font-weight: normal;
+}
+
+.iconeEditar {
+   background-color: #f2b90c;
+}
+
+.iconeExcluir {
+   background-color: #f22738;
+}
+
+.tabelaDadosContent__btnEdit,
+.tabelaDadosContent__btnDelete {
+   background: none;
+   border: none;
+   cursor: pointer;
+   padding: 5px 8px;
+   margin: 0 3px;
+   font-size: 1em;
+   border-radius: 4px;
+   display: inline-block;
+   transition: opacity 0.2s;
+}
+
+.tabelaDadosContent__actions .tabelaDadosContent__btnEdit {
+   background-color: #f2b90c;
+}
+
+.tabelaDadosContent__actions .tabelaDadosContent__btnDelete {
+   background-color: #f22738;
+}
+
+.divisorTabela {
+   border: 0;
+   border-top: 1px solid #f2b90c;
+   margin: 40px 0;
+}
+
+.legendaAmarela {
+   text-align: center;
+   color: #f2b90c;
+   font-weight: bold;
+   margin-top: 30px;
+   font-size: 1.2em;
+}
