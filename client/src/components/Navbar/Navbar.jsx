@@ -41,26 +41,32 @@ export function Navbar() {
             },
             {
                id: 5,
+               title: "Retiradas",
+               path: "/medicamentos/retirada",
+               icon: <IconRetirada className={styles.iconList}/>
+            },
+            {
+               id: 6,
                title: "Relatórios",
                path: "/medicamentos/relatorios",
                icon: <IconRelatorio className={styles.iconList}/>
-            }
+            },
          ]
       },
       {
-         id: 6,
+         id: 7,
          title: "Laboratorios",
          path: "/laboratorios",
          icon: <IconLaboratorio className={styles.iconList}/>
       },
       {
-         id: 7, 
-         title: "Retirada de Medicamentos",
-         path: "/medicamentos/retirada",
+         id: 8, 
+         title: "Solicitação de Medicamentos",
+         path: "/medicamentos/solicitacao",
          icon: <IconRetirada className={styles.iconList}/>
       },
       {
-         id: 8,
+         id: 9,
          title: "Administrador",
          path: "/admin",
          icon: <IconAdmin className={styles.iconList}/>

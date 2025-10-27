@@ -11,6 +11,11 @@ import { SolicitacaoMedicamento } from './pages/SolicitacaoMedicamento/Solicitac
 import { UsuarioConvenio } from './pages/UsuarioConvenio/UsuarioConvenio.jsx'
 import { Administrador } from './pages/Administrador/Administrador.jsx'
 import { NavbarProvider } from './context/NavbarContext.jsx'
+import { RelatorioMedicamento } from './pages/RelatorioMedicamento/RelatorioMedicamento.jsx'
+import { RetiradaMedicamento } from './pages/RetiradaMedicamento/RetiradaMedicamento.jsx'
+import { Autenticacao } from './pages/Autenticacao/Autenticacao.jsx'
+import { UserProvider } from './context/UserContext.jsx'
+import { AlertProvider } from './context/AlertContext.jsx'
 
 const router = createBrowserRouter([
   {
@@ -35,6 +40,14 @@ const router = createBrowserRouter([
         element: <SolicitacaoMedicamento/>
       },
       {
+        path: "/medicamentos/relatorios",
+        element: <RelatorioMedicamento/>
+      },
+      {
+        path: "/medicamentos/retirada",
+        element: <RetiradaMedicamento/>
+      },
+      {
         path: "/laboratorios",
         element: <Laboratorio/>
       },
@@ -46,14 +59,22 @@ const router = createBrowserRouter([
         path: "/admin",
         element: <Administrador/>
       }
-    ]
+    ],
+  },
+  {
+    path: "/auth",
+    element: <Autenticacao/>
   }
 ]);
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <NavbarProvider>
-      <RouterProvider router={router}/>
+      <UserProvider>
+        <AlertProvider>
+          <RouterProvider router={router}/>
+        </AlertProvider>
+      </UserProvider>
     </NavbarProvider>
   </StrictMode>,
 )
