@@ -1,0 +1,46 @@
+.textAreaContainer {
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+}
+
+.textAreaContainer label {
+   font-size: 15px;
+   font-weight: bold;
+   margin-bottom: -5px;
+   padding: 5px 10px;
+   letter-spacing: 1px;
+   color: white;
+   background-color: var(--colorPrim);
+   border-radius: 4px 4px 0 0;
+   text-transform: uppercase;
+}
+
+.textAreaContainer textarea {
+   width: 100%;
+   height: 130px;
+   margin-top: 3px;
+   padding: 10px 10px;
+   font-family: var(--fontSec);
+   font-size: 16px;
+   background-color: white;
+   border: 2px solid var(--colorPrim);
+   outline: none;
+   border-radius: 3px;
+   resize: none;
+}
+
+/* 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+           Estilização do TextArea Error
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+.textAreaError label {
+   background-color: var(--colorRed) !important;
+   font-weight: bold !important;
+}
+
+.textAreaError textarea {
+   border: 1px solid var(--colorRed) !important;
+   color: var(--colorRed) !important;
+}

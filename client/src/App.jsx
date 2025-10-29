@@ -3,18 +3,21 @@ import "./App.css";
 import { Navbar } from "./components/NavBar/NavBar";
 import { Topbar } from "./components/TopBar/TopBar";
 import { useNavbar } from "./context/NavbarContext";
+import { ValidateLogin } from "./components/RoutesValidate/ValidateLogin";
 
 function App() {
    const { isNavbarActive } = useNavbar();
 
    return (
-      <div className={`generalContainer ${!isNavbarActive ? "inactiveNavbar" : ""}`}>
-         <Topbar />
-         <Navbar />
-         <main>
-            <Outlet />
-         </main>
-      </div>
+      <ValidateLogin>
+         <div className={`generalContainer ${!isNavbarActive ? "inactiveNavbar" : ""}`}>
+            <Topbar />
+            <Navbar />
+            <main>
+               <Outlet />
+            </main>
+         </div>
+      </ValidateLogin>
    );
 }
 

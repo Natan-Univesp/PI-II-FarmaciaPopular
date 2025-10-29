@@ -1,0 +1,116 @@
+/* 
+===================================================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                        Estilização Geral
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+===================================================================
+*/
+.modalFilterContainer {
+   display: grid;
+   gap: 1.3em;
+   padding-bottom: 10px;
+}
+
+.modalFilterContainer h2 {
+   font-size: 19px;
+   letter-spacing: .6px;
+   width: fit-content;
+}
+
+.modalFilterContainer h3 {
+   width: fit-content;
+   font-weight: 400;
+   font-size: 17px;
+   margin: 10px 0 5px;
+}
+
+.modalFilterContainer hr {
+   margin: 5px 0 15px;
+   border-color: var(--colorInactive);
+}
+
+.modalFilterContent {
+   display: flex;
+   flex-direction: column;
+   gap: 2em;
+}
+
+/* 
+===================================================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                Estilização de Coleção de Inputs
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+===================================================================
+*/
+
+.modalFilterContent .inputCollectionColumn {
+   display: flex;
+   flex-direction: column;
+   gap: 15px;
+   width: 100%;
+}
+
+.modalFilterContent__filterOptionsCollection .inputCollectionColumn {
+   gap: 10px;
+}
+
+.modalFilterContent .inputCollectionRow__flexStyle {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 15px;
+}
+
+.modalFilterContent .inputCollectionRow__gridStyle {
+   display: grid;
+   gap: 15px;
+   grid-template: repeat(2, 1fr) / repeat(3, 1fr);
+}
+
+/* 
+===================================================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                Estilização das Opções de Filtragem
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+===================================================================
+*/
+.modalFilterContent .modalFilterContent__filterOptions {
+   margin: 15px 0;
+}
+
+/* 
+===================================================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                Estilização do Botão de Filtragem
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+===================================================================
+*/
+.modalFilterContainer .modalFilterButton {
+   margin: auto;
+}
+
+.modalFilterButton button {
+   padding: 12px 20px;
+   background-color: var(--colorPrim);
+   color: white;
+   font-size: 17px;
+   border: 1px solid var(--colorPrim);
+   transition: 0.2s ease;
+}
+
+.modalFilterButton button:hover {
+   background-color: var(--colorPrimBright);
+   color: var(--colorPrim);
+}
+
+@media only screen and (max-width: 575px) {
+   .modalFilterContent .inputCollectionRow__flexStyle {
+      flex-direction: column;
+      width: 100%;
+   }
+
+   .modalFilterContent .inputCollectionRow__gridStyle {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+   }
+}

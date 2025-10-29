@@ -5,6 +5,7 @@ const {
    createUserService,
    changeStatusUserService,
    getUserLoggedByIdService,
+   getTotalUsersRegisteredService,
 } = require("../services/UsersService.js");
 //Helpers
 const errorResponse = require("../helper/ErrorResponseHelper");
@@ -25,20 +26,9 @@ async function getAllUsers(req, res) {
 
 async function getAllDefaultUsers(req, res) {
    try {
-      const { nivel_acesso } = req.userInfo;
+      const { id } = req.userInfo;
 
-      if (nivel_acesso > 1) {
-         throw new AccessLevelError(
-            "Apenas Administradores ou acima podem visualizar outros usuários",
-            {
-               fields: {
-                  nivel_acesso,
-               },
-            }
-         );
-      }
-
-      const allDefaultUsers = await getAllDefaultUsersService();
+      const allDefaultUsers = await getAllDefaultUsersService(id);
       return res.status(200).json(allDefaultUsers);
       
    } catch (error) {
@@ -82,34 +72,18 @@ async function getUserLoggedById(req, res) {
    }
 }
 
+async function getTotalUsersRegistered(req, res) {
+   try {
+      const totalUsers = await getTotalUsersRegisteredService();
+      return res.status(200).json(totalUsers);
+   } catch (error) {
+      errorResponse(error, res);
+   }
+}
+
 async function createUser(req, res) {
    try {
-      /*
-      =============================================
-              Verificação de nível de acesso
-      =============================================
-      */
       const { id } = req.userInfo;
-
-      const existsUser = await getUserByIdService(id);
-
-      if (!existsUser) {
-         throw new NotFoundError("Usuário não encontrado", {
-            fields: {
-               id,
-            },
-         });
-      }
-
-      const { nivel_acesso: nivel_acesso_currUser } = existsUser;
-
-      if (nivel_acesso_currUser > 1) {
-         throw new AccessLevelError("É necessário ser um Administrador para executar a ação", {
-            fields: {
-               nivel_acesso_currUser,
-            },
-         });
-      }
 
       /*
       =============================================
@@ -127,7 +101,7 @@ async function createUser(req, res) {
          });
       }
 
-      const createdUser = await createUserService({ usuario, senha, nivel_acesso });
+      const createdUser = await createUserService(id, { usuario, senha, nivel_acesso });
 
       return res.status(201).json({
          status: "success",
@@ -137,6 +111,31 @@ async function createUser(req, res) {
    } catch (error) {
       errorResponse(error, res);
    }
+}
+
+async function firstCreateUser(req, res) {
+   try {
+      const { usuario, senha, nivel_acesso } = req.body;
+
+      if (!usuario || !senha || !nivel_acesso) {
+         throw new FieldUndefinedError("Um ou mais campos não identificados", {
+            fields: {
+               usuario,
+               senha: senha && "Senha encontrada",
+            },
+         });
+      }
+
+      const createdUser = await createUserService(id, { usuario, senha, nivel_acesso });
+
+      return res.status(201).json({
+         status: "success",
+         message: "Usuário cadastrado com sucesso!",
+         data: createdUser,
+      });
+   } catch (error) {
+      errorResponse(error, res);
+   }   
 }
 
 async function changeStatusUser(req, res) {
@@ -203,6 +202,8 @@ module.exports = {
    getAllDefaultUsers,
    getUserById,
    getUserLoggedById,
+   getTotalUsersRegistered,
    createUser,
+   firstCreateUser,
    changeStatusUser,
 };

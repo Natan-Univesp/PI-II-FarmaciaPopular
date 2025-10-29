@@ -10,15 +10,34 @@ const {
    findUserById,
    findUserByName,
    findUserLoggedById,
+   findAndCountAllUsers,
 } = require("../repositories/UsersRepository.js");
+const CannotCreateError = require("../classes/CannotCreateError.js");
+const AccessLevelError = require("../classes/AccessLevelError.js");
 
 async function getAllUsersService() {
    const users = await findAllUsers();
    return users;
 }
 
-async function getAllDefaultUsersService() {
-   const defaultUsers = await findAllDefaultUsers();
+async function getAllDefaultUsersService(idLoggedUser) {
+   const loggedUser = await findUserById(idLoggedUser);
+
+   if(!loggedUser) {
+      throw new NotFoundError("Usuário não encontrado", {
+         id: idLoggedUser
+      })
+   }
+
+   const nivelAcessoLoggedUser = loggedUser.nivel_acesso;
+
+   if(nivelAcessoLoggedUser > 1) {
+      throw new AccessLevelError("Apenas Administradores ou acima podem visualizar novos usuários", {
+         nivel_acesso: nivelAcessoLoggedUser
+      })
+   }
+
+   const defaultUsers = await findAllDefaultUsers(idLoggedUser, nivelAcessoLoggedUser);
    return defaultUsers;
 }
 
@@ -32,11 +51,48 @@ async function getUserLoggedByIdService(idUser) {
    return user;
 }
 
-async function createUserService(userInfo) {
+async function getTotalUsersRegisteredService() {
+   const totalUsers = await findAndCountAllUsers();
+   return totalUsers;
+}
+
+async function createUserService(idLoggedUser, userInfo) {
    const { usuario, senha, nivel_acesso } = userInfo;
    const formattedUser = removeAllAcentsForString(usuario);
    const existsUser = await findUserByName(formattedUser);
    const trimPassword = String(senha).trim();
+
+   // Verifica se o usuário que está tentando criar um novo usuário é um administrador ou superior e se é o primeiro usuário do sistema
+   if(idLoggedUser) {
+      const loggedUser = await findUserById(idLoggedUser);
+      if(!loggedUser) {
+         throw new NotFoundError("Usuário não encontrado!", {
+            fields: {
+               idLoggedUser
+            }
+         });
+      }
+
+      const { nivel_acesso: nivelAcessoLoggedUser } = loggedUser;
+
+      if(nivelAcessoLoggedUser > 1) {
+         throw new AccessLevelError(
+            "Apenas Administradores ou acima podem criar novos usuários", {
+               fields: {
+                  nivel_acesso: nivelAcessoLoggedUser
+               }
+            }
+         )
+      }
+
+   } else {
+      const allUsers = await findAllUsers();
+
+      if(allUsers.length > 0) {
+         throw new CannotCreateError("Não foi possível criar o usuário. Nível de acesso inválido");
+      }
+   }
+
 
    if(existsUser) {
       throw new ExistsDataError("Usuário já existe", "USER_EXISTS", {
@@ -87,6 +143,7 @@ module.exports = {
    getAllDefaultUsersService,
    getUserByIdService,
    getUserLoggedByIdService,
+   getTotalUsersRegisteredService,
    createUserService,
    changeStatusUserService,
 };

@@ -1,3 +1,4 @@
+import { Outlet } from "react-router";
 import { MainLayout } from "../../components/Layout/MainLayout";
 import { CardAction } from "../../components/cards/CardAction/CardAction";
 import  CardRemedio  from "../../components/cards/CardRemedio/CardRemedio";
@@ -70,4 +71,19 @@ export function Medicamento() {
       </div>
     </MainLayout>
   );
+}
+import { ModalProvider } from "../../context/ModalContext";
+import { MedicamentoProvider } from "../../context/MedicamentoContext";
+
+export function Medicamento() {
+
+   return (
+      <MedicamentoProvider>
+         <ModalProvider>
+            <MainLayout title="Medicamentos">
+               <Outlet/>
+            </MainLayout>
+         </ModalProvider>
+      </MedicamentoProvider>
+   );
 }

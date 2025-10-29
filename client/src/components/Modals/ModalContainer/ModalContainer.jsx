@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useModal } from "../../../context/ModalContext";
 import { modalCollection } from "../../../data/modalArray";
 import styles from "./ModalContainer.module.css";
+//Icones
+import { IoClose as IconClose } from "react-icons/io5";
 
 export function ModalContainer() {
    const { modalRef, closeModal } = useModal();

@@ -15,11 +15,21 @@ export async function logoutService() {
    await localforage.removeItem("user");
 }
 
+export async function getTotalRegisteredUsersService() {
+   const res = await axios.get(`${localServer}/users/total-registered`);
+   return res;
+}
+
 export async function getNecessaryInfoUserService() {
    const res = await axios.get(`${localServer}/users/logged`, {
       headers: {
          Authorization: `Bearer ${Cookies.get("token")}`
       }
    });
+   return res;
+}
+
+export async function registerFirstUserService(body) {
+   const res = await axios.post(`${localServer}/users/firstLogin`, body);
    return res;
 }

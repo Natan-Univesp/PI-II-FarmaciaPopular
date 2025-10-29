@@ -8,7 +8,7 @@ const localServer = import.meta.env.VITE_SERVER_URL;
 method = GET
 ==================================
 */
-export async function getAllRetiradasMedicamentos() {
+export async function getAllRetiradasMedicamentosService() {
    const res = await axios.get(`${localServer}/retiradas`, {
       headers: {
          Authorization: `Bearer ${Cookies.get("token")}`
@@ -18,12 +18,12 @@ export async function getAllRetiradasMedicamentos() {
 }
 
 export async function getAllRetiradasByFilterService(params) {
-   const {orderBy, filterOptions} = params;
+   const {orderBy, ...filterOptions} = params;
 
    const res = await axios.get(`${localServer}/retiradas/filter`, {
       params: {
          orderBy,
-         filterOptions
+         ...filterOptions
       },
       headers: {
          Authorization: `Bearer ${Cookies.get("token")}`

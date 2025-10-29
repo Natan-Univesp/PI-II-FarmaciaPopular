@@ -1,5 +1,6 @@
 @import url(./assets/css/var.css);
 @import url(./assets/css/generalStyles.css);
+@import url(./assets/css/modalFilter.css);
 @import url(./assets/css/animation.css);
 
 * {
@@ -19,6 +20,21 @@ a { text-decoration: none; }
 
 ul li { list-style: none; }
 
+button {
+   border: none;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   padding: 5px 10px;
+   color: white;
+   font-family: var(--fontPrim);
+   font-size: 16px;
+   font-weight: 500;
+   border-radius: 4px;
+   transition: .2s ease;
+   cursor: pointer;
+}
+
 /* Removendo as setas do input number */
 input[type=number]::-webkit-inner-spin-button { 
     -webkit-appearance: none;
@@ -28,4 +44,8 @@ input[type=number] {
    -moz-appearance: textfield;
    appearance: textfield;
 
+}
+
+:is(input, textarea)::placeholder {
+   opacity: .6;
 }

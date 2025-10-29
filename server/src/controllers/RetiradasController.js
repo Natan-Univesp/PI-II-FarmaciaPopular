@@ -20,7 +20,7 @@ async function getAllRetiradas(req, res) {
 
 async function getAllRetiradasByFilter(req, res) {
    try {
-      const { orderBy, filterOptions } = req.query;
+      const { orderBy, ...filterOptions } = req.query;
 
       if (!orderBy && Object.keys(filterOptions).length === 0) {
          throw new FieldUndefinedError("Um ou mais campos não identificados", {

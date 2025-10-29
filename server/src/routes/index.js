@@ -14,7 +14,7 @@ const clienteEspecial = require("./ClientesEspRouter.js");
 const router = Router();
 
 router.use("/auth", authRouter);
-router.use("/users", authMiddleware, userRouter);
+router.use("/users", userRouter);
 router.use("/medicamentos", authMiddleware, medicamentoRouter);
 router.use("/laboratorios", authMiddleware, laboratorioRouter);
 router.use("/lotes-medicamentos", authMiddleware, loteMedicamento);

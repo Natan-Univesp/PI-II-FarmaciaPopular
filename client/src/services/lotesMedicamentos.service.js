@@ -17,13 +17,13 @@ export async function getAllLotesMedicamentosService() {
    return res;
 }
 
-export async function getAllLotesMedicamentosByFilterService(params) {
-   const { orderBy, filterOptions } = params;
+export async function getAllLotesMedicamentosByFilterService(idMedicamento, params) {
+   const { orderBy, ...filterOptions } = params;
 
-   const res = await axios.get(`${localServer}/lotes-medicamentos/filter`, {
+   const res = await axios.get(`${localServer}/lotes-medicamentos/${idMedicamento}/filter`, {
       params: {
          orderBy,
-         filterOptions
+         ...filterOptions
       },
       headers: {
          Authorization: `Bearer ${Cookies.get("token")}`

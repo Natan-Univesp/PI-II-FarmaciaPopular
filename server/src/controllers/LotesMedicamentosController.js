@@ -42,9 +42,18 @@ async function getAllLotesMedicamentosByIdMedicamento(req, res) {
 
 async function getAllLotesMedicamentosByFilter(req, res) {
    try {
+      const idMedicamento = Number(req.params.idMedicamento);
       const { orderBy, ...filterOptions } = req.query;
 
-      if (!orderBy && Object.keys(filterOptions).length === 0) {
+      if (!idMedicamento) {
+         throw new FieldUndefinedError("Campo idMedicamento não identificado", {
+            fields: {
+               idMedicamento,
+            },
+         });
+      }
+
+      if (!orderBy && !filterOptions) {
          throw new FieldUndefinedError("Um ou mais campos não identificados", {
             fields: {
                orderBy,
@@ -53,7 +62,7 @@ async function getAllLotesMedicamentosByFilter(req, res) {
          });
       }
 
-      const filteredLotesMedica = await getAllLotesMedicamentosByFilterService(req.query);
+      const filteredLotesMedica = await getAllLotesMedicamentosByFilterService(idMedicamento, {orderBy, filterOptions});
 
       return res.status(200).json(filteredLotesMedica);
 
