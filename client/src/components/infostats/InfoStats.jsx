@@ -1,10 +1,12 @@
 import styles from "./InfoStats.module.css";
+import { InfoStatsItem } from "./InfoStatsItem";
 
-export function InfoStats({ titulo, valor }) {
-  return (
-    <div className={styles.infoCard}>
-      <h4>{titulo}</h4>
-      <p>{valor}</p>
-    </div>
-  );
+export function InfoStats({ infoStatsCollection = []}) {
+   return (
+      <div className={styles.statsSection}>
+         {infoStatsCollection.map((item, index) => (
+            <InfoStatsItem key={index} titulo={item.titulo} valor={item.valor} />
+         ))}
+      </div>
+   );
 }
