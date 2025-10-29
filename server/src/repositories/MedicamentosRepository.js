@@ -9,7 +9,6 @@ async function getAllMedicamentos() {
    const allMedicamentos = await Medicamentos.findAll({
       attributes: [
          "id",
-         "fk_id_laboratorio",
          "nome",
          "indicacao_uso",
          "categoria",
@@ -170,7 +169,7 @@ async function createMedicamento(medicamentoData) {
    // Verifica a existência da ID informada
    const idExists = await getMedicamentoById(id);
    if (idExists) {
-      throw new ExistsDataError("Existe um medicamento com este ID.", "ID_EXISTS", { id })
+      throw new ExistsDataError("Medicamento com o mesmo CÓDIGO já existe.", "ID_EXISTS", { id })
    }
 
    const Newmedicamentos = await Medicamentos.create({

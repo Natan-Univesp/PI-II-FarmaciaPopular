@@ -1,10 +1,10 @@
 import { useModal } from "../../../context/ModalContext";
 import { InputSearch } from "../../Inputs/InputSearch/InputSearch";
 import { TableDefault } from "../TableDefault/TableDefault";
-import { FaEdit as IconEdit, FaTrashAlt as IconTrash} from "react-icons/fa";
+import { FaEdit as IconEdit, FaTrashAlt as IconTrash } from "react-icons/fa";
 
 export function TableSearch({
-   fieldCollection, 
+   fieldCollection,
    dataCollection,
    fieldsExcludes,
    filterType = "",
@@ -12,48 +12,49 @@ export function TableSearch({
    setSearchValue,
    filterParams,
    setFilterParams,
-   customClassData = {}
+   customClassData = {},
 }) {
    const { showModal } = useModal();
 
    const updateSearchValue = (e) => {
       const value = e.target.value;
       setSearchValue(value);
-   }
+   };
 
    const btnTableCollection = [
       {
          id: 1,
-         infoView: <IconEdit/>,
+         infoView: <IconEdit />,
          className: "btnEdit",
          toolTipsText: "Editar",
       },
       {
          id: 2,
-         infoView: <IconTrash/>,
+         infoView: <IconTrash />,
          className: "btnDelete",
          toolTipsText: "Excluir",
       },
    ];
 
-   return(
+   return (
       <>
-         <InputSearch 
+         <InputSearch
             value={searchValue}
-            hasFilterButton={true}         
+            hasFilterButton={true}
             handleOnChange={updateSearchValue}
             handleOpenFilter={() =>
-            showModal({
-               modalName: filterType,
-               customStyle: {
-                  maxWidth: "530px"
-               },
-               data: {
-                  filterParams,
-                  setFilterParams
-               }
-            })
-         }/>
+               showModal({
+                  modalName: filterType,
+                  customStyle: {
+                     maxWidth: "530px",
+                  },
+                  data: {
+                     filterParams,
+                     setFilterParams,
+                  },
+               })
+            }
+         />
          <TableDefault
             fieldCollection={fieldCollection}
             dataCollection={dataCollection}
@@ -62,5 +63,5 @@ export function TableSearch({
             customClassData={customClassData}
          />
       </>
-   )
+   );
 }

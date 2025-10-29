@@ -5,28 +5,28 @@ const ExistsDataError = require("../classes/ExistsDataError.js");
 
 async function getAllLotesMedicamentos() {
     const allLotesMedicamentos = await Lotes_medicamentos.findAll({
+        include: {
+            association: "medicamento",
+            attributes: [],
+            include: {
+                association: "laboratorio",
+                attributes: []
+            }
+        },
         attributes: [
             "id",
+            [sequelize.col("medicamento.nome"), "nome_medicamento"],
+            [sequelize.col("medicamento.laboratorio.nome_laboratorio"), "nome_laboratorio"],
             "quantidade",
-            "data_validade",
-            [
-                sequelize.fn("DATE_FORMAT", sequelize.col("Lotes_medicamentos.data_validade"), "%d-%m-%Y %H:%i:%s"),
-                "data_validade",
-            ],
             [
                 sequelize.fn("DATE_FORMAT", sequelize.col("Lotes_medicamentos.created_at"), "%d-%m-%Y %H:%i:%s"),
                 "data_criacao",
             ],
             [
-                sequelize.fn("DATE_FORMAT", sequelize.col("Lotes_medicamentos.updated_at"), "%d-%m-%Y %H:%i:%s"),
-                "data_alteracao",
-            ],
-            [sequelize.col("medicamento.nome"), "nome_medicamento"],
+                sequelize.fn("DATE_FORMAT", sequelize.col("Lotes_medicamentos.data_validade"), "%d-%m-%Y"),
+                "data_validade",
+            ]
         ],
-        include: {
-            association: "medicamento",
-            attributes: [],
-        },
         order: [ //Ordena conforme a ID dos Lotes dos medicamentos (Ordem Crescente)
             ['id', 'ASC']
         ]
@@ -56,54 +56,62 @@ async function getLotesMedicamentoById(id) {
 async function getAllLotesMedicamentosByIdMedicamento(idMedicamento) {
     const loteMedicamento = await Lotes_medicamentos.findAll({
         where: { fk_id_medicamento: idMedicamento },
-        attributes: {
-            include: [
-                [sequelize.col("medicamento.nome"), "nome_medicamento"]
-            ]
-        },
-        include: [
-            {
-                association: "medicamento",
-                attributes: [],
+        include: {
+            association: "medicamento",
+            attributes: [],
+            include: {
+                association: "laboratorio",
+                attributes: []
             }
+        },
+        attributes: [
+            "id",
+            [sequelize.col("medicamento.nome"), "nome_medicamento"],
+            [sequelize.col("medicamento.laboratorio.nome_laboratorio"), "nome_laboratorio"],
+            "quantidade",
+            [
+                sequelize.fn("DATE_FORMAT", sequelize.col("Lotes_medicamentos.created_at"), "%d-%m-%Y %H:%i:%s"),
+                "data_criacao",
+            ],
+            [
+                sequelize.fn("DATE_FORMAT", sequelize.col("Lotes_medicamentos.data_validade"), "%d-%m-%Y"),
+                "data_validade",
+            ]
+        ],
+        order: [ //Ordena conforme a ID dos Lotes dos medicamentos (Ordem Crescente)
+            ['id', 'ASC']
         ]
     });
     return loteMedicamento
 }
 
 // Procura os lotes com base no Filtro Selecionado
-async function getAllLotesMedicamentosByFilter(Filterselect = {}, Orderselect = []) {
+async function getAllLotesMedicamentosByFilter(idMedicamento, Filterselect = {}, Orderselect = []) {
     const queryOptions = {
-        where: Object.keys(Filterselect).length > 0 ? Filterselect : undefined,
+        where: Object.keys(Filterselect).length > 0 ? {fk_id_medicamento: idMedicamento, ...Filterselect} : {fk_id_medicamento: idMedicamento},
         order: Orderselect.length > 0 ? Orderselect : [['id', 'ASC']],
+        include: {
+            association: "medicamento",
+            attributes: [],
+            include: {
+                association: "laboratorio",
+                attributes: []
+            }
+        },
         attributes: [
             "id",
+            [sequelize.col("medicamento.nome"), "nome_medicamento"],
+            [sequelize.col("medicamento.laboratorio.nome_laboratorio"), "nome_laboratorio"],
             "quantidade",
-            "data_validade",
-            [
-                sequelize.fn("DATE_FORMAT", sequelize.col("Lotes_medicamentos.data_validade"), "%d-%m-%Y %H:%i:%s"),
-                "data_validade",
-            ],
             [
                 sequelize.fn("DATE_FORMAT", sequelize.col("Lotes_medicamentos.created_at"), "%d-%m-%Y %H:%i:%s"),
                 "data_criacao",
             ],
             [
-                sequelize.fn("DATE_FORMAT", sequelize.col("Lotes_medicamentos.updated_at"), "%d-%m-%Y %H:%i:%s"),
-                "data_alteracao",
+                sequelize.fn("DATE_FORMAT", sequelize.col("Lotes_medicamentos.data_validade"), "%d-%m-%Y"),
+                "data_validade",
             ]
         ],
-        attributes: {
-            include: [
-                [sequelize.col("medicamento.nome"), "nome_medicamento"]
-            ]
-        },
-        include: [
-            {
-                association: "medicamento",
-                attributes: [],
-            }
-        ]
     };
     const allLotesMedicamentos = await Lotes_medicamentos.findAll(queryOptions);
     return allLotesMedicamentos;

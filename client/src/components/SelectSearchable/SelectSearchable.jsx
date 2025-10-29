@@ -34,6 +34,7 @@ export default function SelectSearchable({controlName = "", control, dataOptions
     const customStyles = {
         placeholder: (baseStyles) => ({
             ...baseStyles,
+            opacity: ".6",
             fontFamily: "var(--fontSec)"
         }),
         control: (baseStyles) => ({

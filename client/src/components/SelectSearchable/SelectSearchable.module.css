@@ -1,3 +1,7 @@
+.selectContainer {
+   width: 100%;
+}
+
 .selectContainer h4 {
    font-size: 15px;
    font-weight: bold;

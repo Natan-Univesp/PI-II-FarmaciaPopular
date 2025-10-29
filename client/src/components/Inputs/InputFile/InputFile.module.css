@@ -1,0 +1,75 @@
+.inputImageContainer {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 200px;
+    height: 200px;
+    background-color: rgb(245, 245, 245);
+    border: 2px solid var(--colorPrim);
+    border-radius: var(--fixBorderRadius);
+}
+
+.inputImageContainer label {
+    position: absolute;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    padding: 10px;
+    font-size: 2em;
+    color: var(--colorPrim);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.inputImageContainer label:hover {
+    color: var(--colorPrim);
+    background-color: var(--colorPrimBright);
+}
+
+
+.inputImageContainer img {
+    width: 100%;
+    height: 100%;
+    border-radius: var(--fixBorderRadius);
+}
+
+
+/* Quando a imagem for selecionada */
+.inputImageContainer:has(img) label{
+    transform: translateX(-190%);
+    color: white;
+    background-color: var(--colorPrim);
+    border: 1px solid var(--colorPrim);
+}
+
+.inputImageContainer:has(img) label:hover {
+    color: var(--colorPrim);
+    background-color: white;
+}
+
+
+/* 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            Estilização do Input Error
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+.inputImageError {
+    border-color: var(--colorRed)!important;
+}
+
+.inputImageError label {
+    color: var(--colorRed)!important;
+}
+
+.inputImageError label:hover {
+    color: white!important;
+    background-color: var(--colorRed)!important;
+}
+
+.errorMsgCustom {
+    position: absolute;
+    top: 100%;
+}

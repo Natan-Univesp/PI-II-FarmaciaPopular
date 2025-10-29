@@ -15,6 +15,7 @@
    --colorYellow: #F2B90C;
    --colorItemNav: white;
    --colorInactive : rgb(196,196,196);
+   --colorBackgroundInput: #f5f5f5;
 
    /* Valores fixos */
    --fixHeightTopBar: 90px;

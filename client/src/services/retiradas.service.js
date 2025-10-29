@@ -18,12 +18,12 @@ export async function getAllRetiradasMedicamentosService() {
 }
 
 export async function getAllRetiradasByFilterService(params) {
-   const {orderBy, filterOptions} = params;
+   const {orderBy, ...filterOptions} = params;
 
    const res = await axios.get(`${localServer}/retiradas/filter`, {
       params: {
          orderBy,
-         filterOptions
+         ...filterOptions
       },
       headers: {
          Authorization: `Bearer ${Cookies.get("token")}`

@@ -28,6 +28,20 @@ export function searchFilterMedicamentos(medicamentoCollection, searchValue) {
    return filteredMedicamentos;
 }
 
+export function searchFilterLoteMedicamentos(loteMedicamentoCollection, searchValue) {
+   const fieldsForSearch = [
+      "id",
+      "nome_medicamento",
+      "nome_laboratorio",
+      "quantidade",
+      "data_criacao",
+      "data_validade",
+   ];
+   const filteredLoteMedicamentos = searchFilterData(loteMedicamentoCollection, searchValue, fieldsForSearch);
+
+   return filteredLoteMedicamentos;
+}
+
 export function searchFilterRelatorioMedicamentos(relatMedicamentosCollection, searchValue) {
    const fieldsForSearch = [
       "id",

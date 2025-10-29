@@ -1,10 +1,12 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { createLoteMedicamentoService, getAllLotesMedicamentosByFilterService, getAllLotesMedicamentosService } from "../services/lotesMedicamentos.service";
+import { createLoteMedicamentoService, getAllLotesMedicamentosByFilterService, getAllLotesMedicamentosByIdMedicamentoService, getAllLotesMedicamentosService } from "../services/lotesMedicamentos.service";
+import { searchFilterLoteMedicamentos } from "../utils/SearchFilterUtil";
 
 const LoteMedicamentoContext = createContext();
 
 export function LoteMedicamentoProvider({ children }) {
    const [loteMedicamentos, setLoteMedicamentos] = useState();
+   const [filteredLoteMedicamentos, setFilteredLoteMedicamentos] = useState()
    const [filter, setFilter] = useState();
    const [searchValue, setSearchValue] = useState("");
    const [isLoading, setIsLoading] = useState(true);
@@ -18,13 +20,24 @@ export function LoteMedicamentoProvider({ children }) {
       setIsLoading(false);
    }
 
-   const getAllLoteMedicamentosByFilter = async () => {
+   const getAllLoteMedicamentosByIdMedicamento = async (idMedicamento) => {
+      if(!isLoading) {
+         setIsLoading(true);
+      }
+      const res = await getAllLotesMedicamentosByIdMedicamentoService(idMedicamento);
+      setLoteMedicamentos(res.data);
+      setFilteredLoteMedicamentos(res.data);
+      setIsLoading(false);
+   }
+
+   const getAllLoteMedicamentosByFilter = async (idMedicamento) => {
       try {
          if(!isLoading) {
             setIsLoading(true);
          }
-         const res = await getAllLotesMedicamentosByFilterService(filter);
+         const res = await getAllLotesMedicamentosByFilterService(idMedicamento, filter);
          setLoteMedicamentos(res.data);
+         setFilteredLoteMedicamentos(res.data);
          setIsLoading(false);
       } catch (error) {
          console.log(error);
@@ -39,29 +52,27 @@ export function LoteMedicamentoProvider({ children }) {
       }
    }
 
-   const init = async () => {
-      try {
-         await getAllLoteMedicamentos();
-      } catch (error) {
-         console.log(error);
-      }
-   }
-
    useEffect(() => {
-      init();
-   }, [])
-
+      if(loteMedicamentos && Array.isArray(loteMedicamentos)) {
+         const filteredData = searchFilterLoteMedicamentos(loteMedicamentos, searchValue);
+         setFilteredLoteMedicamentos(filteredData);
+      }
+   }, [loteMedicamentos, searchValue])
 
    return (
       <LoteMedicamentoContext.Provider value={{ 
-         loteMedicamentos, 
+         loteMedicamentos,
+         filteredLoteMedicamentos,
          searchValue,
+         filter,
          isLoading,
          setLoteMedicamentos,
+         setFilteredLoteMedicamentos,
          setSearchValue,
          setIsLoading,
          setFilter,
          getAllLoteMedicamentos,
+         getAllLoteMedicamentosByIdMedicamento,
          getAllLoteMedicamentosByFilter,
          createLoteMedicamento,
       }}>

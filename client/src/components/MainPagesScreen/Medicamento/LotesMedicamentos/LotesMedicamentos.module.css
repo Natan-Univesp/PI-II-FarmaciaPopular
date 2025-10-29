@@ -1,0 +1,21 @@
+.linkReturn {
+   display: flex;
+   align-items: center;
+   width: fit-content;
+   gap: 5px;
+   margin: var(--marginContent) 0;
+   padding: 4px 10px;
+   background-color: white;
+   color: var(--colorPrim);
+   font-size: 16px;
+   font-family: var(--fontSec);
+   border-radius: var(--fixBorderRadius);
+   border: 1px solid var(--colorPrim);
+   transition: .2s ease;
+
+}
+
+.linkReturn:hover {
+   background-color: var(--colorPrim);
+   color: white;
+}

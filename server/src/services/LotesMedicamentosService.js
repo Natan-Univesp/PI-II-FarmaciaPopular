@@ -26,16 +26,15 @@ async function getAllLotesMedicamentosByIdMedicamentoService(idMedicamento) {
     return loteMedicamento;
 }
 
-async function getAllLotesMedicamentosByFilterService(QueryParams = {}) {
-    const { orderBy, ...filters } = QueryParams;
+async function getAllLotesMedicamentosByFilterService(idMedicamento, QueryParams = {}) {
+    const { orderBy, filterOptions: filters } = QueryParams;
 
     const LotesFilters = ["fk_id_medicamento", "quantidade", "data_validade", "vencendo", "estoque_baixo", "vencidos"];
     const Filterselect = {};
 
     if (filters && Object.keys(filters).length > 0) {
         Object.keys(filters).forEach(key => {
-            if (LotesFilters.includes(key)) {
-                
+            if (LotesFilters.includes(key) && filters[key]) {
                 // Filtra por quantidade exata
                 if (key === 'fk_id_medicamento' || key === 'quantidade') {
                     Filterselect[key] = { [Op.eq]: Number(filters[key]) };
@@ -88,7 +87,7 @@ async function getAllLotesMedicamentosByFilterService(QueryParams = {}) {
         Orderselect.push(["id", "ASC"]);
     };
 
-    const allLotes = await getAllLotesMedicamentosByFilter(Filterselect, Orderselect);
+    const allLotes = await getAllLotesMedicamentosByFilter(idMedicamento, Filterselect, Orderselect);
     return allLotes;
 }
 

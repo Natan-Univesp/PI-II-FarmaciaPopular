@@ -10,7 +10,6 @@ export default function ButtonTable({ infoView, handleAction, classBtn, toolTips
          content={<div>{toolTipsText}</div>}
          theme="light-border"
          className={styles.customToolTips}
-         disabled={!toolTipsText}
       >
          <button
             type="button"

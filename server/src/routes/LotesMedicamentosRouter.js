@@ -9,12 +9,12 @@ router
    .post(lotesMedicamentos.createLoteMedicamento);
 
 router
-   .route("/filter")
-   .get(lotesMedicamentos.getAllLotesMedicamentosByFilter);
-
-router
    .route("/medicamentos/:idMedicamento")
    .get(lotesMedicamentos.getAllLotesMedicamentosByIdMedicamento);
+
+router
+   .route("/:idMedicamento/filter")
+   .get(lotesMedicamentos.getAllLotesMedicamentosByFilter);
 
 router
    .route("/:id")

@@ -6,12 +6,13 @@ export function InputDefault({
    placeholder = "",
    disabled = false,
    customClass = "",
+   customStyle = {},
    textView = "",
    register = {},
    error,
 }) {
    return (
-      <div className={`${styles.inputContainer} ${customClass} ${error ? styles.error : ""}`}>
+      <div className={`${styles.inputContainer} ${customClass} ${error ? styles.error : ""}`} style={customStyle}>
          <label className={styles.inputLabel} htmlFor={id}>
             {textView}
          </label>

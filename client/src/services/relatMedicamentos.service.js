@@ -18,11 +18,11 @@ export async function getAllRelatorioMedicamentosService() {
 }
 
 export async function getAllRelatoriosByFilterService(params) {
-   const {orderBy, filterOptions} = params;
+   const {orderBy, ...filterOptions} = params;
    const res = await axios.get(`${localServer}/relatorios/filter`, {
       params: {
          orderBy,
-         filterOptions
+         ...filterOptions
       },
       headers: {
          Authorization: `Bearer ${Cookies.get("token")}`
