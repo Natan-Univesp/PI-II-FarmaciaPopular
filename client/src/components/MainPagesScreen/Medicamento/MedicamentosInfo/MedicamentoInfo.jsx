@@ -1,25 +1,19 @@
 import { Link, useOutletContext } from "react-router";
+import { CardRemedio } from "../../../cards/CardRemedio/CardRemedio";
 
 export function MedicamentosInfo() {
    const { medicamentos } = useOutletContext();
+   console.log(medicamentos);
 
    return (
-      <>
+      <div className="layoutFlexCollectionCard">
          {medicamentos &&
             medicamentos.map((medicamento) => (
-               <div
-                  style={{
-                     width: "120px",
-                     height: "120px",
-                     backgroundColor: "white",
-                     marginBottom: "10px",
-                  }}
-               >
-                  <p>{medicamento.id}</p>
-                  <p>{medicamento.nome}</p>
-                  <Link to={`${medicamento.id}`}>Aqui</Link>
-               </div>
+               <CardRemedio
+                  key={medicamento.id}
+                  medicamentoData={medicamento}
+               />
             ))}
-      </>
+      </div>
    );
 }

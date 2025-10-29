@@ -1,4 +1,5 @@
 import { ModalProvider } from "../../context/ModalContext";
+import { InfoStats } from "../Infostats/InfoStats";
 
 export function MainLayout({title ="", infoStatsCollection = [], customStyle = null, children}) {
    return(
@@ -6,7 +7,7 @@ export function MainLayout({title ="", infoStatsCollection = [], customStyle = n
          <section className={customStyle ? customStyle : ""}>
             <h1 className="mainTitle">{title}</h1>
             {infoStatsCollection.length > 0 &&
-               <p>Componente InfoStats</p>
+               <InfoStats infoStatsCollection={infoStatsCollection}/>
             }
             {children}
          </section>
