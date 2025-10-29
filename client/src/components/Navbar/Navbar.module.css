@@ -9,7 +9,7 @@ Estilização Geral
 nav.navContainer {
    grid-area: navbar;
    width: var(--fixWidthNav);
-   height: calc(100vh - var(--fixHeightTopBar));
+   height: 100%;
    background-color: var(--colorBlue);
    color: white;
    letter-spacing: 1px;

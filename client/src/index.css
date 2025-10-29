@@ -12,6 +12,7 @@
 body {
   font-family: var(--fontPrim);
   background-color: var(--colorBackground);
+  overflow: hidden;
 }
 
 body:has(.activeModal) { overflow-y: hidden; }
