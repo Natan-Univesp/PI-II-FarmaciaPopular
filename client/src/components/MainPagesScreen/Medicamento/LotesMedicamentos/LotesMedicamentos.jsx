@@ -42,12 +42,6 @@ export function LotesMedicamentos() {
          className: "btnEdit",
          toolTipsText: "Editar",
       },
-      {
-         id: 2,
-         infoView: <IconTrash />,
-         className: "btnDelete",
-         toolTipsText: "Excluir",
-      },
    ];
 
    const customClassForFields = {

@@ -4,8 +4,9 @@ import { TableDefault } from "../TableDefault/TableDefault";
 import { FaEdit as IconEdit, FaTrashAlt as IconTrash } from "react-icons/fa";
 
 export function TableSearch({
-   fieldCollection,
-   dataCollection,
+   fieldCollection = [],
+   dataCollection = [],
+   btnCollection = [],
    fieldsExcludes,
    filterType = "",
    searchValue,
@@ -20,21 +21,6 @@ export function TableSearch({
       const value = e.target.value;
       setSearchValue(value);
    };
-
-   const btnTableCollection = [
-      {
-         id: 1,
-         infoView: <IconEdit />,
-         className: "btnEdit",
-         toolTipsText: "Editar",
-      },
-      {
-         id: 2,
-         infoView: <IconTrash />,
-         className: "btnDelete",
-         toolTipsText: "Excluir",
-      },
-   ];
 
    return (
       <>
@@ -59,7 +45,7 @@ export function TableSearch({
             fieldCollection={fieldCollection}
             dataCollection={dataCollection}
             fieldsExcludes={fieldsExcludes}
-            btnCollection={btnTableCollection}
+            btnCollection={btnCollection}
             customClassData={customClassData}
          />
       </>
