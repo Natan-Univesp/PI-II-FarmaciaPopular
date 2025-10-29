@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getAllLaboratoriosService } from "../services/laboratorios.service";
+import { createLaboratorioService, getAllLaboratoriosService } from "../services/laboratorios.service";
 
 const LaboratorioContext = createContext(null);
 
@@ -17,6 +17,14 @@ export function LaboratorioProvider({ children }) {
       setIsLoading(false);
    }
 
+   const createLaboratorio = async (laboratorioData) => {
+      const res = await createLaboratorioService(laboratorioData);
+      if(res.data.status === "success") {
+         await getAllLaboratorios();
+         return true;
+      }
+   }
+
    const init = async () => {
       try {
          await getAllLaboratorios();
@@ -30,7 +38,12 @@ export function LaboratorioProvider({ children }) {
    }, []);
 
    return (
-      <LaboratorioContext.Provider value={{ laboratorios, setLaboratorios, isLoading }}>
+      <LaboratorioContext.Provider value={{ 
+         laboratorios, 
+         isLoading,
+         setLaboratorios, 
+         createLaboratorio, 
+      }}>
          {children}
       </LaboratorioContext.Provider>
    );

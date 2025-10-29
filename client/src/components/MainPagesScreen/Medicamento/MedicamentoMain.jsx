@@ -25,6 +25,19 @@ export function MedicamentoMain() {
          >
             CLIQUE
          </button>
+         <button
+            style={{ backgroundColor: "black" }}
+            onClick={() =>
+               showModal({
+                  modalName: "registerNewLaboratorio",
+                  data: {
+                     createMedicamento
+                  }
+               })
+            }
+         >
+            CLIQUE
+         </button>
          <h2 className="subTitle">Estoque de Medicamentos</h2>
          <Outlet context={{ medicamentos }}/>
       </>
