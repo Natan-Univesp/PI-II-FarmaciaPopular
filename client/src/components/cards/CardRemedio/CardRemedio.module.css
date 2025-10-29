@@ -1,94 +1,111 @@
 .card {
   border: 1px solid #ddd;
-  border-radius: 2px;
-  padding: 20px 20px 5px 20px; /* Reduzi o padding superior para 20px */
-  width: 220px;
+  border-radius: var(--fixBorderRadius);
+  padding: 20px 20px 25px;
+  width: 270px;
+  height: 330px;
   background-color: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadowBox);
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   min-height: 250px;
   gap: 0;
-  position: relative; /* Adicionei isso */
+}
+
+.cardContent__imgContainer {
+  width: 140px;
+  height: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
 }
 
 /* NOVO ESTILO PARA A IMAGEM */
 .imagemRemedio {
-  position: absolute;
-  top: 20px; /* Distância da borda superior */
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px; /* Ajuste conforme necessário */
-  height: 80px; /* Ajuste conforme necessário */
-  object-fit: contain;
-  z-index: 1;
+  width: 100%;
+  margin: auto;
+}
+
+/* Não utilizado, por hora */
+.cardContent__indicacao {
+  height: 108px;
+  margin-top: 10px;
+  font-family: var(--fontSec);
+  font-size: 14px;
+  text-align: justify;
+  overflow: hidden;
+}
+
+.cardContent__indicacao h4 {
+  text-align: center;
+}
+
+.cardContent__indicacao p {
+  display: -webkit-box;
+  overflow: hidden;
+  line-clamp: 4;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
 }
 
 .nome {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: bold;
-  margin: 0;
-  color: #000000;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  margin-bottom: 0;
-  min-height: auto;
-  padding-bottom: 2px;
-  flex: 1;
-  margin-top: 90px; /* Adicionei margem superior para dar espaço à imagem */
+  letter-spacing: .6px;
 }
 
 /* Os outros estilos permanecem iguais */
 .remessasContainer {
+  margin: 10px 0;
+  font-family: var(--fontSec);
+}
+
+.remessasContent__textTitle {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.cardContent__botaoCollection {
   display: flex;
-  flex-direction: column;
-  margin: 0;
-  align-items: center;
-  justify-content: flex-start;
-  margin-top: 0;
-  gap: 0;
-  flex: 1;
+  justify-content: center;
+  gap: 10px;
 }
 
-.remessasLabel {
-  font-size: 0.9rem;
-  color: #000000;
-  font-weight: 500;
-  margin: 0;
-  line-height: 1;
-  padding-top: 2px;
+.cardContent__botaoCollection :is(button, a){
+  background-color: transparent;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: .6px;
+  border-radius: 1px;
+  cursor: pointer;
+  transition: .2s ease;
 }
 
-.remessasValor {
-  font-size: 0.9rem;
-  font-weight: bold;
-  color: #000000;
-  margin: 0;
-  line-height: 1;
+.cardContent__botaoCollection button:active {
+  transform: scale(0.98);
 }
+
+.botaoDetalhes {
+  color: var(--colorBlue);
+  border: 1px solid var(--colorBlue);
+}
+
+.botaoDetalhes:hover {
+  background-color: var(--colorBlue);
+  color: white;
+} 
 
 .botaoVisualizar {
-  background-color: transparent;
-  border: 1px solid #4EBF4B;
-  color: #4EBF4B;
-  padding: 10px 16px;
-  border-radius: 1px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 0.9rem;
-  margin-top: 2px;
-  margin-bottom: 5px;
+  color: var(--colorGreen);
+  border: 1px solid var(--colorGreen);
 }
 
 .botaoVisualizar:hover {
-  background-color: #2c5aa0;
+  background-color: var(--colorGreen);
   color: white;
 }
 
-.botaoVisualizar:active {
-  transform: scale(0.98);
-}

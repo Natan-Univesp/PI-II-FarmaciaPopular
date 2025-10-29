@@ -1,29 +1,34 @@
-import styles from './CardRemedio.module.css';
-import imgRemedio from '../../../assets/img/img-remedio.png';
+import { Link } from "react-router";
+import styles from "./CardRemedio.module.css";
 
-function CardRemedio({ nome, remessasDisponiveis, imagemUrl, onVisualizarClick }) {
-  return (
-    <div className={styles.card}>
-      <img 
-        src={imagemUrl || imgRemedio} 
-        alt={nome}
-        className={styles.imagemRemedio}
-      />
-      
-      <h3 className={styles.nome}>{nome}</h3>
-      
-      <div className={styles.remessasContainer}>
-        <span className={styles.remessasLabel}>Remessas</span>
-        <span className={styles.remessasValor}>{remessasDisponiveis ?? 0}</span>
+export function CardRemedio({ medicamentoData }) {
+   const serverImage = import.meta.env.VITE_SERVER_UPLOADS;
+
+   return (
+      <div className={styles.card} id={medicamentoData.id}>
+         <div className={styles.cardContent__imgContainer}>
+            <img
+               src={`${serverImage}/${medicamentoData.img}`}
+               alt={medicamentoData.nome}
+               className={styles.imagemRemedio}
+            />
+         </div>
+
+         <h3 className={styles.nome}>{medicamentoData.nome}</h3>
+
+         <div className={styles.remessasContainer}>
+            <p className={styles.remessasContent__textTitle}>Lotes Disponíveis</p>
+            <p className={styles.remessasContent__textValue}>{20}</p>
+         </div>
+
+         <div className={styles.cardContent__botaoCollection}>
+            <button className={styles.botaoDetalhes} onClick={() => null}>
+               Detalhes
+            </button>
+            <Link className={styles.botaoVisualizar} to={medicamentoData.id}>
+               Visualizar Lotes
+            </Link>
+         </div>
       </div>
-      
-      <button className={styles.botaoVisualizar} onClick={onVisualizarClick}>
-        Visualizar
-      </button>
-    </div>
-  );
+   );
 }
-
-export default CardRemedio;
-
-

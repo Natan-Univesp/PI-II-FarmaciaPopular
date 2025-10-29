@@ -19,6 +19,14 @@ h2.subTitle {
    margin: var(--marginContent);
 }
 
+.layoutFlexCollectionCard {
+   display: flex;
+   flex-wrap: wrap;
+   gap: calc(var(--marginContent) * 2);
+   margin: var(--marginContent);
+
+}
+
 span.errorMessage {
    font-size: 14px;
    font-weight: 500;
