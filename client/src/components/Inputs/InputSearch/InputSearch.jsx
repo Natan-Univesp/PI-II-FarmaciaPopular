@@ -12,7 +12,7 @@ export function InputSearch({
    handleOnChange
 }) {
    return (
-      <div className={styles.filterbarContainer}>
+      <div className={`${styles.filterbarContainer} ${!hasFilterButton ? styles.notHasFilterBtn : ""}`}>
          <div className={styles.searchInputWrapper}>
             <IconSearch className={styles.searchIcon} />
             <input

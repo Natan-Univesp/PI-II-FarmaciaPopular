@@ -6,6 +6,7 @@ h1.mainTitle {
 
 h2.subTitle {
    width: fit-content;
+   margin: var(--marginContent);
    margin-top: 1.3em;
    padding: 5px 30px;
    background-color: var(--colorPrim);

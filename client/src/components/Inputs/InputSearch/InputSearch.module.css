@@ -3,7 +3,7 @@
    align-items: center;
    max-width: 420px;
    box-shadow: var(--shadowBox);
-   margin: var(--marginContent) 0;
+   margin: var(--marginContent);
 }
 
 .searchInputWrapper {
@@ -14,6 +14,10 @@
    border: 1px solid var(--colorPrim);
    border-radius: var(--fixBorderRadius) 0 0 var(--fixBorderRadius);
    height: 40px;
+}
+
+.notHasFilterBtn .searchInputWrapper {
+   border-radius: var(--fixBorderRadius) !important;
 }
 
 .searchIcon {
