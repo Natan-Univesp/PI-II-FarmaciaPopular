@@ -25,7 +25,7 @@ export function CardRemedio({ medicamentoData }) {
             <button className={styles.botaoDetalhes} onClick={() => null}>
                Detalhes
             </button>
-            <Link className={styles.botaoVisualizar} to={medicamentoData.id}>
+            <Link className={styles.botaoVisualizar} to={`${medicamentoData.id}`}>
                Visualizar Lotes
             </Link>
          </div>
