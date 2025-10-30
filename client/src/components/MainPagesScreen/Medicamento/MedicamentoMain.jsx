@@ -4,24 +4,13 @@ import { useModal } from "../../../context/ModalContext";
 import { CardAction } from "../../Cards/CardAction/CardAction";
 
 export function MedicamentoMain() {
-   /*
-   ==========================================
-   PARTE JOSE
-   ==========================================
-   */
-
-   const handleVisualizarClick = (medicamentoId) => {
-      console.log("Visualizar medicamento:", medicamentoId);
-      // Sua lógica de navegação ou modal aqui
-   };
-
-   const handleCadastroClick = () => {
-      console.log("Abrir cadastro de remessas");
-      // Sua lógica de cadastro aqui
-   };
-
    const { showModal } = useModal();
-   const { medicamentos, createMedicamento } = useMedicamento();
+   const { 
+      filteredMedicamentos: medicamentos, 
+      searchValue,
+      setSearchValue,
+      createMedicamento 
+   } = useMedicamento();
 
    const cardActionCollection = [
       {
@@ -29,7 +18,7 @@ export function MedicamentoMain() {
          title: "Cadastrar Medicamento",
          text: "Cadastra um medicamento ainda não existente",
          textButton: "Cadastrar Medicamento",
-         handleOpenModal: () => 
+         handleOpenModal: () =>
             showModal({
                modalName: "registerNewMedicamento",
                customStyle: {
@@ -39,16 +28,14 @@ export function MedicamentoMain() {
                data: {
                   createMedicamento,
                },
-            })
+            }),
       },
-   ]
-
+   ];
 
    return (
       <>
-
          <h2 className="subTitle">Ações</h2>
-         <CardAction cardActionCollection={cardActionCollection}/>
+         <CardAction cardActionCollection={cardActionCollection} />
 
          <button
             style={{ backgroundColor: "black" }}
@@ -64,7 +51,7 @@ export function MedicamentoMain() {
             CLIQUE
          </button>
          <h2 className="subTitle">Estoque de Medicamentos</h2>
-         <Outlet context={{ medicamentos }} />
+         <Outlet context={{ medicamentos, searchValue, setSearchValue }} />
       </>
    );
 }

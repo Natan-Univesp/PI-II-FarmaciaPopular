@@ -19,9 +19,7 @@ export function searchFilterData(dataCollection, searchValue, fieldsParams) {
 export function searchFilterMedicamentos(medicamentoCollection, searchValue) {
    const fieldsForSearch = [
       "id",
-      "nome",
-      "indicacao_uso",
-      "categoria"
+      "nome"
    ];
    const filteredMedicamentos = searchFilterData(medicamentoCollection, searchValue, fieldsForSearch);
 
