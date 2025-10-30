@@ -1,9 +1,9 @@
 .card {
   border: 1px solid #ddd;
   border-radius: var(--fixBorderRadius);
-  padding: 20px 20px 25px;
+  padding: 10px 20px 25px;
   width: 270px;
-  height: 330px;
+  height: 390px;
   background-color: #fff;
   box-shadow: var(--shadowBox);
   text-align: center;
@@ -12,6 +12,43 @@
   justify-content: flex-start;
   min-height: 250px;
   gap: 0;
+}
+
+.cardContent__btnAdminCollection {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 -10px 20px;
+}
+
+.cardContent__btnAdminCollection button {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding: 10px;
+  font-size: 20px;
+  border-radius: var(--fixBorderRadius);
+}
+
+button.btnAdminContent__btnEdit {
+  background-color: var(--colorYellow);
+  border: 1px solid var(--colorYellow);
+  color: white;
+}
+
+button.btnAdminContent__btnDel {
+  background-color: var(--colorRed);
+  border: 1px solid var(--colorRed);
+  color: white;
+}
+
+button.btnAdminContent__btnEdit:hover {
+  background-color: transparent;
+  color: var(--colorYellow);
+}
+
+button.btnAdminContent__btnDel:hover {
+  background-color: transparent;
+  color: var(--colorRed);
 }
 
 .cardContent__imgContainer {
@@ -26,6 +63,8 @@
 /* NOVO ESTILO PARA A IMAGEM */
 .imagemRemedio {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
   margin: auto;
 }
 

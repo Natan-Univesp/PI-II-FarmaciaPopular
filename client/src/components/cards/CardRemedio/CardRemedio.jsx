@@ -1,11 +1,17 @@
 import { Link } from "react-router";
 import styles from "./CardRemedio.module.css";
+import { FaEdit as IconEdit, FaTrashAlt as IconDel} from "react-icons/fa";
 
 export function CardRemedio({ medicamentoData }) {
    const serverImage = import.meta.env.VITE_SERVER_UPLOADS;
 
    return (
       <div className={styles.card} id={medicamentoData.id}>
+         <div className={styles.cardContent__btnAdminCollection}>
+            <button className={styles.btnAdminContent__btnEdit}><IconEdit/></button>
+            <button className={styles.btnAdminContent__btnDel}><IconDel/></button>
+         </div>
+
          <div className={styles.cardContent__imgContainer}>
             <img
                src={`${serverImage}/${medicamentoData.img}`}
