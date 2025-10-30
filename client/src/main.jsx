@@ -21,6 +21,7 @@ import { AdministradorMain } from "./components/MainPagesScreen/Administrador/Ad
 import { LotesMedicamentos } from "./components/MainPagesScreen/Medicamento/LotesMedicamentos/LotesMedicamentos.jsx";
 import { MedicamentosInfo } from "./components/MainPagesScreen/Medicamento/MedicamentosInfo/MedicamentoInfo.jsx";
 import { LoteMedicamentoProvider } from "./context/LoteMedicamentoContext.jsx";
+import { LaboratorioMain } from "./components/MainPagesScreen/Laboratorio/LaboratorioMain.jsx";
 
 const router = createBrowserRouter([
    {
@@ -75,6 +76,12 @@ const router = createBrowserRouter([
          {
             path: "/laboratorios",
             element: <Laboratorio />,
+            children: [
+               {
+                  index: true,
+                  element: <LaboratorioMain/>
+               }
+            ]
          },
          {
             path: "/usuarios-convenio",

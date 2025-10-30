@@ -37,19 +37,6 @@ export function MedicamentoMain() {
          <h2 className="subTitle">Ações</h2>
          <CardAction cardActionCollection={cardActionCollection} />
 
-         <button
-            style={{ backgroundColor: "black" }}
-            onClick={() =>
-               showModal({
-                  modalName: "registerNewLaboratorio",
-                  data: {
-                     createMedicamento,
-                  },
-               })
-            }
-         >
-            CLIQUE
-         </button>
          <h2 className="subTitle">Estoque de Medicamentos</h2>
          <Outlet context={{ medicamentos, searchValue, setSearchValue }} />
       </>
