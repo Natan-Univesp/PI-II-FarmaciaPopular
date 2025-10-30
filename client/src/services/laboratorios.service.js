@@ -56,7 +56,7 @@ method = PATCH
 ==================================
 */
 export async function updateLaboratorioService(id, body) {
-   const res = await axios.get(`${localServer}/laboratorios/${id}`, body, {
+   const res = await axios.patch(`${localServer}/laboratorios/${id}`, body, {
       headers: {
          Authorization: `Bearer ${Cookies.get("token")}`
       }

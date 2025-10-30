@@ -1,5 +1,6 @@
 import { useLaboratorio } from "../../../context/LaboratorioContext";
 import { useModal } from "../../../context/ModalContext";
+import { getElementIdTable } from "../../../utils/ManipulateDataUtil";
 import { CardAction } from "../../Cards/CardAction/CardAction";
 import { Loading } from "../../Loading/Loading";
 import { TableDefault } from "../../Tables/TableDefault/TableDefault";
@@ -7,7 +8,12 @@ import { FaEdit as IconEdit } from "react-icons/fa";
 
 export function LaboratorioMain() {
    const { showModal } = useModal();
-   const { laboratorios, isLoading, createLaboratorio } = useLaboratorio();
+   const { 
+      laboratorios, 
+      isLoading, 
+      createLaboratorio,
+      updateLaboratorio
+   } = useLaboratorio();
    const tableFields = [
       "ID",
       "Nome do Laboratório",
@@ -33,12 +39,24 @@ export function LaboratorioMain() {
       },
    ];
 
+   const handleEditTable = (e) => {
+      const id = getElementIdTable(e);
+      showModal({
+         modalName: "editLaboratorio",
+         data: {
+            id,
+            updateLaboratorio
+         }
+      })
+   }
+
    const btnTableCollection = [
       {
          id: 1,
          infoView: <IconEdit />,
          className: "btnEdit",
          toolTipsText: "Editar",
+         handleAction: handleEditTable
       },
    ];
 
