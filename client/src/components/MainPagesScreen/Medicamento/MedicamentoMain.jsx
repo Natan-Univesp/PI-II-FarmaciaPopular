@@ -30,6 +30,16 @@ export function MedicamentoMain() {
                },
             }),
       },
+      {
+         id: 2,
+         title: "Visualizar Lixeira",
+         text: "Visualiza Medicamentos movidos para a lixeira, sendo possivel a sua restauração",
+         textButton: "Visualizar Lixeira",
+         handleOpenModal: () => 
+            showModal({
+               modalName: "lixeiraMedicamentos"
+            })
+      }
    ];
 
    return (

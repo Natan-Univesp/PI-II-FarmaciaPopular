@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { createMedicamentoService, getAllInactiveMedicamentosService, getAllMedicamentosService, updateMedicamentoService } from "../services/medicamentos.service";
+import { createMedicamentoService, getAllActiveMedicamentosService, getAllInactiveMedicamentosService, getAllMedicamentosService, inactivateMedicamentoService, restoreMedicamentoService, updateMedicamentoService } from "../services/medicamentos.service";
 import { searchFilterMedicamentos } from "../utils/SearchFilterUtil";
 
 const MedicamentoContext = createContext(null);
@@ -16,7 +16,7 @@ export function MedicamentoProvider({ children }) {
       if (!isLoading) {
          setIsLoading(true);
       }
-      const res = await getAllMedicamentosService();
+      const res = await getAllActiveMedicamentosService();
       setMedicamentos(res.data);
       setIsLoading(false);
    }
@@ -45,6 +45,27 @@ export function MedicamentoProvider({ children }) {
          await getAllMedicamentos();
          return true;
       }
+   }
+
+   const changeStatusMedicamento = async (id, newStatus) => {
+      let res;
+
+      if(newStatus === "INATIVO") {
+         res = await inactivateMedicamentoService(id);
+          
+      } else if(newStatus === "ATIVO") {
+         res = await restoreMedicamentoService(id);
+      
+      } else {
+         return false;
+      }
+
+      if(res.data.status === "success") {
+         await getAllMedicamentos();
+         await getAllInactiveMedicamentos();
+         return true;
+      }
+
    }
 
    const init = async () => {
@@ -81,7 +102,8 @@ export function MedicamentoProvider({ children }) {
          setInactiveMedicamentos,
          setSearchValue,
          createMedicamento,
-         updateMedicamento
+         updateMedicamento,
+         changeStatusMedicamento
       }}>
          {children}
       </MedicamentoContext.Provider>
