@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAlert } from "../../../../context/AlertContext";
 import { useModal } from "../../../../context/ModalContext"
-import { getLaboratorioByIdService, updateLaboratorioService } from "../../../../services/laboratorios.service";
+import { getLaboratorioByIdService } from "../../../../services/laboratorios.service";
 import { FormLaboratorio } from "../../../Forms/FormLaboratorio/FormLaboratorio";
 
 export function ModalEditLaboratorio() {

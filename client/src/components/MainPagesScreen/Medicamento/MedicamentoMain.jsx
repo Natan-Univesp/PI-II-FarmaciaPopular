@@ -9,7 +9,7 @@ export function MedicamentoMain() {
       filteredMedicamentos: medicamentos, 
       searchValue,
       setSearchValue,
-      createMedicamento 
+      createMedicamento,
    } = useMedicamento();
 
    const cardActionCollection = [
@@ -38,7 +38,11 @@ export function MedicamentoMain() {
          <CardAction cardActionCollection={cardActionCollection} />
 
          <h2 className="subTitle">Estoque de Medicamentos</h2>
-         <Outlet context={{ medicamentos, searchValue, setSearchValue }} />
+         <Outlet context={{ 
+            medicamentos, 
+            searchValue, 
+            setSearchValue, 
+         }} />
       </>
    );
 }

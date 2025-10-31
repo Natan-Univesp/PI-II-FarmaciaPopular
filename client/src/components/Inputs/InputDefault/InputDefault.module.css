@@ -32,7 +32,7 @@
    background-color: var(--colorPrimBright);
    border-color: var(--colorPrim);
    cursor: not-allowed;
-   color: var(--colorInactive);
+   color: var(--colorPrim);
 }
 
 .inputContainer.error .inputLabel {

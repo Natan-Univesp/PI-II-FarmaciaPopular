@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { createMedicamentoService, getAllInactiveMedicamentosService, getAllMedicamentosService } from "../services/medicamentos.service";
+import { createMedicamentoService, getAllInactiveMedicamentosService, getAllMedicamentosService, updateMedicamentoService } from "../services/medicamentos.service";
 import { searchFilterMedicamentos } from "../utils/SearchFilterUtil";
 
 const MedicamentoContext = createContext(null);
@@ -39,6 +39,14 @@ export function MedicamentoProvider({ children }) {
       
    }
 
+   const updateMedicamento = async (id, newMedicamentoData) => {
+      const res = await updateMedicamentoService(id, newMedicamentoData);
+      if(res.data.status === "success") {
+         await getAllMedicamentos();
+         return true;
+      }
+   }
+
    const init = async () => {
       try {
          await getAllMedicamentos();
@@ -64,15 +72,16 @@ export function MedicamentoProvider({ children }) {
       <MedicamentoContext.Provider value={{ 
          medicamentos, 
          filteredMedicamentos, 
-         setMedicamentos,
-         setFilteredMedicamentos,
          inactiveMedicamentos,
-         setInactiveMedicamentos,
          searchValue, 
-         setSearchValue,
          isLoading,
          isInactiveLoading,
-         createMedicamento
+         setMedicamentos,
+         setFilteredMedicamentos,
+         setInactiveMedicamentos,
+         setSearchValue,
+         createMedicamento,
+         updateMedicamento
       }}>
          {children}
       </MedicamentoContext.Provider>

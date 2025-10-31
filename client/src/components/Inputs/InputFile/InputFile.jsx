@@ -7,10 +7,8 @@ export default function InputFile({register = {}, watchImg, error}) {
 
     useEffect(() => {
         if(typeof watchImg === "object") {
-            console.log('entrou aqui');
             setPreviewImage(URL.createObjectURL(watchImg[0]));
         } else {
-            console.log("entrou lá")
             setPreviewImage(watchImg);
         }
         

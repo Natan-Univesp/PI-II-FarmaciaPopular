@@ -10,7 +10,6 @@ import { logoutService } from "../../services/user.service";
 
 export function Topbar() {
    const { user } = useUser();
-   console.log(user);
    const { changeActiveNavbarState } = useNavbar();
    const navigate = useNavigate();
 

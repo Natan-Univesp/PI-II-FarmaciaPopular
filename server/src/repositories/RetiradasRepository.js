@@ -5,7 +5,6 @@ const CannotCreateError = require("../classes/CannotCreateError.js");
 // Cria uma nova retirada
 async function createRetirada(itensRetirada, idUser) {
     const t = await sequelize.transaction();
-    console.log(idUser);
 
     try {
         for (const retirados of itensRetirada) {
