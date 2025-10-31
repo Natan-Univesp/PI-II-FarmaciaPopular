@@ -5,7 +5,7 @@ import { Loading } from "../../../Loading/Loading";
 import { TableTrash } from "../../../Tables/TableTrash/TableTrash";
 
 export function ModalLixeiraMedicamentos() {
-   const fieldNameCollection = ["Código", "Nome", "Laboratório", "Categoria", "Data de remoção"];
+   const fieldNameCollection = ["Código", "Nome", "Laboratório", "Categoria", "Lotes disponíveis", "Data de remoção"];
    const { showErrorAlert, showSuccessAlert } = useAlert();
    const { closeModal } = useModal();
    const {
@@ -28,6 +28,7 @@ export function ModalLixeiraMedicamentos() {
                title: "Medicamento Restaurado",
                message: "Agora é possível, novamente, visualizar o medicamento e suas respectivas informações"
             })
+            closeModal();
          }
       } catch (error) {
          if (error?.response?.data) {

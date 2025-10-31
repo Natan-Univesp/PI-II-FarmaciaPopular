@@ -3,7 +3,7 @@
    align-items: center;
    width: fit-content;
    gap: 5px;
-   margin: var(--marginContent) 0;
+   margin: var(--marginContent);
    padding: 4px 10px;
    background-color: white;
    color: var(--colorPrim);

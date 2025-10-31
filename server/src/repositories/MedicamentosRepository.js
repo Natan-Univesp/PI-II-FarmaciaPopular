@@ -25,11 +25,22 @@ async function getAllMedicamentos() {
             "data_alteracao",
          ],
          [sequelize.col("laboratorio.nome_laboratorio"), "nome_laboratorio"],
+         [
+            sequelize.fn('COUNT', sequelize.col("medicamento_lote.id")),
+            "total_lotes"
+         ]
       ],
-      include: {
-         association: "laboratorio",
-         attributes: [],
-      },
+      include: [
+         {
+            association: "laboratorio",
+            attributes: [],
+         },
+         {
+            association: "medicamento_lote",
+            attributes: []
+         }
+      ],
+      group: ["Medicamentos.id"],
       order: [ //Ordena conforme a situação do medicamento (ATIVOS primeiro)
          ['situacao', 'ASC']
       ]
@@ -40,10 +51,16 @@ async function getAllMedicamentos() {
 
 async function findAllActiveMedicamentos() {
    const allActiveMedicamentos = await Medicamentos.findAll({
-      include: {
-         association: "laboratorio",
-         attributes: [],
-      },
+      include: [
+         {
+            association: "laboratorio",
+            attributes: [],
+         },
+         {
+            association: "medicamento_lote",
+            attributes: []
+         }
+      ],
       attributes: [
          "id",
          "nome",
@@ -55,6 +72,10 @@ async function findAllActiveMedicamentos() {
          "img",
          "situacao",
          [
+            sequelize.fn('COUNT', sequelize.col("medicamento_lote.id")),
+            "total_lotes"
+         ],
+         [
             sequelize.fn("DATE_FORMAT", sequelize.col("Medicamentos.created_at"), "%d-%m-%Y %H:%i:%s"),
             "data_criacao",
          ],
@@ -63,6 +84,7 @@ async function findAllActiveMedicamentos() {
             "data_alteracao",
          ],
       ],
+      group: ["Medicamentos.id"],
       where: {
          situacao: "ATIVO"
       },
@@ -112,20 +134,31 @@ async function getMedicamentoById(id) {
 // Busca todos os medicamentos Inativos
 async function getAllInactiveMedicamentos() {
    const medicamento = await Medicamentos.findAll({
-      include: {
-         association: "laboratorio",
-         attributes: [],
-      },
+      include: [
+         {
+            association: "laboratorio",
+            attributes: [],
+         },
+         {
+            association: "medicamento_lote",
+            attributes: []
+         }
+      ],
       attributes: [
          "id",
          "nome",
          [sequelize.col("laboratorio.nome_laboratorio"), "nome_laboratorio"],
          "categoria",
          [
+            sequelize.fn('COUNT', sequelize.col("medicamento_lote.id")),
+            "total_lotes"
+         ],
+         [
             sequelize.fn("DATE_FORMAT", sequelize.col("Medicamentos.updated_at"), "%d-%m-%Y %H:%i:%s"),
             "data_alteracao",
-         ],
+         ]
       ],
+      group: ["Medicamentos.id"],
       where: {
          situacao: 'INATIVO'
       },

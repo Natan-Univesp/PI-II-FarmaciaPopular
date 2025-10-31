@@ -88,7 +88,7 @@ export function CardRemedio({ medicamentoData }) {
 
          <div className={styles.remessasContainer}>
             <p className={styles.remessasContent__textTitle}>Lotes Disponíveis</p>
-            <p className={styles.remessasContent__textValue}>{20}</p>
+            <p className={styles.remessasContent__textValue}>{medicamentoData.total_lotes}</p>
          </div>
 
          <div className={styles.cardContent__botaoCollection}>
