@@ -15,6 +15,15 @@ export function CardRemedio({ medicamentoData }) {
    const { showModal } = useModal();
    const serverImage = import.meta.env.VITE_SERVER_UPLOADS;
 
+   const handleOpenViewModal = () => {
+      showModal({
+         modalName: "viewMedicamentos",
+         data: {
+            id: medicamentoData.id
+         }
+      })
+   }
+
    const handleOpenEditModal = () => {
       showModal({
          modalName: "editMedicamento",
@@ -83,7 +92,7 @@ export function CardRemedio({ medicamentoData }) {
          </div>
 
          <div className={styles.cardContent__botaoCollection}>
-            <button className={styles.botaoDetalhes} onClick={() => null}>
+            <button className={styles.botaoDetalhes} onClick={handleOpenViewModal}>
                Detalhes
             </button>
             <Link className={styles.botaoVisualizar} to={`${medicamentoData.id}`}>

@@ -30,6 +30,13 @@
    resize: none;
 }
 
+.textAreaContainer textarea:disabled {
+   background-color: var(--colorPrimBright);
+   border-color: var(--colorPrim);
+   cursor: not-allowed;
+   color: var(--colorPrim);
+}
+
 /* 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
            Estilização do TextArea Error

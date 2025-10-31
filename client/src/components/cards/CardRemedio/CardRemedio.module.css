@@ -139,12 +139,13 @@ button.btnAdminContent__btnDel:hover {
 } 
 
 .botaoVisualizar {
-  color: var(--colorGreen);
+  background-color: var(--colorGreen)!important;
+  color: white;
   border: 1px solid var(--colorGreen);
 }
 
 .botaoVisualizar:hover {
-  background-color: var(--colorGreen);
-  color: white;
+  background-color: transparent!important;
+  color: var(--colorGreen);
 }
 

@@ -3,6 +3,7 @@ import { ModalEditLaboratorio } from "../components/Modals/Laboratorio/ModalEdit
 import { ModalAddNewMedicamento } from "../components/Modals/Medicamentos/ModalAddNewMedicamento/ModalAddNewMedicamento";
 import { ModalEditMedicamentos } from "../components/Modals/Medicamentos/ModalEditMedicamentos/ModalEditMedicamentos";
 import { ModalLixeiraMedicamentos } from "../components/Modals/Medicamentos/ModalLixeiraMedicamentos/ModalLixeiraMedicamentos";
+import { ModalViewMedicamento } from "../components/Modals/Medicamentos/ModalViewMedicamento/ModalViewMedicamento";
 import { ModalAddUser } from "../components/Modals/ModalAddUser/ModalAddUser";
 import { ModalFilterLoteMedicamentos } from "../components/Modals/ModalFilter/ModalFilterLoteMedicamentos/ModalFilterLoteMedicamentos";
 
@@ -41,5 +42,10 @@ export const modalCollection = [
       name: "lixeiraMedicamentos",
       title: "Lixeira de Medicamentos",
       modalContent: <ModalLixeiraMedicamentos/>
+   },
+   {
+      name: "viewMedicamentos",
+      title: "Detalhes do Medicamento",
+      modalContent: <ModalViewMedicamento/>
    }
 ]

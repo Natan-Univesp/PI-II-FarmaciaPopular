@@ -1,0 +1,41 @@
+.viewMedicamentoContainer {
+   display: flex;
+   align-items: center;
+   gap: 15px;
+   margin: 20px 0;
+
+}
+
+.viewMedicamentoContent__coverImg {
+   width: 300px;
+   height: 300px;
+   display: flex;
+   align-items: center;
+}
+
+.viewMedicamentoContent__coverImg img {
+   min-width: 300px;
+}
+
+.viewMedicamentoContainer form {
+   min-width: 300px;
+}
+
+@media only screen and (max-width: 700px) {
+   .viewMedicamentoContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 15px;
+      margin: 15px 0;
+   }
+
+   .viewMedicamentoContent__coverImg {
+      justify-content: center;
+   }
+
+   .viewMedicamentoContainer form {
+      width: 100%;
+   }
+}
