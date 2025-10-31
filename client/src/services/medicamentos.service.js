@@ -78,7 +78,7 @@ export async function createMedicamentoService(body) {
    const { 
       id, 
       fk_id_laboratorio, 
-      nome_medicamento,
+      nome,
       indicacao_uso,
       categoria,
       quantidade_minima,
@@ -90,7 +90,7 @@ export async function createMedicamentoService(body) {
    
    formData.append("id", id);
    formData.append("fk_id_laboratorio", fk_id_laboratorio);
-   formData.append("nome_medicamento", nome_medicamento);
+   formData.append("nome", nome);
    formData.append("indicacao_uso", indicacao_uso);
    formData.append("categoria", categoria);
    formData.append("quantidade_minima", quantidade_minima);
@@ -121,8 +121,8 @@ export async function updateMedicamentoService(id, body) {
       formData.append("fk_id_laboratorio", body.fk_id_laboratorio);
    }
 
-   if(body?.nome_medicamento) {
-      formData.append("nome_medicamento", body.nome_medicamento);
+   if(body?.nome) {
+      formData.append("nome", body.nome);
    }
 
    if(body?.indicacao_uso) {

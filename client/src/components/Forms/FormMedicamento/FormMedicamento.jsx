@@ -21,7 +21,7 @@ export function FormMedicamento({ dataMedicamento, handleMedicamentoSubmit }) {
          img: "",
          id: null,
          fk_id_laboratorio: null,
-         nome_medicamento: "",
+         nome: "",
          categoria: "",
          tipo_unidade: "CAIXAS",
          quantidade_minima: null,
@@ -40,7 +40,7 @@ export function FormMedicamento({ dataMedicamento, handleMedicamentoSubmit }) {
          message: "Insira um valor maior ou igual a 0"
       }
    });
-   const registerNomeMedicamento = register("nome_medicamento", {
+   const registerNomeMedicamento = register("nome", {
       required: "Campo Obrigatório!"
    });
    const registerQtdMin = register("quantidade_minima", {
@@ -81,9 +81,8 @@ export function FormMedicamento({ dataMedicamento, handleMedicamentoSubmit }) {
    const validateAndSubmit = (data) => {
       if(dataMedicamento) {
          const fieldsModifiedOnly = getItemsDirtyData(dirtyFields, data);
-         console.log(fieldsModifiedOnly);
+         handleMedicamentoSubmit(fieldsModifiedOnly);
       } else {
-         console.log("Cadastrei as coisas abaixo:");
          handleMedicamentoSubmit(data);
       }
    }
@@ -118,6 +117,7 @@ export function FormMedicamento({ dataMedicamento, handleMedicamentoSubmit }) {
                type="number"
                id="idMedicamento"
                placeholder="ex: 1592"
+               disabled={!!dataMedicamento?.id}
                textView="Código*"
                register={registerId}
                error={errors?.id}
@@ -131,7 +131,7 @@ export function FormMedicamento({ dataMedicamento, handleMedicamentoSubmit }) {
                placeholder="ex: Cimegripe"
                textView="Nome*"
                register={registerNomeMedicamento}
-               error={errors?.nome_medicamento}
+               error={errors?.nome}
             />
          </div>
          <SelectSearchable

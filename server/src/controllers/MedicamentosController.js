@@ -120,7 +120,7 @@ async function createMedicamento(req, res) {
       const {
          id,
          fk_id_laboratorio,
-         nome_medicamento,
+         nome,
          indicacao_uso,
          categoria,
          quantidade_minima,
@@ -132,7 +132,7 @@ async function createMedicamento(req, res) {
       if (
          !id ||
          !fk_id_laboratorio ||
-         !nome_medicamento ||
+         !nome ||
          !indicacao_uso ||
          !categoria ||
          (quantidade_minima === undefined || 
@@ -151,7 +151,7 @@ async function createMedicamento(req, res) {
       const medicamentoData = {
          id: Number(id),
          fk_id_laboratorio: Number(fk_id_laboratorio),
-         nome: nome_medicamento,
+         nome: nome,
          indicacao_uso,
          categoria,
          tipo_unidade,
@@ -187,7 +187,7 @@ async function updateMedicamento(req, res) {
       const id = Number(req.params.id);
       const {
          fk_id_laboratorio,
-         nome_medicamento,
+         nome,
          indicacao_uso,
          categoria,
          tipo_unidade,
@@ -199,10 +199,11 @@ async function updateMedicamento(req, res) {
       if (
          !id ||
          (!fk_id_laboratorio &&
-         !nome_medicamento &&
+         !nome &&
          !indicacao_uso &&
          !categoria &&
          !tipo_unidade &&
+         !file &&
          (quantidade_minima === undefined || 
           quantidade_minima === null))
       ) {
@@ -216,8 +217,9 @@ async function updateMedicamento(req, res) {
       }
 
          const medicamentoData = {
+         id,
          fk_id_laboratorio: fk_id_laboratorio ? Number(fk_id_laboratorio) : undefined,
-         nome_medicamento,
+         nome,
          indicacao_uso,
          categoria,
          tipo_unidade,
