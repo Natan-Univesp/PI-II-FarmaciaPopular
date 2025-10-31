@@ -13,12 +13,22 @@ const {
    createMedicamentoService,
    updateMedicamentoService,
    changeSituacaoMedicamentoService,
+   getAllActiveMedicamentosService,
 } = require("../services/MedicamentosService.js")
 
 async function getAllMedicamentos(req, res) {
    try {
       const allMedicamentos = await getAllMedicamentosService();
       return res.status(200).json(allMedicamentos);
+   } catch (error) {
+      errorResponse(error, res);
+   }
+}
+
+async function getAllActiveMedicamentos(req, res) {
+   try {
+      const allActiveMedicamentos = await getAllActiveMedicamentosService();
+      return res.status(200).json(allActiveMedicamentos);
    } catch (error) {
       errorResponse(error, res);
    }
@@ -270,6 +280,7 @@ async function changeSituacaoMedicamento(req, res) {
 
 module.exports = {
    getAllMedicamentos,
+   getAllActiveMedicamentos,
    getAllInactiveMedicamentos,
    getAllMedicamentosByLaboratorioId,
    getAllMedicamentosByFilter,

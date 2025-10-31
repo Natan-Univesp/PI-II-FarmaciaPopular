@@ -7,6 +7,7 @@ const { getAllMedicamentos,
    createMedicamento,
     updateMedicamento,
     changeSituacaoMedicamento,
+    findAllActiveMedicamentos,
 } = require("../repositories/MedicamentosRepository.js");
 const { Op } = require("sequelize");
 const { Medicamentos, Laboratorios, sequelize } = require("../models/index.js");
@@ -16,6 +17,11 @@ const NotFoundError = require("../classes/NotFoundError.js");
 
 async function getAllMedicamentosService() {
    const medicamentos = await getAllMedicamentos();
+   return medicamentos;
+}
+
+async function getAllActiveMedicamentosService() {
+   const medicamentos = await findAllActiveMedicamentos();
    return medicamentos;
 }
 
@@ -115,6 +121,7 @@ async function changeSituacaoMedicamentoService(id, situacao) {
 
 module.exports = {
    getAllMedicamentosService,
+   getAllActiveMedicamentosService,
    getAllMedicamentosByLaboratorioIdService,
    getMedicamentoByIdService,
    getAllInactiveMedicamentosService,

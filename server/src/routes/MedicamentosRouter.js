@@ -19,6 +19,10 @@ router
    .get(medicamentosController.getAllMedicamentosByFilter)
 
 router
+   .route("/situacao/ativo")
+   .get(medicamentosController.getAllActiveMedicamentos)
+
+router
    .route("/situacao/inativo")
    .get(medicamentosController.getAllInactiveMedicamentos)
 

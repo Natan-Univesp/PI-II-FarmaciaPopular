@@ -38,6 +38,41 @@ async function getAllMedicamentos() {
    return allMedicamentos;
 }
 
+async function findAllActiveMedicamentos() {
+   const allActiveMedicamentos = await Medicamentos.findAll({
+      include: {
+         association: "laboratorio",
+         attributes: [],
+      },
+      attributes: [
+         "id",
+         "nome",
+         [sequelize.col("laboratorio.nome_laboratorio"), "nome_laboratorio"],
+         "categoria",
+         "tipo_unidade",
+         "indicacao_uso",
+         "quantidade_minima",
+         "img",
+         "situacao",
+         [
+            sequelize.fn("DATE_FORMAT", sequelize.col("Medicamentos.created_at"), "%d-%m-%Y %H:%i:%s"),
+            "data_criacao",
+         ],
+         [
+            sequelize.fn("DATE_FORMAT", sequelize.col("Medicamentos.updated_at"), "%d-%m-%Y %H:%i:%s"),
+            "data_alteracao",
+         ],
+      ],
+      where: {
+         situacao: "ATIVO"
+      },
+      order: [
+         ['nome', 'ASC']
+      ]
+   })
+   return allActiveMedicamentos;
+}
+
 // Busca todos os medicamentos com base na ID do LABORATÓRIO
 async function getAllMedicamentosByLaboratorioId(idLab) {
    const allMedicamentos = await Medicamentos.findAll({
@@ -77,36 +112,26 @@ async function getMedicamentoById(id) {
 // Busca todos os medicamentos Inativos
 async function getAllInactiveMedicamentos() {
    const medicamento = await Medicamentos.findAll({
-      attributes: [
-         "id",
-         "fk_id_laboratorio",
-         "nome",
-         "indicacao_uso",
-         "categoria",
-         "tipo_unidade",
-         "img",
-         "situacao",
-         [
-            sequelize.fn("DATE_FORMAT", sequelize.col("Medicamentos.created_at"), "%d-%m-%Y %H:%i:%s"),
-            "data_criacao",
-         ],
-         [
-            sequelize.fn("DATE_FORMAT", sequelize.col("Medicamentos.updated_at"), "%d-%m-%Y %H:%i:%s"),
-            "data_alteracao",
-         ]
-      ],
-      where: {
-         situacao: 'INATIVO'
-      },
       include: {
          association: "laboratorio",
          attributes: [],
       },
-      attributes: {
-         include: [
-            [sequelize.col("laboratorio.nome_laboratorio"), "nome_laboratorio"]
-         ]
-      }
+      attributes: [
+         "id",
+         "nome",
+         [sequelize.col("laboratorio.nome_laboratorio"), "nome_laboratorio"],
+         "categoria",
+         [
+            sequelize.fn("DATE_FORMAT", sequelize.col("Medicamentos.updated_at"), "%d-%m-%Y %H:%i:%s"),
+            "data_alteracao",
+         ],
+      ],
+      where: {
+         situacao: 'INATIVO'
+      },
+      order: [
+         ["updated_at", "ASC"]
+      ]
    });
 
    return medicamento;
@@ -246,6 +271,7 @@ async function changeSituacaoMedicamento(id, situacao) {
 
 module.exports = {
    getAllMedicamentos,
+   findAllActiveMedicamentos,
    getAllMedicamentosByLaboratorioId,
    getMedicamentoById,
    getAllInactiveMedicamentos,

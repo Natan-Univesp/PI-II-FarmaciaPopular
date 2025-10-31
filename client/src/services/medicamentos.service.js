@@ -17,6 +17,15 @@ export async function getAllMedicamentosService() {
    return res;
 }
 
+export async function getAllActiveMedicamentosService() {
+   const res = await axios.get(`${localServer}/medicamentos/situacao/ativo`, {
+      headers: {
+         Authorization: `Bearer ${Cookies.get("token")}`
+      }
+   });
+   return res;
+}
+
 export async function getAllInactiveMedicamentosService() {
    const res = await axios.get(`${localServer}/medicamentos/situacao/inativo`, {
       headers: {
@@ -153,7 +162,7 @@ export async function updateMedicamentoService(id, body) {
 
 export async function inactivateMedicamentoService(id) {
    const situacao = "INATIVO";
-   const res = await axios.patch(`${localServer}/medicamentos/situacao/${id}/situacao`, { situacao }, {
+   const res = await axios.patch(`${localServer}/medicamentos/${id}/situacao`, { situacao }, {
       headers: {
          Authorization: `Bearer ${Cookies.get("token")}`
       }
@@ -163,7 +172,7 @@ export async function inactivateMedicamentoService(id) {
 
 export async function restoreMedicamentoService(id) {
    const situacao = "ATIVO";
-   const res = await axios.patch(`${localServer}/medicamentos/situacao/${id}/situacao`, { situacao }, {
+   const res = await axios.patch(`${localServer}/medicamentos/${id}/situacao`, { situacao }, {
       headers: {
          Authorization: `Bearer ${Cookies.get("token")}`
       }
