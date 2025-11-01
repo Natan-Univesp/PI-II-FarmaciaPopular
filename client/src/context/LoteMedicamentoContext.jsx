@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { createLoteMedicamentoService, getAllLotesMedicamentosByFilterService, getAllLotesMedicamentosByIdMedicamentoService, getAllLotesMedicamentosService } from "../services/lotesMedicamentos.service";
+import { createLoteMedicamentoService, getAllLotesMedicamentosByFilterService, getAllLotesMedicamentosByIdMedicamentoService, getAllLotesMedicamentosService, updateLoteMedicamentoService } from "../services/lotesMedicamentos.service";
 import { searchFilterLoteMedicamentos } from "../utils/SearchFilterUtil";
 
 const LoteMedicamentoContext = createContext();
@@ -47,10 +47,20 @@ export function LoteMedicamentoProvider({ children }) {
    const createLoteMedicamento = async (loteMedicamentoData) => {
       const res = await createLoteMedicamentoService(loteMedicamentoData);
       if(res.data.status === "success"){
-         await getAllLoteMedicamentos();
+         console.log(res.data);
+         const { fk_id_medicamento } = res.data.data;
+         await getAllLoteMedicamentosByIdMedicamento(fk_id_medicamento);
          return true;
       }
    }
+
+   const updateLoteMedicamento = async (id, idMedicamento, newLoteMedicamentoData) => {
+      const res = await updateLoteMedicamentoService(id, newLoteMedicamentoData);
+      if(res.data.status === "success") {
+         await getAllLoteMedicamentosByIdMedicamento(idMedicamento);
+         return true;
+      }
+   } 
 
    useEffect(() => {
       if(loteMedicamentos && Array.isArray(loteMedicamentos)) {
@@ -75,6 +85,7 @@ export function LoteMedicamentoProvider({ children }) {
          getAllLoteMedicamentosByIdMedicamento,
          getAllLoteMedicamentosByFilter,
          createLoteMedicamento,
+         updateLoteMedicamento
       }}>
          {children}
       </LoteMedicamentoContext.Provider>

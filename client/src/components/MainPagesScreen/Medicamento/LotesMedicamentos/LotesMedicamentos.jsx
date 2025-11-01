@@ -13,22 +13,41 @@ import { Loading } from "../../../Loading/Loading";
 import { TableSearch } from "../../../Tables/TableSearch/TableSearch";
 import { getElementIdTable } from "../../../../utils/ManipulateDataUtil";
 import { useModal } from "../../../../context/ModalContext";
+import { CardAction } from "../../../Cards/CardAction/CardAction";
 
 export function LotesMedicamentos() {
    const { showModal } = useModal();
-   const { 
+   const {
       filteredLoteMedicamentos: loteMedicamentos,
-      searchValue, 
+      searchValue,
       setSearchValue,
       filter,
       setFilter,
       getAllLoteMedicamentosByIdMedicamento,
       getAllLoteMedicamentosByFilter,
       isLoading,
-      updateLoteMedicamento
+      createLoteMedicamento,
+      updateLoteMedicamento,
    } = useLoteMedicamento();
 
    const { id } = useParams();
+
+   const cardActionCollection = [
+      {
+         id: 1,
+         title: "Cadastrar Lote",
+         text: "Cadastra um novo Lote de Medicamento ",
+         textButton: "Cadastrar Lote",
+         handleOpenModal: () =>
+            showModal({
+               modalName: "registerNewLoteMedicamento",
+               data: {
+                  createLoteMedicamento,
+                  idMedicamento: id
+               },
+            }),
+      },
+   ];
 
    const fieldCollection = [
       "Nº Lote",
@@ -36,7 +55,7 @@ export function LotesMedicamentos() {
       "Laboratório",
       "Qtd Disponível",
       "Data de Recebimento",
-      "Data de Validade"
+      "Data de Validade",
    ];
 
    const handleEditTable = (e) => {
@@ -46,10 +65,10 @@ export function LotesMedicamentos() {
          data: {
             id: idLote,
             idMedicamento: id,
-            updateLoteMedicamento
-         }
-      })
-   }
+            updateLoteMedicamento,
+         },
+      });
+   };
 
    const btnTableCollection = [
       {
@@ -57,7 +76,7 @@ export function LotesMedicamentos() {
          infoView: <IconEdit />,
          className: "btnEdit",
          toolTipsText: "Editar",
-         handleAction: handleEditTable
+         handleAction: handleEditTable,
       },
    ];
 
@@ -71,20 +90,20 @@ export function LotesMedicamentos() {
       } catch (error) {
          console.log(error);
       }
-   }
+   };
 
    useEffect(() => {
       initLoteMedicamentos(id);
-   }, [])
+   }, []);
 
    useEffect(() => {
-      if(filter) {
-         getAllLoteMedicamentosByFilter(id)
+      if (filter) {
+         getAllLoteMedicamentosByFilter(id);
       }
-   }, [filter])
+   }, [filter]);
 
-   if(isLoading) {
-      return <Loading/>
+   if (isLoading) {
+      return <Loading />;
    }
 
    return (
@@ -93,6 +112,10 @@ export function LotesMedicamentos() {
             <IconReturn />
             Retornar
          </Link>
+         <h2 className="subTitle">Ações</h2>
+         <CardAction cardActionCollection={cardActionCollection} />
+
+         <h2 className="subTitle">Lotes do Medicamento</h2>
          {loteMedicamentos && (
             <>
                <TableSearch
