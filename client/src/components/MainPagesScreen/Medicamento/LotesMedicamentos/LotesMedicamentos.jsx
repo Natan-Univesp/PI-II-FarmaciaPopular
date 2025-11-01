@@ -11,8 +11,11 @@ import { useLoteMedicamento } from "../../../../context/LoteMedicamentoContext";
 import { useEffect } from "react";
 import { Loading } from "../../../Loading/Loading";
 import { TableSearch } from "../../../Tables/TableSearch/TableSearch";
+import { getElementIdTable } from "../../../../utils/ManipulateDataUtil";
+import { useModal } from "../../../../context/ModalContext";
 
 export function LotesMedicamentos() {
+   const { showModal } = useModal();
    const { 
       filteredLoteMedicamentos: loteMedicamentos,
       searchValue, 
@@ -21,7 +24,8 @@ export function LotesMedicamentos() {
       setFilter,
       getAllLoteMedicamentosByIdMedicamento,
       getAllLoteMedicamentosByFilter,
-      isLoading 
+      isLoading,
+      updateLoteMedicamento
    } = useLoteMedicamento();
 
    const { id } = useParams();
@@ -35,12 +39,25 @@ export function LotesMedicamentos() {
       "Data de Validade"
    ];
 
+   const handleEditTable = (e) => {
+      const idLote = getElementIdTable(e);
+      showModal({
+         modalName: "editLoteMedicamento",
+         data: {
+            id: idLote,
+            idMedicamento: id,
+            updateLoteMedicamento
+         }
+      })
+   }
+
    const btnTableCollection = [
       {
          id: 1,
          infoView: <IconEdit />,
          className: "btnEdit",
          toolTipsText: "Editar",
+         handleAction: handleEditTable
       },
    ];
 

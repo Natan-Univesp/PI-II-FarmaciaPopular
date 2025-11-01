@@ -42,7 +42,7 @@ export async function getAllLotesMedicamentosByIdMedicamentoService(idMedicament
    return res;
 }
 
-export async function getMedicamentoByIdService(id) {
+export async function getLoteMedicamentoByIdService(id) {
    const res = await axios.get(`${localServer}/lotes-medicamentos/${id}`, {
       headers: {  
          Authorization: `Bearer ${Cookies.get("token")}`

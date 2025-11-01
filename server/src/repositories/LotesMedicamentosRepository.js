@@ -37,16 +37,27 @@ async function getAllLotesMedicamentos() {
 //Filtra os lotes pela ID
 async function getLotesMedicamentoById(id) {
     const loteMedicamento = await Lotes_medicamentos.findByPk(id, {
-        attributes: {
-            include: [
-                [sequelize.col("medicamento.nome"), "nome_medicamento"]
-            ]
-        },
-        include: [
-            {
-                association: "medicamento",
-                attributes: [],
+        include: {
+            association: "medicamento",
+            attributes: [],
+            include: {
+                association: "laboratorio",
+                attributes: []
             }
+        },
+        attributes: [
+            "id",
+            [sequelize.col("medicamento.nome"), "nome_medicamento"],
+            [sequelize.col("medicamento.laboratorio.nome_laboratorio"), "nome_laboratorio"],
+            "quantidade",
+            [
+                sequelize.fn("DATE_FORMAT", sequelize.col("Lotes_medicamentos.created_at"), "%d-%m-%Y %H:%i:%s"),
+                "data_criacao",
+            ],
+            [
+                sequelize.fn("DATE_FORMAT", sequelize.col("Lotes_medicamentos.data_validade"), "%d-%m-%Y"),
+                "data_validade",
+            ]
         ]
     });
     return loteMedicamento
