@@ -44,12 +44,12 @@ async function getAllRelatorios() {
     const allRelatorios = await Relatorios_medicamentos.findAll({
         attributes: [
             "id",
-            "situacao",
-            [sequelize.col("aquisicao.fornecedor"), "fornecedor"],
             [sequelize.col("aquisicao.user.usuario"), "usuario"],
+            "fk_id_aquisicao",
+            [sequelize.col("aquisicao.fornecedor"), "fornecedor"],
             [sequelize.col("aquisicao.laboratorio.nome_laboratorio"), "laboratorio"],
-            [sequelize.fn("DATE_FORMAT", sequelize.col("aquisicao.data_solicitacao"), "%d-%m-%Y"), "data_solicitacao"],
-            [sequelize.fn("DATE_FORMAT", sequelize.col("aquisicao.data_entrega"), "%d-%m-%Y"), "data_entrega"]
+            "situacao",
+            [sequelize.fn("DATE_FORMAT", sequelize.col("relatorios_medicamentos.created_at"), "%d-%m-%Y"), "data_solicitacao"],
         ],
         include: [
             {

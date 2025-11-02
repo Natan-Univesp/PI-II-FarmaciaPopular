@@ -43,7 +43,10 @@ export function searchFilterLoteMedicamentos(loteMedicamentoCollection, searchVa
 export function searchFilterRelatorioMedicamentos(relatMedicamentosCollection, searchValue) {
    const fieldsForSearch = [
       "id",
-      "nome",
+      "usuario",
+      "fk_id_aquisicao",
+      "fornecedor",
+      "laboratorio",
       "situacao"
    ];
    const filteredRelatMedicamentos = searchFilterData(relatMedicamentosCollection, searchValue, fieldsForSearch);

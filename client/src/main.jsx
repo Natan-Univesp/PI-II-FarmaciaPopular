@@ -23,6 +23,7 @@ import { MedicamentosInfo } from "./components/MainPagesScreen/Medicamento/Medic
 import { LoteMedicamentoProvider } from "./context/LoteMedicamentoContext.jsx";
 import { LaboratorioMain } from "./components/MainPagesScreen/Laboratorio/LaboratorioMain.jsx";
 import { SolicitacaoMedicamentoMain } from "./components/MainPagesScreen/SolicitacaoMedicamento/SolicitacaoMedicamentoMain/SolicitacaoMedicamentoMain.jsx";
+import { RelatorioMedicamentoMain } from "./components/MainPagesScreen/RelatorioMedicamento/RelatorioMedicamentoMain.jsx";
 
 const router = createBrowserRouter([
    {
@@ -75,6 +76,12 @@ const router = createBrowserRouter([
          {
             path: "/medicamentos/relatorios",
             element: <RelatorioMedicamento />,
+            children: [
+               {
+                  index: true,
+                  element: <RelatorioMedicamentoMain/>
+               }
+            ]
          },
          {
             path: "/medicamentos/retirada",

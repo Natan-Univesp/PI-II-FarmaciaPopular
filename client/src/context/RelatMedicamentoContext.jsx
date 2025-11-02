@@ -6,6 +6,7 @@ const RelatMedicamentoContext = createContext(null);
 
 export function RelatMedicamentoProvider({ children }) {
    const [relatoriosMedicamentos, setRelatoriosMedicamentos] = useState();
+   const [filteredRelatMedicamentos, setFilteredRelatMedicamentos] = useState();
    const [filter, setFilter] = useState();
    const [searchValue, setSearchValue] = useState("");
    const [isLoading, setIsLoading] = useState(true);
@@ -47,13 +48,14 @@ export function RelatMedicamentoProvider({ children }) {
    useEffect(() => {
       if(relatoriosMedicamentos && Array.isArray(relatoriosMedicamentos)) {
          const filteredRelatoriosMedicamentos = searchFilterRelatorioMedicamentos(relatoriosMedicamentos, searchValue);
-         setRelatoriosMedicamentos(filteredRelatoriosMedicamentos);
+         setFilteredRelatMedicamentos(filteredRelatoriosMedicamentos)
       }
    }, [relatoriosMedicamentos, searchValue]);
 
    return (
       <RelatMedicamentoContext.Provider value={{ 
          relatoriosMedicamentos, 
+         filteredRelatMedicamentos,
          searchValue, 
          isLoading, 
          filter, 
