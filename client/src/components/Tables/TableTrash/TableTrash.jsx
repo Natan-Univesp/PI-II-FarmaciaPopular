@@ -22,7 +22,8 @@ export function TableTrash({fieldCollection = [], dataCollection = [], fieldsExc
             id: 1,
             infoView: <IconRestore/>,
             handleAction: handleConfirmRestore,
-            className: "restoreBtn"
+            className: "restoreBtn",
+            toolTipsText: "Restaurar Medicamento"
         }
     ]
 

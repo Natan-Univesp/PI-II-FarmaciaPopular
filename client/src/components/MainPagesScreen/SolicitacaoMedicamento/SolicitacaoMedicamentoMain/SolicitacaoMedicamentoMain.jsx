@@ -3,10 +3,19 @@ import { FaEdit as IconEdit, FaTrashAlt as IconDel } from "react-icons/fa";
 import { TableAquisicao } from "../../../Tables/TableComponents/TableAquisicao/TableAquisicao";
 import { useModal } from "../../../../context/ModalContext";
 import { useAquisicao } from "../../../../context/AquisicaoContext";
+import { Loading } from "../../../Loading/Loading";
 
 export function SolicitacaoMedicamentoMain() {
    const { showModal } = useModal();
-   const { createAquisicao } = useAquisicao();
+   const {
+      aquisicoesSolicitadas,
+      aquisicoesEnviadas,
+      aquisicoesEntregues,
+      isLoadingSolicitadas,
+      isLoadingEnviadas,
+      isLoadingEntregues,
+      createAquisicao,
+   } = useAquisicao();
    const cardActionCollection = [
       {
          id: 1,
@@ -17,42 +26,12 @@ export function SolicitacaoMedicamentoMain() {
             showModal({
                modalName: "registerNewSolicitacao",
                customStyle: {
-                  maxWidth: "750px"
+                  maxWidth: "750px",
                },
                data: {
-                  createAquisicao
-               }
+                  createAquisicao,
+               },
             }),
-      },
-   ];
-
-   const pendAq = [];
-   const envAq = [];
-   const finishAq = [];
-
-   //Coleções de botões
-   const buttonTableSolicitadaCollection = [
-      {
-         id: 1,
-         infoView: "Confirmar Envio",
-         handleAction: () => null,
-         className: "btnPrim",
-      },
-      {
-         id: 2,
-         infoView: <IconDel />,
-         handleAction: () => null,
-         className: "btnDel",
-         toolTipsText: "Excluir Solicitação",
-      },
-   ];
-
-   const buttonTableEnviadoCollection = [
-      {
-         id: 1,
-         infoView: "Confirmar Entrega",
-         handleAction: () => null,
-         className: "btnConfirm",
       },
    ];
 
@@ -64,37 +43,54 @@ export function SolicitacaoMedicamentoMain() {
          <h2 className="subTitle" style={{ backgroundColor: "var(--colorBlue) !important" }}>
             Medicamentos Solicitados
          </h2>
-         {pendAq &&
-            pendAq.map((aquisicaoData) => (
-               <TableAquisicao
-                  aquisicaoData={aquisicaoData}
-                  btnCollection={buttonTableSolicitadaCollection}
-               />
-            ))}
+         {isLoadingSolicitadas ? (
+            <Loading />
+         ) : (
+            aquisicoesSolicitadas && (
+               aquisicoesSolicitadas.length > 0 ? (
+                  aquisicoesSolicitadas.map((aquisicaoData) => (
+                     <TableAquisicao aquisicaoData={aquisicaoData} actionType="SENDCONFIRM" />
+                  ))
+               ) : (
+                  <p className="textInfoNotAvaliable">Nenhum Medicamento Solicitado</p>
+               )
+            )
+            
+         )}
 
          {/* Medicamentos Enviados */}
-         <h2 className="subTitle" style={{ backgroundColor: "var(--colorYellow) !important" }}>
+         <h2 className="subTitle" style={{ backgroundColor: "var(--colorYellow) !important", marginTop: "3em"}}>
             Medicamentos Enviados
          </h2>
-         {envAq &&
-            envAq.map((aquisicaoData) => (
-               <TableAquisicao
-                  aquisicaoData={aquisicaoData}
-                  btnCollection={buttonTableEnviadoCollection}
-               />
-            ))}
+         {isLoadingEnviadas ? (
+            <Loading />
+         ) : (
+            aquisicoesEnviadas &&
+               (aquisicoesEnviadas.length > 0 ? (
+                  aquisicoesEnviadas.map((aquisicaoData) => (
+                     <TableAquisicao aquisicaoData={aquisicaoData} actionType="DELIVERYCONFIRM" />
+                  ))
+               ) : (
+                  <p className="textInfoNotAvaliable">Nenhum Pedido Enviado</p>
+               ))
+         )}
 
          {/* Medicamentos Entregues */}
-         <h2 className="subTitle" style={{ backgroundColor: "var(--colorGreen) !important" }}>
+         <h2 className="subTitle" style={{ backgroundColor: "var(--colorGreen) !important", marginTop: "3em" }}>
             Medicamentos Entregues
          </h2>
-         {finishAq &&
-            finishAq.map((aquisicaoData) => (
-               <TableAquisicao
-                  aquisicaoData={aquisicaoData}
-               />
-            ))
-         }
+         {isLoadingEntregues ? (
+            <Loading />
+         ) : (
+            aquisicoesEntregues &&
+               (aquisicoesEntregues.length > 0 ? (
+                  aquisicoesEntregues.map((aquisicaoData) => (
+                     <TableAquisicao aquisicaoData={aquisicaoData} />
+                  ))
+               ) : (
+                  <p className="textInfoNotAvaliable">Nenhum Pedido entregue</p>
+               ))
+         )}
       </>
    );
 }

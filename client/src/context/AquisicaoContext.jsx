@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { createAquisicaoService, getAllAquisicoesEntreguesService, getAllAquisicoesEnviadasService, getAllAquisicoesSolicitadasService } from "../services/aquisicoes.service";
+import { changeStatusAquisicaoService, createAquisicaoService, deleteAquisicaoService, getAllAquisicoesEntreguesService, getAllAquisicoesEnviadasService, getAllAquisicoesSolicitadasService } from "../services/aquisicoes.service";
 
 const AquisicaoContext = createContext(null);
 
@@ -48,6 +48,29 @@ export function AquisicaoProvider({ children }) {
          return true;
       }
    }
+
+   const changeStatusAquisicao = async (id, newStatus) => {
+      const res = await changeStatusAquisicaoService(id, newStatus);
+      if(res.data.status === "success") {
+         if(newStatus === "ENVIADO") {
+            await getAllAquisicoesSolicitadas();
+            await getAllAquisicoesEnviadas();
+         
+         } else {
+            await getAllAquisicoesEnviadas();
+            await getAllAquisicoesEntregues();
+         }
+         return true;
+      }
+   }
+
+   const deleteAquisicao = async (id) => {
+      const res = await deleteAquisicaoService(id);
+      if(res.data.status === "success") {
+         await getAllAquisicoesSolicitadas();
+         return true;
+      }
+   }
    
    const init = async () => {
       try {
@@ -77,7 +100,9 @@ export function AquisicaoProvider({ children }) {
          setIsLoadingSolicitadas,
          setIsLoadingEnviadas,
          setIsLoadingEntregues,
-         createAquisicao
+         createAquisicao,
+         changeStatusAquisicao,
+         deleteAquisicao
       }}>
          {children}
       </AquisicaoContext.Provider>

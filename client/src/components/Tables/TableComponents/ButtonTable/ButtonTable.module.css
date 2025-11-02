@@ -7,21 +7,69 @@ button.btnTable {
    font-family: var(--fontSec);
    font-size: 16px;
    border-radius: 4px;
-   transition: opacity 0.2s;
+   transition: 0.2s ease;
 }
+
+button.btnPrim {
+   background-color: var(--colorPrim);
+   border: 1px solid var(--colorPrim);
+}
+button.btnPrim:hover {
+   background-color: var(--colorPrimBright);
+   color: var(--colorPrim);
+}
+
+
+button.btnConfirm {
+   background-color: var(--colorGreen);
+   border: 1px solid var(--colorGreen);
+}
+button.btnConfirm {
+   background-color: transparent;
+   color: var(--colorGreen);
+}
+
 
 button.btnEdit {
    background-color: var(--colorYellow);
 }
 
+
 button.restoreBtn {
    background-color: var(--colorYellow);
 }
 
+
 button.btnDelete {
    background-color: var(--colorRed);
+   border: 1px solid var(--colorRed);
+}
+button.btnDelete:hover {
+   color: var(--colorRed);
+   background-color: white;
 }
 
+
+button.btnHeaderPrim {
+   background-color: white;
+   color: var(--colorPrim);
+   border: 1px solid white;
+}
+button.btnHeaderPrim:hover {
+   background-color: var(--colorPrim);
+   color: white;
+}
+
+
+button.btnHeaderConfirm {
+   background-color: var(--colorGreen);
+   color: white;
+   border: 1px solid var(--colorGreen);
+}
+button.btnHeaderConfirm:hover {
+   background-color: white;
+   color: var(--colorGreen);
+}
 
 .customToolTips {
    font-family: var(--fontPrim) !important;

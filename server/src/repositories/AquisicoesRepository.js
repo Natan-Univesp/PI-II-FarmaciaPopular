@@ -1,4 +1,3 @@
-    const { Association, where } = require("sequelize");
 const { Aquisicoes, Itens_aquisicoes, sequelize } = require("../models/index.js");
 
 // Procura todas as Aquisições
@@ -7,9 +6,11 @@ async function getAllAquisicoes() {
         attributes: [
             "id",
             "fornecedor",
+            [sequelize.col("laboratorio.nome_laboratorio"), "nome_laboratorio"],
+            [sequelize.col("user.usuario"), "nome_usuario"],
             "status",
             [
-                sequelize.fn("DATE_FORMAT", sequelize.col("Aquisicoes.data_solicitacao"), "%d-%m-%Y %H:%i:%s"),
+                sequelize.fn("DATE_FORMAT", sequelize.col("aquisicoes.data_solicitacao"), "%d-%m-%Y %H:%i:%s"),
                 "data_solicitacao_formatada",
             ],
             [
@@ -20,19 +21,29 @@ async function getAllAquisicoes() {
         include: [
             {
                 association: "laboratorio",
-                attributes: ["nome_laboratorio"]
+                attributes: []
             },
             {
                 association: "user",
-                attributes: ["usuario"]
+                attributes: []
             },
             {
-                association: "itens_aquisicoes"
+                association: "itens_aquisicoes",
+                include: [
+                    {
+                        association: "medicamento",
+                        attributes: []
+                    }
+                ],
+                attributes: [
+                    "id",
+                    [sequelize.literal("`itens_aquisicoes->medicamento`.`nome`"), "nome_medicamento"],
+                    "quantidade_solicitada"
+                ],
             }
         ],
         order: [
             ['data_solicitacao', 'DESC'],
-            ['data_entrega', 'ASC']
         ]
     });
     return allAquisicoes;
@@ -63,9 +74,11 @@ async function getAllAquisicoesSolicitadas() {
         attributes: [
             "id",
             "fornecedor",
+            [sequelize.col("laboratorio.nome_laboratorio"), "nome_laboratorio"],
+            [sequelize.col("user.usuario"), "nome_usuario"],
             "status",
             [
-                sequelize.fn("DATE_FORMAT", sequelize.col("Aquisicoes.data_solicitacao"), "%d-%m-%Y %H:%i:%s"),
+                sequelize.fn("DATE_FORMAT", sequelize.col("aquisicoes.data_solicitacao"), "%d-%m-%Y %H:%i:%s"),
                 "data_solicitacao_formatada",
             ],
             [
@@ -76,16 +89,29 @@ async function getAllAquisicoesSolicitadas() {
         include: [
             {
                 association: "laboratorio",
-                attributes: ["nome_laboratorio"]
+                attributes: []
             },
             {
                 association: "user",
-                attributes: ["usuario"]
+                attributes: []
+            },
+            {
+                association: "itens_aquisicoes",
+                include: [
+                    {
+                        association: "medicamento",
+                        attributes: []
+                    }
+                ],
+                attributes: [
+                    "id",
+                    [sequelize.literal("`itens_aquisicoes->medicamento`.`nome`"), "nome_medicamento"],
+                    "quantidade_solicitada"
+                ]
             }
         ],
         order: [
             ['data_solicitacao', 'DESC'],
-            ['data_entrega', 'ASC']
         ],
         where: { status: 'SOLICITADO' },
     });
@@ -98,9 +124,11 @@ async function getAllAquisicoesEnviadas() {
         attributes: [
             "id",
             "fornecedor",
+            [sequelize.col("laboratorio.nome_laboratorio"), "nome_laboratorio"],
+            [sequelize.col("user.usuario"), "nome_usuario"],
             "status",
             [
-                sequelize.fn("DATE_FORMAT", sequelize.col("Aquisicoes.data_solicitacao"), "%d-%m-%Y %H:%i:%s"),
+                sequelize.fn("DATE_FORMAT", sequelize.col("aquisicoes.data_solicitacao"), "%d-%m-%Y %H:%i:%s"),
                 "data_solicitacao_formatada",
             ],
             [
@@ -111,15 +139,29 @@ async function getAllAquisicoesEnviadas() {
         include: [
             {
                 association: "laboratorio",
-                attributes: ["nome_laboratorio"]
+                attributes: []
             },
             {
                 association: "user",
-                attributes: ["usuario"]
+                attributes: []
+            },
+            {
+                association: "itens_aquisicoes",
+                include: [
+                    {
+                        association: "medicamento",
+                        attributes: []
+                    }
+                ],
+                attributes: [
+                    "id",
+                    [sequelize.literal("`itens_aquisicoes->medicamento`.`nome`"), "nome_medicamento"],
+                    "quantidade_solicitada"
+                ]
             }
         ],
         order: [
-            ['data_entrega', 'ASC']
+            ['data_solicitacao', 'DESC'],
         ],
         where: { status: 'ENVIADO' }
     });
@@ -132,9 +174,11 @@ async function getAllAquisicoesEntregues() {
         attributes: [
             "id",
             "fornecedor",
+            [sequelize.col("laboratorio.nome_laboratorio"), "nome_laboratorio"],
+            [sequelize.col("user.usuario"), "nome_usuario"],
             "status",
             [
-                sequelize.fn("DATE_FORMAT", sequelize.col("Aquisicoes.data_solicitacao"), "%d-%m-%Y %H:%i:%s"),
+                sequelize.fn("DATE_FORMAT", sequelize.col("aquisicoes.data_solicitacao"), "%d-%m-%Y %H:%i:%s"),
                 "data_solicitacao_formatada",
             ],
             [
@@ -145,15 +189,29 @@ async function getAllAquisicoesEntregues() {
         include: [
             {
                 association: "laboratorio",
-                attributes: ["nome_laboratorio"]
+                attributes: []
             },
             {
                 association: "user",
-                attributes: ["usuario"]
+                attributes: []
+            },
+            {
+                association: "itens_aquisicoes",
+                include: [
+                    {
+                        association: "medicamento",
+                        attributes: []
+                    }
+                ],
+                attributes: [
+                    "id",
+                    [sequelize.literal("`itens_aquisicoes->medicamento`.`nome`"), "nome_medicamento"],
+                    "quantidade_solicitada"
+                ]
             }
         ],
         order: [
-            ['data_entrega', 'DESC']
+            ['data_entrega', 'DESC'],
         ],
         where: { status: 'ENTREGUE' }
     });

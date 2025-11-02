@@ -22,6 +22,7 @@ import { LotesMedicamentos } from "./components/MainPagesScreen/Medicamento/Lote
 import { MedicamentosInfo } from "./components/MainPagesScreen/Medicamento/MedicamentosInfo/MedicamentoInfo.jsx";
 import { LoteMedicamentoProvider } from "./context/LoteMedicamentoContext.jsx";
 import { LaboratorioMain } from "./components/MainPagesScreen/Laboratorio/LaboratorioMain.jsx";
+import { SolicitacaoMedicamentoMain } from "./components/MainPagesScreen/SolicitacaoMedicamento/SolicitacaoMedicamentoMain/SolicitacaoMedicamentoMain.jsx";
 
 const router = createBrowserRouter([
    {
@@ -64,6 +65,12 @@ const router = createBrowserRouter([
          {
             path: "/medicamentos/solicitacao",
             element: <SolicitacaoMedicamento />,
+            children: [
+               {
+                  index: true,
+                  element: <SolicitacaoMedicamentoMain/>
+               }
+            ]
          },
          {
             path: "/medicamentos/relatorios",

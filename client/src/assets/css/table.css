@@ -36,18 +36,7 @@
    overflow: hidden;
 }
 
-td.customLimitWidthText {
-   width: 580px;
-   white-space: normal;
-}
 
-td.customLimitWidthText p {
-   display: -webkit-box;
-   line-clamp: 3;
-   -webkit-line-clamp: 3;
-   -webkit-box-orient: vertical;
-   overflow: hidden;
-}
 
 .tabelaDados tbody tr:last-child td {
    border-bottom: none;
@@ -174,4 +163,106 @@ td.customLimitWidthText p {
    font-weight: bold;
    margin-top: 30px;
    font-size: 1.2em;
+}
+
+/*
+=====================================================
+                 Header de aquisicao
+=====================================================
+*/
+.tableHeader {
+   background-color: var(--colorPrim);
+   font-size: 17px;
+}
+
+.generalInfo__container,
+.generalInfo__content,
+.splitContainer {
+   display: flex;
+   align-items: center;
+}
+
+.generalInfo__container {
+   gap: 2em;
+   justify-content: space-between;
+}
+
+.splitContainer {
+   gap: 2em;
+}
+
+.splitButton {
+   gap: 15px;
+   align-items: initial;
+}
+
+
+/* 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Estilização de informações do Header de Aquisicao
+                        == TableAquisicao ==
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+
+.generalInfo__content {
+   flex-wrap: wrap;
+   justify-content: center;
+   gap: 8px;
+   text-align: center;
+}
+
+.generalInfo__content span {
+   font-family: var(--fontPrim);
+   font-weight: 600;
+   color: white;
+   letter-spacing: .8px;
+}
+
+.generalInfo__content p {
+   font-family: var(--fontSec);
+   font-size: 16px;
+   font-weight: 400;
+   color: white;
+}
+
+
+/* 
+=======================================================================
+                  Classes Customizadas Pré definidas
+=======================================================================
+*/
+
+td.customLimitWidthText {
+   width: 580px;
+   white-space: normal;
+}
+
+td.customLimitWidthText p {
+   display: -webkit-box;
+   line-clamp: 3;
+   -webkit-line-clamp: 3;
+   -webkit-box-orient: vertical;
+   overflow: hidden;
+}
+
+td:is(.primStyle, .yellowStyle, .greenStyle) p {
+   width: fit-content;
+   padding: 4px 10px;
+   font-weight: 500;
+   border-radius: var(--fixBorderRadius);
+}
+
+td.primStyle p{
+   background-color: var(--colorPrimBright);
+   color: var(--colorPrim);
+}
+
+td.yellowStyle p {
+   background-color: var(--colorYellowBright);
+   color: #8a6a07;
+}
+
+td.greenStyle p {
+   background-color: var(--colorGreenBright);
+   color: #347f31;
 }

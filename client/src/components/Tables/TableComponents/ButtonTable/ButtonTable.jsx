@@ -5,6 +5,17 @@ import "tippy.js/themes/light-border.css";
 import "tippy.js/themes/material.css";
 
 export default function ButtonTable({ infoView, handleAction, classBtn, toolTipsText = "" }) {
+   if (!toolTipsText) {
+      return (
+         <button
+            type="button"
+            onClick={handleAction}
+            className={`${styles[classBtn]} ${styles.btnTable} fadeIn`}
+         >
+            {infoView}
+         </button>
+      );
+   }
    return (
       <Tippy
          content={<div>{toolTipsText}</div>}
