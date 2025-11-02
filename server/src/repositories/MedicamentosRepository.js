@@ -181,6 +181,20 @@ async function getAllMedicamentosForSelect() {
    return medicamento;
 }
 
+async function findAllMedicamentosForSelectByLabId(idLab) {
+   const medicamento = await Medicamentos.findAll({
+      attributes: [
+         ["id", "value"],
+         ["nome", "label"]
+      ],
+      where: {
+         fk_id_laboratorio: idLab
+      }
+   });
+
+   return medicamento;
+}
+
 // busca os medicamentos conforme os FILTROS selecionados pelo usuário
 async function getAllMedicamentosByFilter(filterSelect = {}, orderSelect = []) {
 
@@ -309,6 +323,7 @@ module.exports = {
    getMedicamentoById,
    getAllInactiveMedicamentos,
    getAllMedicamentosForSelect,
+   findAllMedicamentosForSelectByLabId,
    getAllMedicamentosByFilter,
    createMedicamento,
    updateMedicamento,

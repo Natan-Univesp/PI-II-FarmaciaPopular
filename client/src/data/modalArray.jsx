@@ -1,3 +1,4 @@
+import { ModalAddSolicitacao } from "../components/Modals/Aquisicao/ModalAddSolicitacao/ModalAddSolicitacao";
 import { ModalAddLaboratorio } from "../components/Modals/Laboratorio/ModalAddLaboratorio/ModalAddLaboratorio";
 import { ModalEditLaboratorio } from "../components/Modals/Laboratorio/ModalEditLaboratorio/ModalEditLaboratorio";
 import { ModalAddLoteMedicamento } from "../components/Modals/Medicamentos/ModalAddLoteMedicamento/ModalAddLotemedicamento";
@@ -59,5 +60,10 @@ export const modalCollection = [
       name: "editLoteMedicamento",
       title: "Editar Lote de Medicamento",
       modalContent: <ModalEditLoteMedicamentos/>
+   },
+   {
+      name: "registerNewSolicitacao",
+      title: "Cadastrar Solicitação de Suprimento",
+      modalContent: <ModalAddSolicitacao/>
    }
 ]

@@ -14,6 +14,7 @@ const {
    updateMedicamentoService,
    changeSituacaoMedicamentoService,
    getAllActiveMedicamentosService,
+   getAllMedicamentosForSelectByLaboratorioIdService,
 } = require("../services/MedicamentosService.js")
 
 async function getAllMedicamentos(req, res) {
@@ -114,6 +115,26 @@ async function getAllMedicamentosForSelect(req, res) {
    try {
       const allMedicamentos = await getAllMedicamentosForSelectService();
       return res.status(200).json(allMedicamentos);
+   } catch (error) {
+      errorResponse(error, res);
+   }
+}
+
+async function getAllMedicamentosForSelectByLaboratorioId(req, res) {
+   try {
+      const idLab = Number(req.params.idLab);
+
+      if (!idLab) {
+         throw new FieldUndefinedError("Campo idLab não identificado", {
+            fields: {
+               idLab,
+            },
+         });
+      }
+
+      const medicamentos = await getAllMedicamentosForSelectByLaboratorioIdService(idLab);
+      return res.status(200).json(medicamentos);
+
    } catch (error) {
       errorResponse(error, res);
    }
@@ -286,6 +307,7 @@ module.exports = {
    getAllMedicamentosByFilter,
    getMedicamentoById,
    getAllMedicamentosForSelect,
+   getAllMedicamentosForSelectByLaboratorioId,
    createMedicamento,
    updateMedicamento,
    changeSituacaoMedicamento,

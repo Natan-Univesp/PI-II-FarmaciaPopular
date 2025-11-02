@@ -5,9 +5,10 @@ const { getAllMedicamentos,
    getAllMedicamentosForSelect,
    getAllMedicamentosByFilter,
    createMedicamento,
-    updateMedicamento,
-    changeSituacaoMedicamento,
-    findAllActiveMedicamentos,
+   updateMedicamento,
+   changeSituacaoMedicamento,
+   findAllActiveMedicamentos,
+   findAllMedicamentosForSelectByLabId,
 } = require("../repositories/MedicamentosRepository.js");
 const { Op } = require("sequelize");
 const { Medicamentos, Laboratorios, sequelize } = require("../models/index.js");
@@ -42,6 +43,11 @@ async function getAllInactiveMedicamentosService() {
 
 async function getAllMedicamentosForSelectService() {
    const medicamento = await getAllMedicamentosForSelect();
+   return medicamento;
+}
+
+async function getAllMedicamentosForSelectByLaboratorioIdService(idLab) {
+   const medicamento = await findAllMedicamentosForSelectByLabId(idLab);
    return medicamento;
 }
 
@@ -126,6 +132,7 @@ module.exports = {
    getMedicamentoByIdService,
    getAllInactiveMedicamentosService,
    getAllMedicamentosForSelectService,
+   getAllMedicamentosForSelectByLaboratorioIdService,
    getAllMedicamentosByFilterService,
    createMedicamentoService,
    updateMedicamentoService,

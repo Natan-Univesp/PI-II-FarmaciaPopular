@@ -31,6 +31,10 @@ router
    .get(medicamentosController.getAllMedicamentosByLaboratorioId)
 
 router
+   .route("/laboratorios/:idLab/select-options")
+   .get(medicamentosController.getAllMedicamentosForSelectByLaboratorioId)
+
+router
    .route("/:id/situacao")
    .patch(medicamentosController.changeSituacaoMedicamento)
 

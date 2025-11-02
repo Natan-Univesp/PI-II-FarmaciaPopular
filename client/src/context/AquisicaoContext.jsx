@@ -77,7 +77,7 @@ export function AquisicaoProvider({ children }) {
          setIsLoadingSolicitadas,
          setIsLoadingEnviadas,
          setIsLoadingEntregues,
-         create
+         createAquisicao
       }}>
          {children}
       </AquisicaoContext.Provider>

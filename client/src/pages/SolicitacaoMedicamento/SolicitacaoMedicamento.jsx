@@ -1,9 +1,13 @@
+import { Outlet } from "react-router";
 import { MainLayout } from "../../components/Layout/MainLayout";
+import { AquisicaoProvider } from "../../context/AquisicaoContext";
 
 export function SolicitacaoMedicamento() {
    return(
-      <MainLayout title="Solicitação de Medicamentos">
-         <p>Conteudo solicitacao</p>
-      </MainLayout>
+      <AquisicaoProvider>
+         <MainLayout title="Solicitação de Medicamentos">
+            <Outlet/>
+         </MainLayout>
+      </AquisicaoProvider>
    )
 }
