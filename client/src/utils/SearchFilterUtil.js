@@ -53,3 +53,14 @@ export function searchFilterRelatorioMedicamentos(relatMedicamentosCollection, s
 
    return filteredRelatMedicamentos;
 }
+
+export function searchFilterRetiradaMedicamentos(retiradaCollection, searchValue) {
+   const fieldsForSearch = [
+      "nome_usuario",
+      "nome_medicamento",
+      "quantidade_solicitada",
+   ];
+   const filteredRetirada = searchFilterData(retiradaCollection, searchValue, fieldsForSearch);
+
+   return filteredRetirada;
+}

@@ -87,31 +87,34 @@ async function createRetirada(itensRetirada, idUser) {
 
 // Encontra todas as retiradas
 async function getAllRetiradas() {
-   const retiradas = await Retiradas.findAll({
+   const retiradas = await Itens_retiradas.findAll({
       attributes: [
-         "id",
+         ["id", "id_retirada"],
+         [sequelize.col("retirada.user.usuario"), "nome_usuario"],
+         [sequelize.col("medicamento.nome"), "nome_medicamento"],
+         "quantidade_solicitada",
          [
-            sequelize.fn("DATE_FORMAT", sequelize.col("Retiradas.data_retirada"), "%d-%m-%Y"),
+            sequelize.fn("DATE_FORMAT", sequelize.col("retirada.data_retirada"), "%d-%m-%Y"),
             "data_retirada",
          ],
       ],
       include: [
          {
-            association: "user",
-            attributes: ["usuario"],
+            association: "medicamento",
+            attributes: []
          },
          {
-            association: "itens_retirada",
-            attributes: ["quantidade_solicitada"],
+            association: "retirada",
+            attributes: [],
             include: [
                {
-                  association: "medicamento",
-                  attributes: ["nome", "indicacao_uso", "categoria", "quantidade_total", "img"],
-               },
-            ],
-         },
+                  association: "user",
+                  attributes: []
+               }
+            ]
+         }
       ],
-      order: [["data_retirada", "DESC"]],
+      order: [["id", "DESC"]]
    });
    return retiradas;
 }

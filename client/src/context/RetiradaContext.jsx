@@ -4,11 +4,13 @@ import {
    getAllRetiradasByFilterService,
    getAllRetiradasMedicamentosService,
 } from "../services/retiradas.service";
+import { searchFilterRetiradaMedicamentos } from "../utils/SearchFilterUtil";
 
 const RetiradaContext = createContext(null);
 
 export const RetiradaProvider = ({ children }) => {
    const [retiradas, setRetiradas] = useState();
+   const [filteredRetiradas, setFilteredRetiradas] = useState();
    const [filter, setFilter] = useState();
    const [searchValue, setSearchValue] = useState("");
    const [isLoading, setIsLoading] = useState(true);
@@ -57,10 +59,18 @@ export const RetiradaProvider = ({ children }) => {
       init();
    }, []);
 
+   useEffect(() => {
+      if(retiradas && Array.isArray(retiradas)) {
+         const filteredRetiradas = searchFilterRetiradaMedicamentos(retiradas, searchValue);
+         setFilteredRetiradas(filteredRetiradas);
+      }
+   }, [retiradas, searchValue])
+
    return (
       <RetiradaContext.Provider
          value={{
             retiradas,
+            filteredRetiradas,
             filter,
             searchValue,
             isLoading,
