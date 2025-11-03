@@ -69,6 +69,15 @@ export async function getAllMedicamentosForSelectByIdMedicamentoService(idLab) {
    return res;
 }
 
+export async function getAllMedicamentosForSelectRetiradaService() {
+   const res = await axios.get(`${localServer}/medicamentos/select-options/retirada`, {
+      headers: {
+         Authorization: `Bearer ${Cookies.get("token")}`
+      }
+   });
+   return res;
+}
+
 export async function getAllMedicamentosByIdLaboratorioService(idLab) {
    const res = await axios.get(`${localServer}/medicamentos/laboratorios/${idLab}`, {
       headers: {

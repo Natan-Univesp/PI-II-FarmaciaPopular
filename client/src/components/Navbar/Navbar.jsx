@@ -35,18 +35,12 @@ export function Navbar() {
             },
             {
                id: 4,
-               title: "Modelos",
-               path: "/medicamentos/modelos",
-               icon: <IconPill className={styles.iconList}/>
-            },
-            {
-               id: 5,
                title: "Retiradas",
                path: "/medicamentos/retirada",
                icon: <IconRetirada className={styles.iconList}/>
             },
             {
-               id: 6,
+               id: 5,
                title: "Relatórios",
                path: "/medicamentos/relatorios",
                icon: <IconRelatorio className={styles.iconList}/>
@@ -54,19 +48,19 @@ export function Navbar() {
          ]
       },
       {
-         id: 7,
+         id: 6,
          title: "Laboratorios",
          path: "/laboratorios",
          icon: <IconLaboratorio className={styles.iconList}/>
       },
       {
-         id: 8, 
+         id: 7, 
          title: "Solicitação de Medicamentos",
          path: "/medicamentos/solicitacao",
          icon: <IconRetirada className={styles.iconList}/>
       },
       {
-         id: 9,
+         id: 8,
          title: "Administrador",
          path: "/admin",
          icon: <IconAdmin className={styles.iconList}/>

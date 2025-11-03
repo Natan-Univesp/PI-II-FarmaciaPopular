@@ -9,6 +9,7 @@ import { ModalLixeiraMedicamentos } from "../components/Modals/Medicamentos/Moda
 import { ModalViewMedicamento } from "../components/Modals/Medicamentos/ModalViewMedicamento/ModalViewMedicamento";
 import { ModalAddUser } from "../components/Modals/ModalAddUser/ModalAddUser";
 import { ModalFilterLoteMedicamentos } from "../components/Modals/ModalFilter/ModalFilterLoteMedicamentos/ModalFilterLoteMedicamentos";
+import { ModalAddRetirada } from "../components/Modals/Retirada/ModalAddRetirada/ModalAddRetirada";
 
 export const modalCollection = [
    {
@@ -65,5 +66,10 @@ export const modalCollection = [
       name: "registerNewSolicitacao",
       title: "Cadastrar Solicitação de Suprimento",
       modalContent: <ModalAddSolicitacao/>
+   },
+   {
+      name: "registerNewRetirada",
+      title: "Cadastrar Retirada",
+      modalContent: <ModalAddRetirada/>
    }
 ]

@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import {
+   createRetiradaService,
    getAllRetiradasByFilterService,
    getAllRetiradasMedicamentosService,
 } from "../services/retiradas.service";
@@ -36,6 +37,14 @@ export const RetiradaProvider = ({ children }) => {
       }
    };
 
+   const createRetirada = async (retiradaData) => {
+      const res = await createRetiradaService(retiradaData);
+      if(res.data.status === "success") {
+         await getAllRetiradas();
+         return true;
+      }
+   }
+
    const init = async () => {
       try {
          await getAllRetiradas();
@@ -59,6 +68,7 @@ export const RetiradaProvider = ({ children }) => {
             setFilter,
             setSearchValue,
             setIsLoading,
+            createRetirada
          }}
       >
          {children}

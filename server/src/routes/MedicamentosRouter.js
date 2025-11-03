@@ -15,6 +15,10 @@ router
    .get(medicamentosController.getAllMedicamentosForSelect)
 
 router
+   .route("/select-options/retirada")
+   .get(medicamentosController.getAllMedicamentosForSelectRetirada)
+
+router
    .route("/filter")
    .get(medicamentosController.getAllMedicamentosByFilter)
 

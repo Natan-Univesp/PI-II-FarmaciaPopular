@@ -1,5 +1,4 @@
 import Select from 'react-select';
-import PropTypes from "prop-types";
 import { Controller } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import { Loading } from '../Loading/Loading.jsx';
@@ -32,6 +31,11 @@ export default function SelectSearchable({controlName = "", control, dataOptions
     }
 
     const customStyles = {
+        groupHeading: (baseStyles) => ({
+            ...baseStyles,
+            fontSize: "18px",
+            color: "var(--colorPrim)"
+        }),
         placeholder: (baseStyles) => ({
             ...baseStyles,
             opacity: ".6",
@@ -96,14 +100,4 @@ export default function SelectSearchable({controlName = "", control, dataOptions
             {error && <span className='errorMessage'>{error.message}</span>}
         </div>
     )
-}
-
-SelectSearchable.propTypes = {
-    controlName: PropTypes.string,
-    control: PropTypes.object,
-    dataOptions: PropTypes.array,
-    textView: PropTypes.string,
-    placeholder: PropTypes.string,
-    defaultValue: PropTypes.object,
-    error: PropTypes.object
 }

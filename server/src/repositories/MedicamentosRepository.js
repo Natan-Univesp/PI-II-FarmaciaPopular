@@ -181,6 +181,39 @@ async function getAllMedicamentosForSelect() {
    return medicamento;
 }
 
+async function findAllMedicamentosForSelectRetirada() {
+   const medicamentos = await Medicamentos.findAll({
+      include: {
+         association: "medicamento_lote",
+         attributes: [
+            [
+               sequelize.fn(
+                  "CONCAT",
+                  "Lote: ",
+                  sequelize.col("medicamento_lote.id"),
+                  " - quantidade: ",
+                  sequelize.col("medicamento_lote.quantidade")
+               ),
+               "label"
+            ],
+            ["id", "value"]
+         ]
+      },
+      attributes: [
+         [
+            sequelize.fn(
+               "CONCAT",
+               sequelize.col("Medicamentos.id"),
+               " - ",
+               sequelize.col("Medicamentos.nome")
+            ),
+            "label"
+         ]
+      ]
+   });
+   return medicamentos;
+}
+
 async function findAllMedicamentosForSelectByLabId(idLab) {
    const medicamento = await Medicamentos.findAll({
       attributes: [
@@ -323,6 +356,7 @@ module.exports = {
    getMedicamentoById,
    getAllInactiveMedicamentos,
    getAllMedicamentosForSelect,
+   findAllMedicamentosForSelectRetirada,
    findAllMedicamentosForSelectByLabId,
    getAllMedicamentosByFilter,
    createMedicamento,

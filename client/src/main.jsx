@@ -5,7 +5,6 @@ import App from "./App.jsx";
 import "./index.css";
 import { Home } from "./pages/Home/Home.jsx";
 import { Medicamento } from "./pages/Medicamento/Medicamento.jsx";
-import { ModeloMedicamento } from "./pages/ModeloMedicamento/ModeloMedicamento.jsx";
 import { Laboratorio } from "./pages/Laboratorio/Laboratorio.jsx";
 import { SolicitacaoMedicamento } from "./pages/SolicitacaoMedicamento/SolicitacaoMedicamento.jsx";
 import { UsuarioConvenio } from "./pages/UsuarioConvenio/UsuarioConvenio.jsx";
@@ -24,6 +23,7 @@ import { LoteMedicamentoProvider } from "./context/LoteMedicamentoContext.jsx";
 import { LaboratorioMain } from "./components/MainPagesScreen/Laboratorio/LaboratorioMain.jsx";
 import { SolicitacaoMedicamentoMain } from "./components/MainPagesScreen/SolicitacaoMedicamento/SolicitacaoMedicamentoMain/SolicitacaoMedicamentoMain.jsx";
 import { RelatorioMedicamentoMain } from "./components/MainPagesScreen/RelatorioMedicamento/RelatorioMedicamentoMain.jsx";
+import { RetiradaMedicamentoMain } from "./components/MainPagesScreen/RetiradaMedicamento/RetiradaMedicamentoMain.jsx";
 
 const router = createBrowserRouter([
    {
@@ -60,10 +60,6 @@ const router = createBrowserRouter([
             ],
          },
          {
-            path: "/medicamentos/modelos",
-            element: <ModeloMedicamento />,
-         },
-         {
             path: "/medicamentos/solicitacao",
             element: <SolicitacaoMedicamento />,
             children: [
@@ -86,6 +82,12 @@ const router = createBrowserRouter([
          {
             path: "/medicamentos/retirada",
             element: <RetiradaMedicamento />,
+            children: [
+               {
+                  index: true,
+                  element: <RetiradaMedicamentoMain/>
+               }
+            ]
          },
          {
             path: "/laboratorios",
