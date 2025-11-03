@@ -134,6 +134,11 @@ async function createLoteMedicamento(loteData) {
     return createdLote;
 }
 
+async function bulkCreateLoteMedicamento(loteCollection) {
+    const createdLote = await Lotes_medicamentos.bulkCreate(loteCollection);
+    return createdLote;
+}
+
 //Edita um lote já existente
 async function updateLoteMedicamento(id, fk_id_medicamento, quantidade, data_validade) {
 
@@ -159,4 +164,5 @@ module.exports = {
     getAllLotesMedicamentosByFilter,
     createLoteMedicamento,
     updateLoteMedicamento,
+    bulkCreateLoteMedicamento
 }

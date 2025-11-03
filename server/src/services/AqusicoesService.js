@@ -12,6 +12,9 @@ const {
 const { Op } = require("sequelize");
 const { Aquisicoes, sequelize } = require("../models/index.js");
 const ExistsDataError = require("../classes/ExistsDataError.js");
+const { findAllItemAquisicoesByIdAquisicao } = require("../repositories/ItemAquisicoesRepository.js");
+const { bulkCreateLoteMedicamento, createLoteMedicamento } = require("../repositories/LotesMedicamentosRepository.js");
+const CannotUpdateError = require("../classes/CannotUpdateError.js");
 
 async function getAllAquisicoesService() {
     const allAquisicoes = await getAllAquisicoes()
@@ -63,6 +66,26 @@ async function changeStatusAquisicaoService(id, status) {
         throw new ExistsDataError(`Esta aquisição já está na situação de: ${formattedSituacao}`);
     }
     
+    if(formattedSituacao === "ENTREGUE") {
+        const itensAquisicao = await findAllItemAquisicoesByIdAquisicao(id);
+        let createdLote;
+        let formattedData = JSON.parse(JSON.stringify(itensAquisicao));
+
+        if(!Array.isArray(formattedData)) {
+            formattedData = Array(formattedData);
+        }
+
+        createdLote = await bulkCreateLoteMedicamento(formattedData);
+
+        if(!createdLote) {
+            throw CannotUpdateError("Não foi possível adicionar os itens ao estoque", {
+                data: {
+                    createdLote
+                }
+            })
+        }
+    }
+
     const dataEntrega = formattedSituacao === "ENTREGUE" ? new Date() : null;
 
     const rowAffected = await changeStatusAquisicao(id, formattedSituacao, dataEntrega);

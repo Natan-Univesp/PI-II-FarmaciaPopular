@@ -12,7 +12,7 @@ export function ModalAddSolicitacao() {
       try {
          if(await createAquisicao(aquisicaoData)) {
             showSuccessAlert({
-               title: "Solicitação Cadastradas com Sucesso!"
+               title: "Solicitação Cadastrada com Sucesso!"
             });
             closeModal();
          }
