@@ -58,21 +58,10 @@ async function getClienteEspecialById(id) {
 
 
 // Cria um novo cliente especial
-async function createClienteEspecial(clienteData, idMedicamentos) {
+async function createClienteEspecial(clienteData, medicamentos) {
     const t = await sequelize.transaction();
 
     try {
-
-        const medicamentosInvalidos = await Medicamentos.findAll({
-            where: {
-                id: idMedicamentos,
-                categoria: { [Op.ne]: "CONVENIO" }
-            }
-        }, { transaction: t });
-
-        if (medicamentosInvalidos.length > 0) {
-            throw new ExistsDataError("Apenas medicamentos com a categoria 'CONVÊNIO' podem ser associados a clientes especiais.");
-        }
 
         // Cria o cliente 
         const newClient = await Clientes_especiais.create({
@@ -81,10 +70,10 @@ async function createClienteEspecial(clienteData, idMedicamentos) {
         }, { transaction: t });
 
         // Cria o medicamento(s) associados a este cliente
-        const newMed = idMedicamentos.map(fk_id_medicamento => {
+        const newMed = medicamentos.map(medicamento => {
             return {
                 fk_id_cliente_especial: newClient.id,
-                fk_id_medicamento: fk_id_medicamento
+                fk_id_medicamento: medicamento.fk_id_medicamento
             }
         });
 

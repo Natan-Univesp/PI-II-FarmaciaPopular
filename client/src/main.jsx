@@ -7,7 +7,7 @@ import { Home } from "./pages/Home/Home.jsx";
 import { Medicamento } from "./pages/Medicamento/Medicamento.jsx";
 import { Laboratorio } from "./pages/Laboratorio/Laboratorio.jsx";
 import { SolicitacaoMedicamento } from "./pages/SolicitacaoMedicamento/SolicitacaoMedicamento.jsx";
-import { UsuarioConvenio } from "./pages/UsuarioConvenio/UsuarioConvenio.jsx";
+import { ClienteConvenio } from "./pages/ClienteConvenio/ClienteConvenio.jsx";
 import { Administrador } from "./pages/Administrador/Administrador.jsx";
 import { NavbarProvider } from "./context/NavbarContext.jsx";
 import { RelatorioMedicamento } from "./pages/RelatorioMedicamento/RelatorioMedicamento.jsx";
@@ -24,6 +24,7 @@ import { LaboratorioMain } from "./components/MainPagesScreen/Laboratorio/Labora
 import { SolicitacaoMedicamentoMain } from "./components/MainPagesScreen/SolicitacaoMedicamento/SolicitacaoMedicamentoMain/SolicitacaoMedicamentoMain.jsx";
 import { RelatorioMedicamentoMain } from "./components/MainPagesScreen/RelatorioMedicamento/RelatorioMedicamentoMain.jsx";
 import { RetiradaMedicamentoMain } from "./components/MainPagesScreen/RetiradaMedicamento/RetiradaMedicamentoMain.jsx";
+import { ClienteConvenioMain } from "./components/MainPagesScreen/ClienteConvenio/ClienteConvenioMain.jsx";
 
 const router = createBrowserRouter([
    {
@@ -100,8 +101,14 @@ const router = createBrowserRouter([
             ]
          },
          {
-            path: "/usuarios-convenio",
-            element: <UsuarioConvenio />,
+            path: "/clientes-convenio",
+            element: <ClienteConvenio />,
+            children: [
+               {
+                  index: true,
+                  element: <ClienteConvenioMain/>
+               }
+            ]
          },
          {
             path: "/admin",

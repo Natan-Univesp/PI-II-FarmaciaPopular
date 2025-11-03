@@ -1,4 +1,5 @@
 import { ModalAddSolicitacao } from "../components/Modals/Aquisicao/ModalAddSolicitacao/ModalAddSolicitacao";
+import { ModalAddConvenio } from "../components/Modals/ClienteConvenio/ModalAddConvenio/ModalAddConvenio";
 import { ModalAddLaboratorio } from "../components/Modals/Laboratorio/ModalAddLaboratorio/ModalAddLaboratorio";
 import { ModalEditLaboratorio } from "../components/Modals/Laboratorio/ModalEditLaboratorio/ModalEditLaboratorio";
 import { ModalAddLoteMedicamento } from "../components/Modals/Medicamentos/ModalAddLoteMedicamento/ModalAddLotemedicamento";
@@ -71,5 +72,10 @@ export const modalCollection = [
       name: "registerNewRetirada",
       title: "Cadastrar Retirada",
       modalContent: <ModalAddRetirada/>
+   },
+   {
+      name: "registerNewClienteConvenio",
+      title: "Cadastrar Cliente com Convênio",
+      modalContent: <ModalAddConvenio/>
    }
 ]

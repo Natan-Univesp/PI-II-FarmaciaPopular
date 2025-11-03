@@ -41,7 +41,7 @@ method = POST
 ==================================
 */
 export async function createClienteEspecialService(body) {
-   const res = await axios.get(`${localServer}/clientes-especiais`, body, {
+   const res = await axios.post(`${localServer}/clientes-especiais`, body, {
       headers: {
          Authorization: `Bearer ${Cookies.get("token")}`
       }

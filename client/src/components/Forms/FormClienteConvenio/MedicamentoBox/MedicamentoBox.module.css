@@ -1,0 +1,57 @@
+/* 
+================================================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Estilização Destinada ao Container Box
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+================================================================
+*/
+form .boxForm__container {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-wrap: wrap;
+}
+
+form .boxForm__container .boxForm__content {
+   width: 15em;
+   display: grid;
+   gap: 20px;
+   padding: 15px 10px;
+   box-shadow: var(--shadowBox);
+   border-radius: var(--fixBorderRadius);
+   border: 2px solid var(--colorPrim);
+   margin: var(--marginContent) var(--marginContent) 0 0;
+}
+
+form
+   .boxForm__container:not(:has(.boxForm__content:nth-child(2)))
+   .boxForm__content:first-child {
+   margin-right: 0;
+}
+
+form .btnContainer {
+   display: flex;
+   justify-content: center;
+}
+
+form .btnContainer button {
+   font-size: 1.5em;
+   border: none;
+   margin: 0 20px;
+   padding: 10px;
+   border-radius: 50%;
+   display: flex;
+   align-items: center;
+   background-color: var(--colorPrim);
+   color: rgb(245, 245, 245);
+   box-shadow: var(--shadowBox);
+   cursor: pointer;
+   transition: 0.2s ease;
+}
+
+form .btnContainer button:hover {
+   outline: 1px solid var(--colorPrim);
+   background-color: rgb(245, 245, 245);
+   color: var(--colorSec);
+   transform: translateY(-5%);
+}

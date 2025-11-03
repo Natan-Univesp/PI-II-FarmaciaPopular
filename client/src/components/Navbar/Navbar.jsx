@@ -5,6 +5,7 @@ import { Navlist } from "./Navlist";
 import { FaHome as IconHome} from "react-icons/fa";
 import { GiMedicines as IconMedicamento} from "react-icons/gi";
 import { CiPillsBottle1 as IconPill} from "react-icons/ci";
+import { MdGroups as IconGroup } from "react-icons/md";
 import { LuClipboardPlus as IconRelatorio} from "react-icons/lu";
 import { PiHandWithdrawLight as IconRetirada} from "react-icons/pi";
 import { MdOutlineScience as IconLaboratorio} from "react-icons/md";
@@ -61,6 +62,12 @@ export function Navbar() {
       },
       {
          id: 8,
+         title: "Clientes de Convênio",
+         path: "/clientes-convenio",
+         icon: <IconGroup className={styles.iconList}/>
+      },
+      {
+         id: 9,
          title: "Administrador",
          path: "/admin",
          icon: <IconAdmin className={styles.iconList}/>
