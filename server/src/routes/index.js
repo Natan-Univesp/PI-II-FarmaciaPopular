@@ -10,6 +10,7 @@ const aquisicaoMedicamento = require("./AquisicoesRouter.js");
 const retiradasMedicamento = require("./RetiradasRouter.js");
 const relatorioMedicamento = require("./RelatMedicamentosRouter.js");
 const clienteEspecial = require("./ClientesEspRouter.js");
+const infoStatsRouter = require("./InfoStatsRouter.js");
 
 const router = Router();
 
@@ -22,6 +23,7 @@ router.use("/aquisicoes", authMiddleware, aquisicaoMedicamento);
 router.use("/retiradas", authMiddleware, retiradasMedicamento);
 router.use("/relatorios", authMiddleware, relatorioMedicamento);
 router.use("/clientes-especiais", authMiddleware, clienteEspecial);
+router.use("/infoStatsRouter", authMiddleware, infoStatsRouter)
 
 
 module.exports = router;
