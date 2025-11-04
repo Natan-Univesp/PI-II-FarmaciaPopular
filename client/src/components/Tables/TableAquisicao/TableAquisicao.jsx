@@ -1,6 +1,6 @@
-import TBody from "../TBody/TBody";
-import TBodyAquisicao from "../TBody/TBodyAquisicao";
-import { THeadAquisicao } from "../THead/THeadAquisicao";
+import TBody from "../TableComponents/TBody/TBody";
+import TBodyAquisicao from "../TableComponents/TBody/TBodyAquisicao";
+import { THeadAquisicao } from "../TableComponents/THead/THeadAquisicao";
 
 export function TableAquisicao({
    aquisicaoData,

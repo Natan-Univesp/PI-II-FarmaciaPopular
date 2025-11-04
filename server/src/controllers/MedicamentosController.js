@@ -16,6 +16,7 @@ const {
    getAllActiveMedicamentosService,
    getAllMedicamentosForSelectByLaboratorioIdService,
    getAllMedicamentosForSelectRetiradaService,
+   getAllMedicamentosConvenioForSelectService,
 } = require("../services/MedicamentosService.js")
 
 async function getAllMedicamentos(req, res) {
@@ -115,6 +116,15 @@ async function getMedicamentoById(req, res) {
 async function getAllMedicamentosForSelect(req, res) {
    try {
       const allMedicamentos = await getAllMedicamentosForSelectService();
+      return res.status(200).json(allMedicamentos);
+   } catch (error) {
+      errorResponse(error, res);
+   }
+}
+
+async function getAllMedicamentosConvenioForSelect(req, res) {
+   try {
+      const allMedicamentos = await getAllMedicamentosConvenioForSelectService();
       return res.status(200).json(allMedicamentos);
    } catch (error) {
       errorResponse(error, res);
@@ -317,6 +327,7 @@ module.exports = {
    getAllMedicamentosByFilter,
    getMedicamentoById,
    getAllMedicamentosForSelect,
+   getAllMedicamentosConvenioForSelect,
    getAllMedicamentosForSelectByLaboratorioId,
    getAllMedicamentosForSelectRetirada,
    createMedicamento,

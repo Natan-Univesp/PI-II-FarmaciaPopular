@@ -26,7 +26,7 @@ export async function getAllClientesEspeciaisByIdMedicamentoService(idMedicacame
    return res;
 }
 
-export async function getAllClientesByIdService(id) {
+export async function getClienteEspecialByIdService(id) {
    const res = await axios.get(`${localServer}/clientes-especiais/${id}`, {
       headers: {
          Authorization: `Bearer ${Cookies.get("token")}`
@@ -55,6 +55,7 @@ method = PATCH
 ==================================
 */
 export async function updateClienteEspecialService(id, body) {
+   console.log(body);
    const res = await axios.patch(`${localServer}/clientes-especiais/${id}`, body, {
       headers: {
          Authorization: `Bearer ${Cookies.get("token")}`

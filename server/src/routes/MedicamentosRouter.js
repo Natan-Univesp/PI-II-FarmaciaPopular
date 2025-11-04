@@ -19,6 +19,10 @@ router
    .get(medicamentosController.getAllMedicamentosForSelectRetirada)
 
 router
+   .route("/select-options/categoria/convenio")
+   .get(medicamentosController.getAllMedicamentosConvenioForSelect)
+
+router
    .route("/filter")
    .get(medicamentosController.getAllMedicamentosByFilter)
 

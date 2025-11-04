@@ -3,17 +3,12 @@ import { useModal } from "../../../context/ModalContext";
 import { CardAction } from "../../Cards/CardAction/CardAction";
 import { InputSearch } from "../../Inputs/InputSearch/InputSearch";
 import { Loading } from "../../Loading/Loading";
+import { TableClientesConvenio } from "../../Tables/TableClientesConvenio/TableClientesConvenio";
 import { TableDefault } from "../../Tables/TableDefault/TableDefault";
 
 export function ClienteConvenioMain() {
    const { showModal } = useModal();
    const { clientesEspeciais, isLoading, createClienteEspecial } = useClienteEsp();
-
-   const fieldsCollection = [
-      "ID",
-      "Cliente",
-      "Telefone"
-   ]
 
    const cardActionCollection = [
       {
@@ -41,7 +36,13 @@ export function ClienteConvenioMain() {
          <CardAction cardActionCollection={cardActionCollection} />
 
          <h2 className="subTitle">Todos os Clientes de Convênio</h2>
-         {isLoading ? <Loading /> : <TableDefault fieldCollection={fieldsCollection} dataCollection={clientesEspeciais} />}
+         {isLoading ? 
+            <Loading /> : 
+            
+            clientesEspeciais.map((clienteData) => (
+               <TableClientesConvenio key={clienteData.id} clientesConvenioData={clienteData} />
+            ))   
+         }
       </>
    );
 }

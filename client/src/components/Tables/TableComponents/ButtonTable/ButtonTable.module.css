@@ -6,7 +6,7 @@ button.btnTable {
    margin: 0 3px;
    font-family: var(--fontSec);
    font-size: 16px;
-   border-radius: 4px;
+   border-radius: var(--fixBorderRadius);
    transition: 0.2s ease;
 }
 
@@ -69,6 +69,16 @@ button.btnHeaderConfirm {
 button.btnHeaderConfirm:hover {
    background-color: white;
    color: var(--colorGreen);
+}
+
+button.btnHeaderEdit {
+   background-color: var(--colorYellow);
+   color: white;
+   border: 1px solid var(--colorYellow);
+}
+button.btnHeaderEdit:hover {
+   background-color: white;
+   color: var(--colorYellow);
 }
 
 .customToolTips {

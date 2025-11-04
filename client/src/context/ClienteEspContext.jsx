@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { createClienteEspecialService, getAllClientesEspeciaisService } from "../services/clientesEsp.service";
+import { createClienteEspecialService, getAllClientesEspeciaisService, removeClienteEspecialService, updateClienteEspecialService } from "../services/clientesEsp.service";
 
 const ClienteEspContext = createContext(null);
 
@@ -24,6 +24,22 @@ export function ClienteEspProvider({ children }) {
       }
    }
 
+   const updateClienteEspecial = async (id, newClienteData) => {
+      const res = await updateClienteEspecialService(id, newClienteData);
+      if(res.data.status === "success") {
+         await getAllClientesEspeciais();
+         return true;
+      }
+   }
+
+   const deleteClienteEspecial = async (id) => {
+      const res = await removeClienteEspecialService(id);
+      if(res.data.status === "success") {
+         await getAllClientesEspeciais();
+         return true;
+      }
+   }
+
    const init = async () => {
       try {
          await getAllClientesEspeciais();
@@ -41,7 +57,9 @@ export function ClienteEspProvider({ children }) {
          clientesEspeciais, 
          isLoading,
          setClientesEspeciais, 
-         createClienteEspecial
+         createClienteEspecial,
+         updateClienteEspecial,
+         deleteClienteEspecial
       }}>
          {children}
       </ClienteEspContext.Provider>

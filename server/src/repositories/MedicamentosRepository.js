@@ -181,6 +181,19 @@ async function getAllMedicamentosForSelect() {
    return medicamento;
 }
 
+async function findAllMedicamentosConvenioForSelect() {
+   const medicamento = await Medicamentos.findAll({
+      attributes: [
+         ["id", "value"],
+         ["nome", "label"]
+      ],
+      where: {
+         categoria: "CONVENIO"
+      }
+   });
+   return medicamento;
+}
+
 async function findAllMedicamentosForSelectRetirada() {
    const medicamentos = await Medicamentos.findAll({
       include: {
@@ -356,6 +369,7 @@ module.exports = {
    getMedicamentoById,
    getAllInactiveMedicamentos,
    getAllMedicamentosForSelect,
+   findAllMedicamentosConvenioForSelect,
    findAllMedicamentosForSelectRetirada,
    findAllMedicamentosForSelectByLabId,
    getAllMedicamentosByFilter,

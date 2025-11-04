@@ -4,13 +4,14 @@ import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light-border.css";
 import "tippy.js/themes/material.css";
 
-export default function ButtonTable({ infoView, handleAction, classBtn, toolTipsText = "" }) {
+export default function ButtonTable({ infoView, handleAction, classBtn, customStyle = {}, toolTipsText = "" }) {
    if (!toolTipsText) {
       return (
          <button
             type="button"
             onClick={handleAction}
             className={`${styles[classBtn]} ${styles.btnTable} fadeIn`}
+            style={customStyle}
          >
             {infoView}
          </button>
@@ -26,6 +27,7 @@ export default function ButtonTable({ infoView, handleAction, classBtn, toolTips
             type="button"
             onClick={handleAction}
             className={`${styles[classBtn]} ${styles.btnTable} fadeIn`}
+            style={customStyle}
          >
             {infoView}
          </button>

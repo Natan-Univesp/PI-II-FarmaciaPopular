@@ -1,7 +1,7 @@
 import { useFieldArray, useForm } from "react-hook-form"
 import { InputDefault } from "../../Inputs/InputDefault/InputDefault"
 import { MedicamentoBox } from "./MedicamentoBox/MedicamentoBox";
-import { getAllMedicamentosForSelectService } from "../../../services/medicamentos.service";
+import { getAllMedicamentosConvenioForSelectService } from "../../../services/medicamentos.service";
 import { useState } from "react";
 import { useEffect } from "react";
 
@@ -42,7 +42,7 @@ export function FormClienteConvenio({clienteConvenioData, handleClienteSubmit}) 
 
    const defineMedicamentoOptions = async () => {
       try {
-         const res = await getAllMedicamentosForSelectService();
+         const res = await getAllMedicamentosConvenioForSelectService();
          setMedicamentoOptions(res.data);
          
       } catch (error) {

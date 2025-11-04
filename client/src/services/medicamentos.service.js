@@ -60,6 +60,15 @@ export async function getAllMedicamentosForSelectService() {
    return res;
 }
 
+export async function getAllMedicamentosConvenioForSelectService() {
+   const res = await axios.get(`${localServer}/medicamentos/select-options/categoria/convenio`, {
+      headers: {
+         Authorization: `Bearer ${Cookies.get("token")}`
+      }
+   });
+   return res;
+}
+
 export async function getAllMedicamentosForSelectByIdMedicamentoService(idLab) {
    const res = await axios.get(`${localServer}/medicamentos/laboratorios/${idLab}/select-options`, {
       headers: {

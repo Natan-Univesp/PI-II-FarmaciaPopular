@@ -1,6 +1,6 @@
 import { CardAction } from "../../../Cards/CardAction/CardAction";
 import { FaEdit as IconEdit, FaTrashAlt as IconDel } from "react-icons/fa";
-import { TableAquisicao } from "../../../Tables/TableComponents/TableAquisicao/TableAquisicao";
+import { TableAquisicao } from "../../../Tables/TableAquisicao/TableAquisicao";
 import { useModal } from "../../../../context/ModalContext";
 import { useAquisicao } from "../../../../context/AquisicaoContext";
 import { Loading } from "../../../Loading/Loading";
