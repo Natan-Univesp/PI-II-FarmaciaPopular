@@ -19,7 +19,6 @@ export function ModalLixeiraMedicamentos() {
       message: "Você tem certeza que deseja restaurar este Medicamento?"
    }
 
-   console.log(inactiveMedicamentos);
 
    const handleRestoreMedicamento = async (id) => {
       try {

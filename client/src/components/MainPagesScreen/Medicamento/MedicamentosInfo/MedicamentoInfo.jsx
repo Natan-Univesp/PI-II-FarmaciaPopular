@@ -6,12 +6,7 @@ import { CardAction } from "../../../Cards/CardAction/CardAction";
 
 export function MedicamentosInfo() {
    const { showModal } = useModal();
-   const { 
-      medicamentos, 
-      searchValue, 
-      setSearchValue, 
-      createMedicamento 
-   } = useOutletContext();
+   const { medicamentos, searchValue, setSearchValue, createMedicamento, user } = useOutletContext();
 
    const updateSearchValue = (e) => {
       const value = e.target.value;
@@ -50,8 +45,12 @@ export function MedicamentosInfo() {
 
    return (
       <>
-         <h2 className="subTitle">Ações</h2>
-         <CardAction cardActionCollection={cardActionCollection} />
+         {user.nivel_acesso !== 3 && (
+            <>
+               <h2 className="subTitle">Ações</h2>
+               <CardAction cardActionCollection={cardActionCollection} />
+            </>
+         )}
 
          <h2 className="subTitle">Estoque de Medicamentos</h2>
 
@@ -63,7 +62,7 @@ export function MedicamentosInfo() {
          <div className="layoutFlexCollectionCard">
             {medicamentos &&
                medicamentos.map((medicamento) => (
-                  <CardRemedio key={medicamento.id} medicamentoData={medicamento} />
+                  <CardRemedio key={medicamento.id} medicamentoData={medicamento} user={user}/>
                ))}
          </div>
       </>

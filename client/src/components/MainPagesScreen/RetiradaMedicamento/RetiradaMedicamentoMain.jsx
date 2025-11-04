@@ -1,11 +1,14 @@
 import { useModal } from "../../../context/ModalContext";
 import { useRetirada } from "../../../context/RetiradaContext";
+import { useUser } from "../../../context/UserContext";
 import { CardAction } from "../../Cards/CardAction/CardAction";
 import { InputSearch } from "../../Inputs/InputSearch/InputSearch";
 import { Loading } from "../../Loading/Loading";
 import { TableDefault } from "../../Tables/TableDefault/TableDefault";
 
 export function RetiradaMedicamentoMain() {
+   const { user } = useUser();
+
    const fieldsCollection = [
       "ID de Retirada",
       "Nome do Usuário",
@@ -50,8 +53,14 @@ export function RetiradaMedicamentoMain() {
 
    return (
       <>
-         <h2 className="subTitle">Ações</h2>
-         <CardAction cardActionCollection={cardActionCollection} />
+         {
+            user.nivel_acesso !== 3 && (
+               <>
+                  <h2 className="subTitle">Ações</h2>
+                  <CardAction cardActionCollection={cardActionCollection} />
+               </>
+            )
+         }
 
          <h2 className="subTitle">Histórico de Retiradas</h2>
          {isLoading ? (

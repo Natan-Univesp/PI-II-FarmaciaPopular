@@ -1,11 +1,13 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import localforage from "localforage";
+import { Loading } from "../components/Loading/Loading";
 
 const UserContext = createContext(null);
 
 export function UserProvider({ children }) {
    const [user, setUser] = useState();
+   const [isLoading, setIsLoading] = useState(true);
 
    const getUserInfo = async () => {
       try {
@@ -17,6 +19,7 @@ export function UserProvider({ children }) {
          if(res) {
             setUser(res);
          }
+         setIsLoading(false);
 
       } catch (error) {
          console.log(error);
@@ -29,7 +32,7 @@ export function UserProvider({ children }) {
 
    return (
       <UserContext.Provider value={{ user, setUser }}>
-         {children}
+         {isLoading ? <Loading/> : children}
       </UserContext.Provider>
    );
 }

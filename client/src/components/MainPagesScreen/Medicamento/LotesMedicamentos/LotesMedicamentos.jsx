@@ -6,7 +6,7 @@ import {
 import { TableDefault } from "../../../Tables/TableDefault/TableDefault";
 import { InputSearch } from "../../../Inputs/InputSearch/InputSearch";
 import styles from "./LotesMedicamentos.module.css";
-import { Link, useParams } from "react-router";
+import { Link, useOutletContext, useParams } from "react-router";
 import { useLoteMedicamento } from "../../../../context/LoteMedicamentoContext";
 import { useEffect } from "react";
 import { Loading } from "../../../Loading/Loading";
@@ -17,6 +17,7 @@ import { CardAction } from "../../../Cards/CardAction/CardAction";
 
 export function LotesMedicamentos() {
    const { showModal } = useModal();
+   const { user } = useOutletContext();
    const {
       filteredLoteMedicamentos: loteMedicamentos,
       searchValue,
@@ -43,7 +44,7 @@ export function LotesMedicamentos() {
                modalName: "registerNewLoteMedicamento",
                data: {
                   createLoteMedicamento,
-                  idMedicamento: id
+                  idMedicamento: id,
                },
             }),
       },
@@ -112,8 +113,12 @@ export function LotesMedicamentos() {
             <IconReturn />
             Retornar
          </Link>
-         <h2 className="subTitle">Ações</h2>
-         <CardAction cardActionCollection={cardActionCollection} />
+         {user.nivel_acesso !== 3 && (
+            <>
+               <h2 className="subTitle">Ações</h2>
+               <CardAction cardActionCollection={cardActionCollection} />
+            </>
+         )}
 
          <h2 className="subTitle">Lotes do Medicamento</h2>
          {loteMedicamentos && (
@@ -121,7 +126,7 @@ export function LotesMedicamentos() {
                <TableSearch
                   fieldCollection={fieldCollection}
                   dataCollection={loteMedicamentos}
-                  btnCollection={btnTableCollection}
+                  btnCollection={user.nivel_acesso !== 3 && btnTableCollection}
                   customClassData={customClassForFields}
                   filterType="filterLoteMedicamentos"
                   searchValue={searchValue}

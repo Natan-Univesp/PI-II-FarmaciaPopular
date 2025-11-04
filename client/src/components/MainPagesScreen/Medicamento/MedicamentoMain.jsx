@@ -1,5 +1,6 @@
 import { Outlet } from "react-router";
 import { useMedicamento } from "../../../context/MedicamentoContext";
+import { useUser } from "../../../context/UserContext";
 
 export function MedicamentoMain() {
    const { 
@@ -8,7 +9,7 @@ export function MedicamentoMain() {
       setSearchValue,
       createMedicamento,
    } = useMedicamento();
-
+   const { user } = useUser();
 
 
    return (
@@ -17,7 +18,8 @@ export function MedicamentoMain() {
             medicamentos, 
             searchValue, 
             setSearchValue,
-            createMedicamento
+            createMedicamento,
+            user
          }} />
       </>
    );
