@@ -69,6 +69,7 @@ async function findAllActiveMedicamentos() {
          "tipo_unidade",
          "indicacao_uso",
          "quantidade_minima",
+         "quantidade_total",
          "img",
          "situacao",
          [

@@ -68,7 +68,17 @@ export function CardRemedio({ medicamentoData, user }) {
    };
 
    return (
-      <div className={styles.card} id={medicamentoData.id}>
+      <div
+         className={`${styles.card} ${
+            medicamentoData.quantidade_total <= medicamentoData.quantidade_minima
+               ? styles.warningEstoque
+               : ""
+         }`}
+         id={medicamentoData.id}
+      >
+         {medicamentoData.quantidade_total <= medicamentoData.quantidade_minima && (
+            <div className={styles.alertMinEstoque}>Estoque Baixo</div>
+         )}
          {user.nivel_acesso <= 1 && (
             <div className={styles.cardContent__btnAdminCollection}>
                <button className={styles.btnAdminContent__btnEdit} onClick={handleOpenEditModal}>
