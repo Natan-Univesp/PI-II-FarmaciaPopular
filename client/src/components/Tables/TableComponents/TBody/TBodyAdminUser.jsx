@@ -63,14 +63,14 @@ export function TBodyAdminUser({ userData }) {
          <td>
             <p>{nivelAcessoData[userData.nivel_acesso]}</p>
          </td>
-         <td class={"celulaStatus"}>
+         <td className={"celulaStatus"}>
             <input type="checkbox" 
                    name={`userStatus${userData.id}`}
                    id={`userStatus${userData.id}`} 
                    className={"statusToggle"}
                    checked={userData?.status === "ATIVO"}
                    onChange={handleConfirmChangeStatus}/>
-            <label for={`userStatus${userData.id}`} 
+            <label htmlFor={`userStatus${userData.id}`} 
                    className={"toggleSwitch"}></label>
          </td>
          <td>

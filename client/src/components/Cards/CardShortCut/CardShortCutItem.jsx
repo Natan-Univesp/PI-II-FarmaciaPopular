@@ -2,7 +2,7 @@ import { NavLink } from "react-router";
 import { FaPlus as IconAdd} from "react-icons/fa";
 import styles from "./CardShortCut.module.css";
 
-export function CardShortCutItem({ title, path}) {
+export function CardShortCutItem({ title, path }) {
    return(
       <article className={styles.cardShortCutContainer}>
          <div className={styles.cardShortCut__icon}>

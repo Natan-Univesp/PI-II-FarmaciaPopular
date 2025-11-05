@@ -150,6 +150,7 @@ Responsividade
    nav.navContainer {
       position: absolute;
       top: var(--fixHeightTopBar);
+      z-index: 2;
    }
 
 }

@@ -13,6 +13,7 @@
   justify-content: flex-start;
   min-height: 250px;
   gap: 0;
+  z-index: 1;
 }
 
 .warningEstoque {
@@ -164,5 +165,12 @@ button.btnAdminContent__btnDel:hover {
   color: white;
   font-size: 20px;
   
+}
+
+
+@media only screen and (max-width: 575px) {
+  .card {
+    width: 100%;
+  }
 }
 

@@ -35,9 +35,15 @@ export function Home() {
       }
    ]
 
+   const nivelAcessoExcludesData = {
+      1: [],
+      2: [5],
+      3: [3,4]
+   }
+
    return(
       <MainLayout title="Principais Serviços">
-         <CardShortCut shortCutCollection={shortCutCollection}/>
+         <CardShortCut shortCutCollection={shortCutCollection} nivelAcessoExcludesData={nivelAcessoExcludesData}/>
       </MainLayout>
    )
 }

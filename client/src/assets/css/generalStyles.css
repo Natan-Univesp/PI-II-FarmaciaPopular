@@ -25,7 +25,6 @@ h2.subTitle {
    flex-wrap: wrap;
    gap: calc(var(--marginContent) * 2);
    margin: var(--marginContent);
-
 }
 
 span.errorMessage {
@@ -84,4 +83,17 @@ span.errorMessage {
    background-color: var(--colorPrimBright);
    color: var(--colorPrim);
    border-color: var(--colorPrimBright);
+}
+
+@media only screen and (max-width: 575px) {
+   h2.subTitle {
+      width: 100%;
+      text-align: center;
+      margin-left: 0;
+      margin-right: 0;
+   }
+
+   .layoutFlexCollectionCard {
+      justify-content: center;
+   }
 }
