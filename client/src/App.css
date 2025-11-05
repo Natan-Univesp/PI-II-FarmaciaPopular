@@ -33,6 +33,15 @@ main {
 
 }
 
+@media only screen and (max-width: 575px) {
+   .generalContainer {
+      grid-template: var(--fixHeightTopBarResponsive) 1fr / var(--fixWidthNav) 1fr;
+      grid-template-areas: 
+      "topbar topbar topbar"
+      "main main main";
+   }
+}
+
 @keyframes changeGridTemplate {
    from {
       grid-template-areas: 

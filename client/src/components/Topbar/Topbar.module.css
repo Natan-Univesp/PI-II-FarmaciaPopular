@@ -82,3 +82,10 @@ header.topBarContainer .topBar__leftSide {
 button.topBar__buttonLogout .logoutIcon {
    font-size: 25px;
 }
+
+@media only screen and (max-width: 575px) {
+   header.topBarContainer {
+      flex-direction: column;
+      height: var(--fixHeightTopBarResponsive);
+   }
+}

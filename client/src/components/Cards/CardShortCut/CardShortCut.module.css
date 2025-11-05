@@ -22,7 +22,7 @@ article.cardShortCutContainer .cardShortCut__icon {
    align-items: center;
    text-align: center;
    font-size: 4em;
-   color: var(--colorInactive);
+   color: rgb(129, 129, 129);
    transition: .1s ease;
 }
 
@@ -34,10 +34,10 @@ article.cardShortCutContainer hr {
 article.cardShortCutContainer a {
    text-align: center;
    font-size: 23px;
-   color: var(--colorInactive);
+   color: rgb(129, 129, 129);
    transition: .1s ease;
 }
 
 article.cardShortCutContainer:has(a:hover) :is(.cardShortCut__icon, a) {
-   color: var(--colorBlue);
+   color: var(--colorPrim);
 }
