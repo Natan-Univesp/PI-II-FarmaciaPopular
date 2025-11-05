@@ -79,7 +79,7 @@ export function CardRemedio({ medicamentoData, user }) {
          {medicamentoData.quantidade_total <= medicamentoData.quantidade_minima && (
             <div className={styles.alertMinEstoque}>Estoque Baixo</div>
          )}
-         {user.nivel_acesso <= 1 && (
+         {user?.nivel_acesso <= 1 && (
             <div className={styles.cardContent__btnAdminCollection}>
                <button className={styles.btnAdminContent__btnEdit} onClick={handleOpenEditModal}>
                   <IconEdit />

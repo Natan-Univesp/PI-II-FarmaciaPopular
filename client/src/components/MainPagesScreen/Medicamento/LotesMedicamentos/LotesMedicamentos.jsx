@@ -113,7 +113,7 @@ export function LotesMedicamentos() {
             <IconReturn />
             Retornar
          </Link>
-         {user.nivel_acesso !== 3 && (
+         {user?.nivel_acesso !== 3 && (
             <>
                <h2 className="subTitle">Ações</h2>
                <CardAction cardActionCollection={cardActionCollection} />
@@ -126,7 +126,7 @@ export function LotesMedicamentos() {
                <TableSearch
                   fieldCollection={fieldCollection}
                   dataCollection={loteMedicamentos}
-                  btnCollection={user.nivel_acesso !== 3 && btnTableCollection}
+                  btnCollection={user?.nivel_acesso !== 3 && btnTableCollection}
                   customClassData={customClassForFields}
                   filterType="filterLoteMedicamentos"
                   searchValue={searchValue}

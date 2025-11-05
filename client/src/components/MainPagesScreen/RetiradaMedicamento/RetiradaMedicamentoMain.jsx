@@ -54,7 +54,7 @@ export function RetiradaMedicamentoMain() {
    return (
       <>
          {
-            user.nivel_acesso !== 3 && (
+            user?.nivel_acesso !== 3 && (
                <>
                   <h2 className="subTitle">Ações</h2>
                   <CardAction cardActionCollection={cardActionCollection} />
