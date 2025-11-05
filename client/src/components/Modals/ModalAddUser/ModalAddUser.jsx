@@ -4,10 +4,12 @@ import SelectSearchable from "../../SelectSearchable/SelectSearchable";
 import { useAlert } from "../../../context/AlertContext";
 import { useModal } from "../../../context/ModalContext";
 import { registerNewUser } from "../../../services/admin.service";
+import { useInfoStats } from "../../../context/InfoStatsContext";
 
 export function ModalAddUser() {
    const { showConfirmAlert, showSuccessAlert, showErrorAlert } = useAlert();
    const { showDataInfo, closeModal } = useModal();
+   const { getAllAdminPageStats } = useInfoStats();
    const { getAllUsers } = showDataInfo();
    const {
       register,
@@ -57,6 +59,7 @@ export function ModalAddUser() {
             reset();
             closeModal();
             await getAllUsers();
+            await getAllAdminPageStats();
          }
          
       } catch (error) {

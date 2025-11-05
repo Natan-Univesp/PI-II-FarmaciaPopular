@@ -1,5 +1,6 @@
 import { useAdmin } from "../../../../context/AdminContext";
 import { useAlert } from "../../../../context/AlertContext";
+import { useInfoStats } from "../../../../context/InfoStatsContext";
 import { changeStatusUserService } from "../../../../services/admin.service";
 
 export function TBodyAdminUser({ userData }) {
@@ -9,6 +10,7 @@ export function TBodyAdminUser({ userData }) {
       showErrorAlert
    } = useAlert();
    const { getAllUsers } = useAdmin();
+   const { getAllAdminPageStats } = useInfoStats();
 
    const nivelAcessoData = {
       1: "ADMINISTRADOR",
@@ -26,6 +28,7 @@ export function TBodyAdminUser({ userData }) {
                message: "Status de usuário alterado com sucesso!",
             });
             await getAllUsers();
+            await getAllAdminPageStats();
          }
          
       } catch (error) {

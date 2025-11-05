@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const {
    Aquisicoes,
    Itens_retiradas,
@@ -31,7 +32,14 @@ async function findAndCountAllLaboratorios() {
 
 async function findAndCountAllMinEstoqueMedicamentos() {
    const { count } = await Medicamentos.findAndCountAll({
-      where: sequelize.literal("quantidade_total <= quantidade_minima"),
+      where: {
+         [Op.and]: [
+            sequelize.literal("quantidade_total <= quantidade_minima"),
+            {
+               situacao: "ATIVO"
+            }
+         ]
+      },
    });
    return { total_minEstoque: count };
 }
@@ -98,7 +106,7 @@ async function findAndCountAllRetiradasOnMonth(currMonth) {
 async function findMostMedicamentoRetiradoOnMonth(currMonth) {
    const mostRetirada = await Itens_retiradas.findOne({
       where: [
-         sequelize.where(sequelize.fn("MONTH", sequelize.col("data_retirada")), currMonth)
+         sequelize.where(sequelize.fn("MONTH", sequelize.col("Itens_retiradas.created_at")), currMonth)
       ],
       include: {
          association: "medicamento",

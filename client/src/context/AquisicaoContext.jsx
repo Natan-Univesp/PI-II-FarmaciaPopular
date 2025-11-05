@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { changeStatusAquisicaoService, createAquisicaoService, deleteAquisicaoService, getAllAquisicoesEntreguesService, getAllAquisicoesEnviadasService, getAllAquisicoesSolicitadasService } from "../services/aquisicoes.service";
+import { useInfoStats } from "./InfoStatsContext";
 
 const AquisicaoContext = createContext(null);
 
@@ -11,6 +12,7 @@ export function AquisicaoProvider({ children }) {
    const [isLoadingSolicitadas, setIsLoadingSolicitadas] = useState(true);
    const [isLoadingEnviadas, setIsLoadingEnviadas] = useState(true);
    const [isLoadingEntregues, setIsLoadingEntregues] = useState(true);
+   const { getAllSolicitacaoPageStats } = useInfoStats();
 
    const getAllAquisicoesSolicitadas = async () => {
       if(!isLoadingSolicitadas) {
@@ -45,6 +47,7 @@ export function AquisicaoProvider({ children }) {
       const res = await createAquisicaoService(aquisicaoData);
       if(res.data.status === "success"){
          await getAllAquisicoesSolicitadas();
+         await getAllSolicitacaoPageStats();
          return true;
       }
    }
@@ -60,6 +63,7 @@ export function AquisicaoProvider({ children }) {
             await getAllAquisicoesEnviadas();
             await getAllAquisicoesEntregues();
          }
+         await getAllSolicitacaoPageStats();
          return true;
       }
    }

@@ -1,11 +1,13 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { createLaboratorioService, getAllLaboratoriosService, updateLaboratorioService } from "../services/laboratorios.service";
+import { useInfoStats } from "./InfoStatsContext";
 
 const LaboratorioContext = createContext(null);
 
 export function LaboratorioProvider({ children }) {
    const [laboratorios, setLaboratorios] = useState();
    const [isLoading, setIsLoading] = useState(true);
+   const { getAllLaboratorioPageStats } = useInfoStats();
 
    const getAllLaboratorios = async () => {
       if(!isLoading) {
@@ -21,6 +23,7 @@ export function LaboratorioProvider({ children }) {
       const res = await createLaboratorioService(laboratorioData);
       if(res.data.status === "success") {
          await getAllLaboratorios();
+         await getAllLaboratorioPageStats();
          return true;
       }
    }

@@ -8,11 +8,9 @@ const {
    findAndCountAllRetiradasOnMonth,
    findMostMedicamentoRetiradoOnMonth,
    findOneMedicamentoWithMaxEstoque,
-} = require("../repositories/InfoStatsRepository.js");
-const {
    findAndCountAllActiveUsers,
-   findAndCountAllUsers,
-} = require("../repositories/UsersRepository");
+   findAndCountAllUsers
+} = require("../repositories/InfoStatsRepository.js");
 
 async function getTotalRegisteredLaboratoriosService() {
    const allLabs = await findAndCountAllLaboratorios();
@@ -53,6 +51,7 @@ async function getAllRetiradasOnMonthService() {
 async function getMostMedicamentoRetiradoOnMonthService() {
    const month = new Date().getMonth() + 1;
    const mostRetirado = await findMostMedicamentoRetiradoOnMonth(month);
+   return mostRetirado;
 }
 
 async function getTotalUsersServices() {

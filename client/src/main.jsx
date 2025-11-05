@@ -25,6 +25,7 @@ import { SolicitacaoMedicamentoMain } from "./components/MainPagesScreen/Solicit
 import { RelatorioMedicamentoMain } from "./components/MainPagesScreen/RelatorioMedicamento/RelatorioMedicamentoMain.jsx";
 import { RetiradaMedicamentoMain } from "./components/MainPagesScreen/RetiradaMedicamento/RetiradaMedicamentoMain.jsx";
 import { ClienteConvenioMain } from "./components/MainPagesScreen/ClienteConvenio/ClienteConvenioMain.jsx";
+import { InfoStatsProvider } from "./context/InfoStatsContext.jsx";
 
 const router = createBrowserRouter([
    {
@@ -133,7 +134,9 @@ createRoot(document.getElementById("root")).render(
       <NavbarProvider>
          <UserProvider>
             <AlertProvider>
-               <RouterProvider router={router} />
+               <InfoStatsProvider>
+                  <RouterProvider router={router} />
+               </InfoStatsProvider>
             </AlertProvider>
          </UserProvider>
       </NavbarProvider>

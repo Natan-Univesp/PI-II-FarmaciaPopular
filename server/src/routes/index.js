@@ -23,7 +23,7 @@ router.use("/aquisicoes", authMiddleware, aquisicaoMedicamento);
 router.use("/retiradas", authMiddleware, retiradasMedicamento);
 router.use("/relatorios", authMiddleware, relatorioMedicamento);
 router.use("/clientes-especiais", authMiddleware, clienteEspecial);
-router.use("/infoStatsRouter", authMiddleware, infoStatsRouter)
+router.use("/infostats", authMiddleware, infoStatsRouter);
 
 
 module.exports = router;
