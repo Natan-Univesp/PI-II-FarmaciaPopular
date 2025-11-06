@@ -66,7 +66,7 @@ export const modalCollection = [
    },
    {
       name: "registerNewSolicitacao",
-      title: "Cadastrar Solicitação de Suprimento",
+      title: "Cadastrar Solicitação de Medicamento",
       modalContent: <ModalAddSolicitacao/>
    },
    {

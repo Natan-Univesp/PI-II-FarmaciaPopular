@@ -91,7 +91,7 @@ export function THeadClienteConvenio({ clienteData, fieldCollection = [] }) {
                            display: "flex",
                            gap: "8px",
                         }}
-                        toolTipsText="Editar"
+                        toolTipsText="Excluir"
                      />
                   </div>
                </div>
