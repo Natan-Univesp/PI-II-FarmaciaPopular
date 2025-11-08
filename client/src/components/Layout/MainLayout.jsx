@@ -1,5 +1,5 @@
 import { ModalProvider } from "../../context/ModalContext";
-import { InfoStats } from "../Infostats/InfoStats";
+import { InfoStats } from "../InfoStats/InfoStats";
 
 export function MainLayout({title ="", infoStatsCollection = [], customStyle = null, children}) {
    return(
