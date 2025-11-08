@@ -1,0 +1,79 @@
+.cardCollection {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 20px; 
+}
+
+.card {
+   width: 280px;
+   min-height: 170px;
+   margin: var(--marginContent);
+   padding: 15px 0 0;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   text-align: center;
+   background-color: white;
+   border-top: 4px solid var(--colorPrim);
+   border-radius: 2px;
+   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+   cursor: pointer;
+   transition: all 0.2s ease;
+}
+
+.card:hover {
+   border-right-color: var(--colorPrim);
+   border-bottom-color: var(--colorPrim);
+   border-left-color: var(--colorPrim);
+   border-radius: 2px;
+}
+
+.cardContent__textContainer {
+  margin: 0 10px;
+  display: grid;
+}
+
+.cardContent__textTitle {
+   color: var(--colorPrim);
+   font-size: calc(23px * var(--font-size-scale, 1));
+   letter-spacing: 0.7px;
+}
+
+.cardContent__textInfo {
+   display: flex;
+   align-items: center;
+   padding: 0;
+   min-height: 40px;
+}
+
+.cardContent__textInfo {
+   font-family: var(--fontSec);
+   font-size: calc(14px * var(--font-size-scale, 1));
+   line-height: 18px;
+   color: black;
+}
+
+button.cardContent__btnAction {
+   width: 100%;
+   padding: 10px 0;
+   font-size: calc(19px * var(--font-size-scale, 1));
+   letter-spacing: 0.7px;
+   background-color: var(--colorPrim);
+   border: 2px solid var(--colorPrim);
+   border-radius: 0;
+}
+
+button.cardContent__btnAction:hover {
+  background-color: white;
+  color: var(--colorPrim);
+}
+
+@media only screen and (max-width: 575px) {
+   .cardCollection {
+      justify-content: center;
+   }
+
+   .card {
+      width: 100%;
+   }
+}
