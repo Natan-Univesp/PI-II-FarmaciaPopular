@@ -21,7 +21,7 @@
    text-align: left;
    font-weight: bold;
    color: var(--colorBlue);
-   font-size: 18px;
+   font-size: calc(18px * var(--font-size-scale, 1));
    letter-spacing: 0.4px;
    text-transform: uppercase;
    border-bottom: none;
@@ -30,7 +30,7 @@
 .tabelaDados tbody td {
    color: black;
    font-family: var(--fontSec);
-   font-size: 16px;
+   font-size: calc(16px * var(--font-size-scale, 1));
    border-bottom: 1px solid var(--colorInactive);
    vertical-align: middle;
    word-wrap: break-word;
@@ -173,7 +173,7 @@
 */
 .tableHeader {
    background-color: var(--colorPrim);
-   font-size: 17px;
+   font-size: calc(17px * var(--font-size-scale, 1));
 }
 
 .generalInfo__container,
@@ -221,7 +221,7 @@ Estilização de informações do Header de Aquisicao
 
 .generalInfo__content p {
    font-family: var(--fontSec);
-   font-size: 16px;
+   font-size: calc(16px * var(--font-size-scale, 1));
    font-weight: 400;
    color: white;
 }

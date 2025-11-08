@@ -21,7 +21,7 @@ article.cardShortCutContainer .cardShortCut__icon {
    justify-content: center;
    align-items: center;
    text-align: center;
-   font-size: 4em;
+   font-size: calc(4rem * var(--font-size-scale, 1));
    color: rgb(129, 129, 129);
    transition: .1s ease;
 }
@@ -33,7 +33,7 @@ article.cardShortCutContainer hr {
 
 article.cardShortCutContainer a {
    text-align: center;
-   font-size: 23px;
+   font-size: calc(23px * var(--font-size-scale, 1));
    color: rgb(129, 129, 129);
    transition: .1s ease;
 }

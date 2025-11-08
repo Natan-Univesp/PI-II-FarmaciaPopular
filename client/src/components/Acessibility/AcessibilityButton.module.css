@@ -1,0 +1,66 @@
+.mainContainer {
+  position: fixed;
+  top: 50%; 
+  right: 10px; 
+  transform: translateY(-50%); 
+  margin-top: -45px; 
+  z-index: 1001; 
+  display: inline-block;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--colorPrim); 
+  color: white;
+  font-size: 22px; 
+  cursor: pointer;
+  width: 39px; 
+  height: 40px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  border-radius: 8px;
+  gap: 10px;
+}
+
+.opencontent {
+  opacity: 0;
+  visibility: hidden; 
+  transition: 
+    opacity 0.3s ease 0.2s, 
+    transform 0.3s ease 0.2s, 
+    visibility 0s 0.5s;
+  position: absolute;
+  right: 100%; 
+  top: 50%; 
+  transform: translateX(10px) translateY(-50%);
+  margin-right: 5px;
+  background-color: whitesmoke;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 10px;
+  z-index: 1002; 
+  width: auto; 
+}
+
+.mainContainer:hover .opencontent {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0) translateY(-50%);
+  transition-delay: 0s;
+  transition-duration: 0.2s;
+}
+
+.opencontent > :global(.font-size-control) {
+  box-shadow: none;
+  padding: 0;
+}
+.opencontent > :global(.font-size-control button) {
+  background: var(--colorPrim);
+  color: white;
+}
+.opencontent > :global(.font-size-control button:hover) {
+  background: white; 
+  color: var(--colorPrim);
+  border: 2px solid var(--colorPrim);
+}

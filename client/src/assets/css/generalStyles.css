@@ -1,5 +1,5 @@
 h1.mainTitle {
-   font-size: var(--fontTitleSize);
+   font-size: calc(var(--fontTitleSize) * var(--font-size-scale, 1));
    text-align: center;
    margin: var(--fontMargin);
 }
@@ -12,6 +12,7 @@ h2.subTitle {
    background-color: var(--colorPrim);
    color: white;
    letter-spacing: 0.8px;
+   font-size: calc(18px * var(--font-size-scale, 1));
 }
 
 .textInfoNotAvaliable {
@@ -47,10 +48,10 @@ span.errorMessage {
 /* Botões customizados */
 .buttonForm-style1 {
    margin: auto;
-   padding: 10px 15px;
+   padding: calc(10px * var(--font-size-scale, 1)) calc(15px * var(--font-size-scale, 1));
    margin-bottom: 10px;
    font-family: var(--fontSec);
-   font-size: 1em;
+   font-size: calc(1rem * var(--font-size-scale, 1));
    background-color: var(--colorPrim);
    border: 1px solid var(--colorPrim);
    transition: 0.2s ease;

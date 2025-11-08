@@ -5,7 +5,7 @@
 }
 
 .inputLabel {
-   font-size: 15px;
+   font-size: calc(15px * var(--font-size-scale, 1));
    font-weight: bold;
    padding: 5px 10px;
    letter-spacing: 1px;
@@ -18,7 +18,7 @@
 .inputField {
    padding: 8px 10px;
    font-family: var(--fontSec);
-   font-size: 16px;
+   font-size: calc(16px * var(--font-size-scale, 1));
    border: 2px solid var(--colorPrim);
    border-top: none;
    border-radius: 0 0 4px 4px;

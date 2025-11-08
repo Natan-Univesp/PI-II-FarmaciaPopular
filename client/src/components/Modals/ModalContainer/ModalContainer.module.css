@@ -40,14 +40,14 @@
 }
 
 .modalContent__header h1 {
-    font-size: 24px;
+    font-size: calc(24px * var(--font-size-scale, 1));
     font-weight: 500;
     text-align: left;
     letter-spacing: 0.4px;
 }
 
 .modalContent__header .closeIcon {
-    font-size: 2em;
+    font-size: calc(2em * var(--font-size-scale, 1));
     color: white;
     background-color: var(--colorPrim);
     border-radius: var(--fixBorderRadius);

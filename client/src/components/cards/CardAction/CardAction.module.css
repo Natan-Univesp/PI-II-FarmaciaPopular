@@ -6,7 +6,7 @@
 
 .card {
    width: 280px;
-   height: 170px;
+   min-height: 170px;
    margin: var(--marginContent);
    padding: 15px 0 0;
    display: flex;
@@ -35,7 +35,7 @@
 
 .cardContent__textTitle {
    color: var(--colorPrim);
-   font-size: 23px;
+   font-size: calc(23px * var(--font-size-scale, 1));
    letter-spacing: 0.7px;
 }
 
@@ -48,7 +48,7 @@
 
 .cardContent__textInfo {
    font-family: var(--fontSec);
-   font-size: 14px;
+   font-size: calc(14px * var(--font-size-scale, 1));
    line-height: 18px;
    color: black;
 }
@@ -56,7 +56,7 @@
 button.cardContent__btnAction {
    width: 100%;
    padding: 10px 0;
-   font-size: 19px;
+   font-size: calc(19px * var(--font-size-scale, 1));
    letter-spacing: 0.7px;
    background-color: var(--colorPrim);
    border: 2px solid var(--colorPrim);

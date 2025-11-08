@@ -20,7 +20,7 @@ export function MedicamentoBoxItem({ index = 0, options }) {
    const errorMedicamento = errors?.['medicamentos_retirados']?.[index]?.fk_id_medicamento;
 
    return(
-      <div className={`${styles.boxForm__content} fadeLeft`} style={{width: "19em"}}>
+      <div className={`${styles.boxForm__content} fadeLeft`} style={{width: `calc(19rem * var(--font-size-scale, 1))`}}>
          <SelectSearchable
             controlName={controlMedicamento}
             control={control}

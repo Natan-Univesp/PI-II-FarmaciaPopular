@@ -15,7 +15,7 @@ header.topBarContainer .topBar__leftSide {
 }
 
 .topBar__leftSide h1 {
-   font-size: 30px;
+   font-size: calc(30px * var(--font-size-scale, 1));
 }
 
 .topBar__leftSide .topBar__logo {
@@ -35,7 +35,7 @@ header.topBarContainer .topBar__leftSide {
    border: none;
    color: black;
    background-color: white;
-   font-size: 30px;
+   font-size: calc(30px * var(--font-size-scale, 1));
    border-radius: var(--fixBorderRadius);
    cursor: pointer;
    transition: .2s ease;
@@ -55,7 +55,7 @@ header.topBarContainer .topBar__leftSide {
 
 .topBar__rightSide .topBar__userInfo p {
    margin-top: 3px;
-   font-size: 23px;
+   font-size: calc(23px * var(--font-size-scale, 1));
 }
 
 .topBar__rightSide button.topBar__buttonLogout {
@@ -66,7 +66,7 @@ header.topBarContainer .topBar__leftSide {
    background-color: transparent;
    color: white;
    font-family: var(--fontSec);
-   font-size: 15px;
+   font-size: calc(15px * var(--font-size-scale, 1));
    font-weight: 600;
    border: 1px solid transparent;
    border-radius: var(--fixBorderRadius);
@@ -80,12 +80,25 @@ header.topBarContainer .topBar__leftSide {
 }
 
 button.topBar__buttonLogout .logoutIcon {
-   font-size: 25px;
+   font-size: calc(25px * var(--font-size-scale, 1));
 }
 
-@media only screen and (max-width: 575px) {
+
+@media only screen and (max-width: 991px) {
+
    header.topBarContainer {
-      flex-direction: column;
-      height: var(--fixHeightTopBarResponsive);
+      flex-direction: column; 
+      gap: 15px;
+      justify-content: center;
+   }
+
+   header.topBarContainer .topBar__leftSide {
+      justify-content: center;
+      width: 100%; 
+   }
+
+   .topBar__rightSide {
+      justify-content: center;
+      width: 100%; 
    }
 }

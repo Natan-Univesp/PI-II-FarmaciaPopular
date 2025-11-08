@@ -23,13 +23,13 @@
 
 .infoCard h4 {
    margin: 0;
-   font-size: 1rem;
+   font-size: calc(1rem * var(--font-size-scale, 1));
    color: #333;
    margin-bottom: 10px;
 }
 
 .infoCard p {
-   font-size: 2rem;
+   font-size: calc(2rem * var(--font-size-scale, 1));
    font-weight: bold;
    color: #000000;
    margin: 0;
