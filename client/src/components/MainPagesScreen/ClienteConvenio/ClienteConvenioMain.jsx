@@ -1,10 +1,8 @@
 import { useClienteEsp } from "../../../context/ClienteEspContext";
 import { useModal } from "../../../context/ModalContext";
 import { CardAction } from "../../Cards/CardAction/CardAction";
-import { InputSearch } from "../../Inputs/InputSearch/InputSearch";
 import { Loading } from "../../Loading/Loading";
 import { TableClientesConvenio } from "../../Tables/TableClientesConvenio/TableClientesConvenio";
-import { TableDefault } from "../../Tables/TableDefault/TableDefault";
 
 export function ClienteConvenioMain() {
    const { showModal } = useModal();

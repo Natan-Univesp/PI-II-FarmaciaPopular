@@ -3,8 +3,6 @@ import {
    FaTrashAlt as IconTrash,
    FaLongArrowAltLeft as IconReturn,
 } from "react-icons/fa";
-import { TableDefault } from "../../../Tables/TableDefault/TableDefault";
-import { InputSearch } from "../../../Inputs/InputSearch/InputSearch";
 import styles from "./LotesMedicamentos.module.css";
 import { Link, useOutletContext, useParams } from "react-router";
 import { useLoteMedicamento } from "../../../../context/LoteMedicamentoContext";
