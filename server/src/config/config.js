@@ -26,4 +26,5 @@ module.exports = {
       dialect: process.env.DB_DIALECT,
       timezone: "-03:00",
    },
+   
 };
