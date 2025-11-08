@@ -3,7 +3,7 @@ import { ModalAddConvenio } from "../components/Modals/ClienteConvenio/ModalAddC
 import { ModalEditConvenio } from "../components/Modals/ClienteConvenio/ModalEditConvenio/ModalEditConvenio";
 import { ModalAddLaboratorio } from "../components/Modals/Laboratorio/ModalAddLaboratorio/ModalAddLaboratorio";
 import { ModalEditLaboratorio } from "../components/Modals/Laboratorio/ModalEditLaboratorio/ModalEditLaboratorio";
-import { ModalAddLoteMedicamento } from "../components/Modals/Medicamentos/ModalAddLoteMedicamento/ModalAddLotemedicamento";
+import { ModalAddLoteMedicamento } from "../components/Modals/Medicamentos/ModalAddLoteMedicamento/ModalAddLoteMedicamento";
 import { ModalAddNewMedicamento } from "../components/Modals/Medicamentos/ModalAddNewMedicamento/ModalAddNewMedicamento";
 import { ModalEditLoteMedicamentos } from "../components/Modals/Medicamentos/ModalEditLoteMedicamentos/ModalEditLoteMedicamentos";
 import { ModalEditMedicamentos } from "../components/Modals/Medicamentos/ModalEditMedicamentos/ModalEditMedicamentos";
