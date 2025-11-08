@@ -39,7 +39,7 @@ Estilização dos Links
 */
 
 nav.navContainer ul :is(li, li > p) {
-   font-size: 18px;
+   font-size: calc(18px * var(--font-size-scale, 1));
    padding: 10px 20px;
    margin: 15px 0;
    transition: 0.2s ease;
@@ -72,7 +72,7 @@ nav.navContainer ul li:has(.active) a {
 }
 
 nav.navContainer ul li a .iconList {
-   font-size: 1.5em;
+   font-size: calc(1.5rem * var(--font-size-scale, 1));
 }
 
 /* 

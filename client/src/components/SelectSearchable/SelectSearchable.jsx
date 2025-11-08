@@ -39,7 +39,8 @@ export default function SelectSearchable({controlName = "", control, dataOptions
         placeholder: (baseStyles) => ({
             ...baseStyles,
             opacity: ".6",
-            fontFamily: "var(--fontSec)"
+            fontFamily: "var(--fontSec)",
+            fontSize: "calc(16px * var(--font-size-scale, 1))"  
         }),
         control: (baseStyles) => ({
             ...baseStyles,
@@ -51,14 +52,15 @@ export default function SelectSearchable({controlName = "", control, dataOptions
             borderWidth: 0,
             boxShadow: "none",
             fontFamily: "var(--fontSec)",
-
+            fontSize: "calc(16px * var(--font-size-scale, 1))"
         }),
         option: (baseStyles, state) => ({
             ...baseStyles,
 
             fontFamily: "var(--fontSec)",
             fontWeight: 400,
-            cursor: state.isFocused && "pointer"
+            cursor: state.isFocused && "pointer",
+            fontSize: "calc(16px * var(--font-size-scale, 1))"
         })
     }
 

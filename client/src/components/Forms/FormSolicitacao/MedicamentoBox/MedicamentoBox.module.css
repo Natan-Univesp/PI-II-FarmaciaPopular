@@ -13,7 +13,7 @@ form .boxForm__container {
 }
 
 form .boxForm__container .boxForm__content {
-   width: 15em;
+   width: calc(15em * var(--font-size-scale, 1));
    display: grid;
    gap: 20px;
    padding: 15px 10px;
@@ -35,7 +35,7 @@ form .btnContainer {
 }
 
 form .btnContainer button {
-   font-size: 1.5em;
+   font-size: calc(1.5em * var(--font-size-scale, 1));
    border: none;
    margin: 0 20px;
    padding: 10px;

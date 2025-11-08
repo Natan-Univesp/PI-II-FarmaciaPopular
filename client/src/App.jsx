@@ -4,6 +4,7 @@ import { Navbar } from "./components/NavBar/NavBar";
 import { Topbar } from "./components/TopBar/TopBar";
 import { useNavbar } from "./context/NavbarContext";
 import { ValidateLogin } from "./components/RoutesValidate/ValidateLogin";
+import { AcessibilityButton } from "./components/Acessibility/AcessibilityButton";
 
 function App() {
    const { isNavbarActive } = useNavbar();
@@ -13,6 +14,7 @@ function App() {
          <div className={`generalContainer ${!isNavbarActive ? "inactiveNavbar" : ""}`}>
             <Topbar />
             <Navbar />
+            <AcessibilityButton />
             <main>
                <Outlet />
             </main>
