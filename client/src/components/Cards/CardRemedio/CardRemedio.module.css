@@ -1,0 +1,176 @@
+.card {
+  position: relative;
+  border: 1px solid #ddd;
+  border-radius: var(--fixBorderRadius);
+  padding: 10px 20px 25px;
+  width: 270px;
+  height: 390px;
+  background-color: #fff;
+  box-shadow: var(--shadowBox);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 250px;
+  gap: 0;
+  z-index: 1;
+}
+
+.warningEstoque {
+  border-color: var(--colorRed)!important;
+}
+
+.cardContent__btnAdminCollection {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 -10px 20px;
+}
+
+.cardContent__btnAdminCollection button {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding: 10px;
+  font-size: calc(20px * var(--font-size-scale, 1));
+  border-radius: var(--fixBorderRadius);
+}
+
+button.btnAdminContent__btnEdit {
+  background-color: var(--colorYellow);
+  border: 1px solid var(--colorYellow);
+  color: white;
+}
+
+button.btnAdminContent__btnDel {
+  background-color: var(--colorRed);
+  border: 1px solid var(--colorRed);
+  color: white;
+}
+
+button.btnAdminContent__btnEdit:hover {
+  background-color: transparent;
+  color: var(--colorYellow);
+}
+
+button.btnAdminContent__btnDel:hover {
+  background-color: transparent;
+  color: var(--colorRed);
+}
+
+.cardContent__imgContainer {
+  width: 140px;
+  height: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+/* NOVO ESTILO PARA A IMAGEM */
+.imagemRemedio {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  margin: auto;
+}
+
+/* Não utilizado, por hora */
+.cardContent__indicacao {
+  height: 108px;
+  margin-top: 10px;
+  font-family: var(--fontSec);
+  font-size: 14px;
+  text-align: justify;
+  overflow: hidden;
+}
+
+.cardContent__indicacao h4 {
+  text-align: center;
+}
+
+.cardContent__indicacao p {
+  display: -webkit-box;
+  overflow: hidden;
+  line-clamp: 4;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+
+.nome {
+  font-size: calc(1.13rem * var(--font-size-scale, 1));
+  font-weight: bold;
+  letter-spacing: .6px;
+}
+
+/* Os outros estilos permanecem iguais */
+.remessasContainer {
+  margin: 10px 0;
+  font-family: var(--fontSec);
+}
+
+.remessasContent__textTitle {
+  font-size: calc(14px * var(--font-size-scale, 1));
+  font-weight: 600;
+}
+
+.cardContent__botaoCollection {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.cardContent__botaoCollection :is(button, a){
+  background-color: transparent;
+  padding: 10px 15px;
+  font-size: calc(16px * var(--font-size-scale, 1));
+  font-weight: 600;
+  letter-spacing: .6px;
+  border-radius: 1px;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.cardContent__botaoCollection button:active {
+  transform: scale(0.98);
+}
+
+.botaoDetalhes {
+  color: var(--colorBlue);
+  border: 1px solid var(--colorBlue);
+}
+
+.botaoDetalhes:hover {
+  background-color: var(--colorBlue);
+  color: white;
+} 
+
+.botaoVisualizar {
+  background-color: var(--colorGreen)!important;
+  color: white;
+  border: 1px solid var(--colorGreen);
+}
+
+.botaoVisualizar:hover {
+  background-color: transparent!important;
+  color: var(--colorGreen);
+}
+
+.alertMinEstoque {
+  position: absolute;
+  width: 120px;
+  left: 50%;
+  top: -2%;
+  transform: translate(-50%, 0%);
+  background-color: var(--colorRed);
+  color: white;
+  font-size: 20px;
+  
+}
+
+
+@media only screen and (max-width: 575px) {
+  .card {
+    width: 100%;
+  }
+}
+
