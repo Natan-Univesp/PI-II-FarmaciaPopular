@@ -22,6 +22,7 @@
    /* Valores fixos */
    --fixHeightTopBar: 90px;
    --fixHeightTopBarResponsive: 120px;
+   --fixHeightTopBarResponsiveXX-small: 140px;
    --fixWidthNav: 240px;
    --fixBorderRadius: 4px;
 

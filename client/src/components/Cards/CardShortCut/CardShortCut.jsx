@@ -7,7 +7,7 @@ export function CardShortCut({ shortCutCollection = [], nivelAcessoExcludesData 
    return (
       <div className={styles.cardShortCutCollection}>
          {shortCutCollection.map((item) => {
-            if (!nivelAcessoExcludesData[user.nivel_acesso].includes(item.id)) {
+            if (user?.nivel_acesso && !nivelAcessoExcludesData[user.nivel_acesso].includes(item.id)) {
                return <CardShortCutItem key={item.id} title={item.title} path={item.path} />;
             }
          })}
