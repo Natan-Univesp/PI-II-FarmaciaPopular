@@ -14,17 +14,15 @@ const allowedOrigins = [
 
 const corsOptions = {
    origin: (origin, callback) => {
-      // Allow requests with no origin (like mobile apps or curl requests)
-      if (!origin) return callback(null, true);
 
-      if (allowedOrigins.includes(origin)) {
+      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
          callback(null, true); // Origin is allowed
       } else {
          callback(new Error("Not allowed by CORS")); // Origin is not allowed
       }
    },
    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allow specific methods
-   allowedHeaders: ["Content-Type", "Authorization"], // Specify allowed headers
+   allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"], // Specify allowed headers
    credentials: true, // Include credentials (optional)
    optionsSuccessStatus: 204, // For legacy browser support
 };
@@ -34,7 +32,10 @@ const PORT = 3000;
 const HOST_IP = process.env.IP_FIXED || "0.0.0.0";
 
 dbConnectionTest();
+
 app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
+
 app.use(express.json());
 app.use(express.static("public"));
 app.use(Routes);
