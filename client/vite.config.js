@@ -22,4 +22,12 @@ export default defineConfig({
          },
       },
    },
+   preview: {
+      host: true,
+      allowedHosts: [
+         "farmaciapopular-production.up.railway.app",
+         ".railway.app"
+      ]
+
+   }
 });
