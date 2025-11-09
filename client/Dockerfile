@@ -10,8 +10,12 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
+# Servir com Nginx
+FROM nginx:latest
+COPY nginx/nginx.conf /etc/nginx/nginx.conf
+
 # Expor porta
 EXPOSE $PORT
 
 # Comando de start
-CMD ["npm", "run", "start"]
+CMD ["nginx", "-g", "daemon off;"]
