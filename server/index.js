@@ -33,8 +33,27 @@ const HOST_IP = process.env.IP_FIXED || "0.0.0.0";
 
 dbConnectionTest();
 
+app.use((req, res, next) => {
+   console.log('=== REQUEST INFO ===');
+   console.log('Method:', req.method);
+   console.log('Path:', req.path);
+   console.log('Origin:', req.headers.origin);
+   console.log('Headers:', req.headers);
+   next();
+});
+
 app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
+
+app.use((req, res, next) => {
+   if (req.method === 'OPTIONS') {
+      res.header('Access-Control-Allow-Origin', req.headers.origin);
+      res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
+      res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+      res.header('Access-Control-Allow-Credentials', 'true');
+      return res.status(200).end();
+   }
+   next();
+});
 
 app.use(express.json());
 app.use(express.static("public"));
