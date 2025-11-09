@@ -116,6 +116,7 @@ async function createUser(req, res) {
 async function firstCreateUser(req, res) {
    try {
       const { usuario, senha, nivel_acesso } = req.body;
+      console.log(req.body);
 
       if (!usuario || !senha || !nivel_acesso) {
          throw new FieldUndefinedError("Um ou mais campos não identificados", {
@@ -126,7 +127,7 @@ async function firstCreateUser(req, res) {
          });
       }
 
-      const createdUser = await createUserService(id, { usuario, senha, nivel_acesso });
+      const createdUser = await createUserService({ usuario, senha, nivel_acesso });
 
       return res.status(201).json({
          status: "success",
