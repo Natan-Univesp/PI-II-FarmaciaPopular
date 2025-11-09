@@ -1,0 +1,7 @@
+[static]
+directory = "dist"
+spa = true
+
+# O Railway usa Nginx automaticamente para static sites
+[static.environment]
+NODE_ENV = "production"
