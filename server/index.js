@@ -35,7 +35,6 @@ const HOST_IP = process.env.IP_FIXED || "0.0.0.0";
 
 dbConnectionTest();
 app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
 app.use(express.json());
 app.use(express.static("public"));
 app.use(Routes);
