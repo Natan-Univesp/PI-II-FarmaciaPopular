@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-   const Medicamentos = sequelize.define("medicamentos", {
+   const Medicamentos = sequelize.define("Medicamentos", {
       id: {
          type: DataTypes.INTEGER(11),
          primaryKey: true,
@@ -42,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: "ATIVO",
       }
    }, {
-      freezeTableName: true,
+      tableName: "medicamentos",
       timestamps: true,
       underscored: true
    });

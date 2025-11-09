@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-   const Laboratorios = sequelize.define("laboratorios", {
+   const Laboratorios = sequelize.define("Laboratorios", {
       nome_laboratorio: {
          type: DataTypes.STRING(100),
          allowNull: false,
@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
          allowNull: false,
       },
    }, {
-      freezeTableName: true,
+      tableName: "laboratorios",
       timestamps: true,
       underscored: true
    });

@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
    const RelatoriosMedicamentos = sequelize.define(
-      "relatorios_medicamentos",
+      "Relatorios_medicamentos",
       {
       id: {
             type: DataTypes.INTEGER,
@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
          },
       },
       {
-         freezeTableName: true,
+         tableName: "relatorios_medicamentos",
          timestamps: true,
          underscored: true,
          updatedAt: false

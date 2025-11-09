@@ -1,11 +1,11 @@
 module.exports = (sequelize, DataTypes) => {
-   const ItensAquisicoes = sequelize.define("itens_aquisicoes", {
+   const ItensAquisicoes = sequelize.define("Itens_aquisicoes", {
       quantidade_solicitada: {
          type: DataTypes.INTEGER(11),
          allowNull: false,
       },
    }, {
-      freezeTableName: true,
+      tableName: "itens_aquisicoes",
       timestamps: true,
       underscored: true,
       updatedAt: false  

@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
    const ClientesEspeciais = sequelize.define(
-      "clientes_especiais",
+      "Clientes_especiais",
       {
          nome_cliente: {
             type: DataTypes.STRING(100),
@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
          },
       },
       {
-         freezeTableName: true,
+         tableName: "clientes_especiais",
          timestamps: false,
          underscored: true,
       }

@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-   const Aquisicoes = sequelize.define("aquisicoes", {
+   const Aquisicoes = sequelize.define("Aquisicoes", {
       fornecedor: {
          type: DataTypes.STRING(180),
          allowNull: false,
@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
          allowNull: true,
       },
    }, {
-      freezeTableName: true,
+      tableName: "aquisicoes",
       timestamps: true,
       underscored: true,
       // Altera o nome do createdAt
