@@ -49,7 +49,9 @@ async function findOneMedicamentoWithMaxEstoque() {
       attributes: ["nome"],
       order: [["quantidade_total", "DESC"]],
    });
-   return maxEstoque;
+   return maxEstoque || {
+      nome: "Nenhum"
+   };
 }
 
 /* 
@@ -124,7 +126,7 @@ async function findMostMedicamentoRetiradoOnMonth(currMonth) {
    });
 
    return mostRetirada || {
-      nome_medicamento: "Não informado",
+      nome_medicamento: "Nenhum",
       total_retirada: "0"
    };
 }
