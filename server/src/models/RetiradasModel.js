@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-   const Retiradas = sequelize.define("Retiradas", {}, {
+   const Retiradas = sequelize.define("retiradas", {}, {
       freezeTableName: true,
       timestamps: true,
       underscored: true,

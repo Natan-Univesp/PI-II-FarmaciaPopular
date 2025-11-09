@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-   const ItensAquisicoes = sequelize.define("Itens_aquisicoes", {
+   const ItensAquisicoes = sequelize.define("itens_aquisicoes", {
       quantidade_solicitada: {
          type: DataTypes.INTEGER(11),
          allowNull: false,

@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
    const MedicamentosClientesEspeciais = sequelize.define(
-      "Medicamentos_clientes_especiais",
+      "medicamentos_clientes_especiais",
       {},
       {
          freezeTableName: true,

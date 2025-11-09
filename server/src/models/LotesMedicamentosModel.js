@@ -1,7 +1,7 @@
 const moment = require("moment");
 
 module.exports = (sequelize, DataTypes) => {
-   const LotesMedicamentos = sequelize.define("Lotes_medicamentos", {
+   const LotesMedicamentos = sequelize.define("lotes_medicamentos", {
       quantidade: {
          type: DataTypes.INTEGER(11),
          allowNull: false,
