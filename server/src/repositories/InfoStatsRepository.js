@@ -123,7 +123,10 @@ async function findMostMedicamentoRetiradoOnMonth(currMonth) {
       ]
    });
 
-   return mostRetirada;
+   return mostRetirada || {
+      nome_medicamento: "Não informado",
+      total_retirada: "0"
+   };
 }
 
 /* 
