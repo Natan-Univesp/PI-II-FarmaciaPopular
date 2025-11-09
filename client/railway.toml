@@ -1,9 +1,0 @@
-[build]
-builder = "nixpacks"
-
-[service]
-startCommand = "npm start"
-
-[service.env]
-PORT = "5173"
-HOST = "0.0.0.0"
