@@ -10,13 +10,8 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
-# Production stage
-FROM nginx:alpine
-
-# Copia o build do React para o Nginx
-COPY --from=build /app/dist /usr/share/nginx/html
-
-# Copia configuração customizada do Nginx
+# Servir com Nginx
+FROM nginx:latest
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
 
 # Expor porta
