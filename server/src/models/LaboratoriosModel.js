@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
          allowNull: false,
       },
    }, {
-      freezeTableName: true,
+      tableName: "laboratorios",
       timestamps: true,
       underscored: true
    });

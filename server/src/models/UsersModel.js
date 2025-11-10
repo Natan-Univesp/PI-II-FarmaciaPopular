@@ -17,8 +17,7 @@ module.exports = (sequelize, DataTypes) => {
          allowNull: false,
       },
    }, {
-      // Mantém o nome do modelo como nome da Tabela
-      freezeTableName: true,
+      tableName: "users",
       // cria o created_at e updated_at a nível do sequelize 
       timestamps: true,
       // permite que os campos criados pelo sequelize utilize _ ao invés de Camelcase 

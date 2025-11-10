@@ -56,7 +56,7 @@ async function getTotalUsersRegisteredService() {
    return totalUsers;
 }
 
-async function createUserService(idLoggedUser, userInfo) {
+async function createUserService(userInfo, idLoggedUser) {
    const { usuario, senha, nivel_acesso } = userInfo;
    const formattedUser = removeAllAcentsForString(usuario);
    const existsUser = await findUserByName(formattedUser);

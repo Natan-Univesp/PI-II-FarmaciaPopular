@@ -42,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: "ATIVO",
       }
    }, {
-      freezeTableName: true,
+      tableName: "medicamentos",
       timestamps: true,
       underscored: true
    });

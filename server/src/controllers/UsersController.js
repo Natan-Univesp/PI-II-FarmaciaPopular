@@ -101,7 +101,7 @@ async function createUser(req, res) {
          });
       }
 
-      const createdUser = await createUserService(id, { usuario, senha, nivel_acesso });
+      const createdUser = await createUserService({ usuario, senha, nivel_acesso }, id);
 
       return res.status(201).json({
          status: "success",
@@ -126,7 +126,7 @@ async function firstCreateUser(req, res) {
          });
       }
 
-      const createdUser = await createUserService(id, { usuario, senha, nivel_acesso });
+      const createdUser = await createUserService({ usuario, senha, nivel_acesso });
 
       return res.status(201).json({
          status: "success",

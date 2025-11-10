@@ -49,7 +49,7 @@ async function getAllRelatorios() {
             [sequelize.col("aquisicao.fornecedor"), "fornecedor"],
             [sequelize.col("aquisicao.laboratorio.nome_laboratorio"), "laboratorio"],
             "situacao",
-            [sequelize.fn("DATE_FORMAT", sequelize.col("relatorios_medicamentos.created_at"), "%d-%m-%Y"), "data_solicitacao"],
+            [sequelize.fn("DATE_FORMAT", sequelize.col("Relatorios_medicamentos.created_at"), "%d-%m-%Y"), "data_solicitacao"],
         ],
         include: [
             {

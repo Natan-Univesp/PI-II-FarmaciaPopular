@@ -10,7 +10,7 @@ async function getAllAquisicoes() {
             [sequelize.col("user.usuario"), "nome_usuario"],
             "status",
             [
-                sequelize.fn("DATE_FORMAT", sequelize.col("aquisicoes.data_solicitacao"), "%d-%m-%Y %H:%i:%s"),
+                sequelize.fn("DATE_FORMAT", sequelize.col("Aquisicoes.data_solicitacao"), "%d-%m-%Y %H:%i:%s"),
                 "data_solicitacao_formatada",
             ],
             [
@@ -78,7 +78,7 @@ async function getAllAquisicoesSolicitadas() {
             [sequelize.col("user.usuario"), "nome_usuario"],
             "status",
             [
-                sequelize.fn("DATE_FORMAT", sequelize.col("aquisicoes.data_solicitacao"), "%d-%m-%Y %H:%i:%s"),
+                sequelize.fn("DATE_FORMAT", sequelize.col("Aquisicoes.data_solicitacao"), "%d-%m-%Y %H:%i:%s"),
                 "data_solicitacao_formatada",
             ],
             [
@@ -128,7 +128,7 @@ async function getAllAquisicoesEnviadas() {
             [sequelize.col("user.usuario"), "nome_usuario"],
             "status",
             [
-                sequelize.fn("DATE_FORMAT", sequelize.col("aquisicoes.data_solicitacao"), "%d-%m-%Y %H:%i:%s"),
+                sequelize.fn("DATE_FORMAT", sequelize.col("Aquisicoes.data_solicitacao"), "%d-%m-%Y %H:%i:%s"),
                 "data_solicitacao_formatada",
             ],
             [
@@ -178,7 +178,7 @@ async function getAllAquisicoesEntregues() {
             [sequelize.col("user.usuario"), "nome_usuario"],
             "status",
             [
-                sequelize.fn("DATE_FORMAT", sequelize.col("aquisicoes.data_solicitacao"), "%d-%m-%Y %H:%i:%s"),
+                sequelize.fn("DATE_FORMAT", sequelize.col("Aquisicoes.data_solicitacao"), "%d-%m-%Y %H:%i:%s"),
                 "data_solicitacao_formatada",
             ],
             [
