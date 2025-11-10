@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
          allowNull: false,
       },
    }, {
-      freezeTableName: true,
+      tableName: "itens_aquisicoes",
       timestamps: true,
       underscored: true,
       updatedAt: false  

@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
       "Medicamentos_clientes_especiais",
       {},
       {
-         freezeTableName: true,
+         tableName: "medicamentos_clientes_especiais",
          timestamps: true,
          underscored: true,
       }

@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
          }
       },
    }, {
-      freezeTableName: true,
+      tableName: "lotes_medicamentos",
       timestamps: true,
       underscored: true      
    });

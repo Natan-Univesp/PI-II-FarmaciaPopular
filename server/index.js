@@ -9,11 +9,14 @@ dotenv.config();
 
 const app = express();
 const PORT = 3000;
-const HOST_IP = process.env.IP_FIXED || "0.0.0.0";
 
 dbConnectionTest();
+
 app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
 app.use(Routes);
-app.listen(PORT, HOST_IP, () => console.log("rodando"));
+app.use("/", (req, res) => {
+   res.send("OK")
+})
+app.listen(process.env.PORT || PORT, () => console.log("rodando"));

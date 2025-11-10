@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
          allowNull: true,
       },
    }, {
-      freezeTableName: true,
+      tableName: "aquisicoes",
       timestamps: true,
       underscored: true,
       // Altera o nome do createdAt
